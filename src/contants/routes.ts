@@ -1,3 +1,7 @@
 export const routes = {
-  home: '/',
+  HOME: '/',
+  LOGIN: {
+    INDEX: '/login',
+    GOOGLE: '/login/google',
+  },
 };
