@@ -1,6 +1,6 @@
 import { routes } from 'contants/routes';
 import MainLayout from 'layouts/mainLayout';
-import Home from 'pages/Index';
+import Home from 'pages/Home';
 import Login from 'pages/User';
 import { createBrowserRouter } from 'react-router-dom';
 
