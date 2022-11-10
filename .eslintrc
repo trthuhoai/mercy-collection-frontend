@@ -1,0 +1,15 @@
+{
+  "root": true,
+  "extends": ["react-app", "react-app/jest"],
+  "rules": {
+    "object-shorthand": "error",
+    "react/self-closing-comp": "error",
+    "import/no-anonymous-default-export": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ]
+  }
+}
