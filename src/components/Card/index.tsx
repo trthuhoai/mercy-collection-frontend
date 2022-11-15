@@ -16,8 +16,7 @@ const Card = () => {
       </div>
       <div className="flex-1 rounded-b p-4 group-hover:bg-primary-50">
         <Typo className="line-clamp-2" isBold size="large">
-          Hỗ trợ áo lót và miếng đệm cho bệnh nhân ung thư đã phẫu thuật đoạn
-          nhũ nhux
+         Hỗ trợ sữa cho 73 trẻ em tại mái ấm ở Quảng Bình
         </Typo>
         <div className="relative h-2 mt-8">
           <div className="absolute bg-primary-100 inset-0 rounded-md" />
