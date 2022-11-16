@@ -1,13 +1,14 @@
 import create from 'zustand';
 interface User {
   name: string;
-  avatar: string;
+  avatar?: string;
 }
 
 interface UserState {
   isAuthenticated: boolean;
   user: User | null;
   setUser: (user: User) => void;
+  clearUser: () => void;
 }
 
 const useUser = create<UserState>(set => ({
@@ -17,6 +18,11 @@ const useUser = create<UserState>(set => ({
     set(() => ({
       isAuthenticated: true,
       user,
+    })),
+  clearUser: () =>
+    set(() => ({
+      isAuthenticated: false,
+      user: null,
     })),
 }));
 
