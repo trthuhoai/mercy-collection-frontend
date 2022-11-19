@@ -1,15 +1,40 @@
-import React, { useEffect } from 'react';
-import Button from 'components/Button';
+import React, { useEffect, useState } from 'react';
 import Typo from 'components/Typo';
 import { gapi } from 'gapi-script';
-import GoogleLogin from 'react-google-login';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { NavLink } from 'react-router-dom';
 import { useUser } from 'store';
+import Modal from 'components/Modal';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { useForm } from 'react-hook-form';
+import Box from '@mui/material/Box';
+import { IFormLoginProps, IFormRegisterProps } from './types';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaLogin, schemaRegister } from './constant';
+import { createUser, loginWithUser } from 'apis/users';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
   const activeStyle = 'border-b-2 border-white hover:border-gray-500';
-  const { user, setUser } = useUser();
+  const { user, setUser, clearUser } = useUser();
+  const [openLoginModal, setOpenLoginModal] = useState(false);
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClickName = event => {
+    setAnchorEl(event.currentTarget);
+  };
 
   useEffect(() => {
     gapi.load('client:auth2', () => {
@@ -22,6 +47,7 @@ const Header = () => {
 
   const responseGoogle = response => {
     if (response.profileObj) {
+      setOpenLoginModal(false);
       localStorage.setItem('access_token', response.accessToken);
       const { name, imageUrl } = response.profileObj;
       setUser({
@@ -31,101 +57,384 @@ const Header = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    clearUser();
+    setAnchorEl(null);
+  };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IFormRegisterProps>({
+    mode: 'onSubmit',
+    resolver: yupResolver(schemaRegister),
+  });
+
+  const {
+    register: registerLogin,
+    handleSubmit: handleSubmitLogin,
+    reset: resetLogin,
+    formState: { errors: errorsLogin },
+  } = useForm<IFormLoginProps>({
+    mode: 'onSubmit',
+    resolver: yupResolver(schemaLogin),
+  });
+
+  const onSubmit = async data => {
+    try {
+      await createUser(data);
+      toast.success('Đăng kí thành công');
+      setOpenLoginModal(true);
+      resetLogin(data);
+    } catch (error) {
+      toast.error('Đăng kí thất bại');
+    } finally {
+      setOpenRegisterModal(false);
+      reset();
+    }
+  };
+
+  const onSubmitLogin = async data => {
+    try {
+      const dataLogin = await loginWithUser(data);
+      localStorage.setItem('access_token', dataLogin.token);
+      setUser({
+        name: dataLogin.name,
+      });
+      toast.success('Đăng nhập thành công');
+    } catch (error) {
+      toast.error('Đăng nhập thất bại');
+    } finally {
+      setOpenLoginModal(false);
+    }
+  };
+
   return (
-    <header className="z-10 sticky top-0 h-20 bg-green-900 text-white">
-      <div className="container h-full flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="w-10 h-10">
-            <img src="/logo192.png" alt="logo" className="w-full h-full" />
-          </div>
-          <Typo size="large" className="ml-4 text-white">
-            Mercy Collection
-          </Typo>
-        </div>
-        <div className="flex gap-16">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `${classNameNavLink} ${isActive && activeStyle}`
-            }
-          >
-            Trang chủ
-          </NavLink>
-          <NavLink
-            to="/project"
-            className={({ isActive }) =>
-              `${classNameNavLink} ${isActive && activeStyle}`
-            }
-          >
-            Dự án
-          </NavLink>
-          <NavLink
-            to="/volunteer"
-            className={({ isActive }) =>
-              `${classNameNavLink} ${isActive && activeStyle}`
-            }
-          >
-            Tình nguyện
-          </NavLink>
-          <NavLink
-            to="/faq"
-            className={({ isActive }) =>
-              `${classNameNavLink} ${isActive && activeStyle}`
-            }
-          >
-            Faqs
-          </NavLink>
-          <NavLink
-            to="/donate"
-            className={({ isActive }) =>
-              `${classNameNavLink} ${isActive && activeStyle}`
-            }
-          >
-            Ủng hộ
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `${classNameNavLink} ${isActive && activeStyle}`
-            }
-          >
-            Về chúng tôi
-          </NavLink>
-        </div>
-        {user ? (
+    <>
+      <div className="hidden">
+        <GoogleLogin
+          clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          isSignedIn={true}
+          cookiePolicy={'single_host_origin'}
+        />
+      </div>
+      <header className="z-10 sticky top-0 h-20 bg-green-900 text-white">
+        <div className="container h-full flex items-center justify-between">
           <div className="flex items-center">
-            <Typo className="mr-4 text-white" size="large">
-              {user.name}
-            </Typo>
             <div className="w-10 h-10">
-              <img src={user.avatar} alt="avatar" className="rounded-full" />
+              <img src="/logo192.png" alt="logo" className="w-full h-full" />
             </div>
+            <Typo size="large" className="ml-4 text-white">
+              Mercy Collection
+            </Typo>
           </div>
-        ) : (
-          <div>
-            <Button className="mr-4" color="secondary" variant="transparent">
+          <div className="flex gap-16">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `${classNameNavLink} ${isActive && activeStyle}`
+              }
+            >
+              Trang chủ
+            </NavLink>
+            <NavLink
+              to="/project"
+              className={({ isActive }) =>
+                `${classNameNavLink} ${isActive && activeStyle}`
+              }
+            >
+              Dự án
+            </NavLink>
+            <NavLink
+              to="/volunteer"
+              className={({ isActive }) =>
+                `${classNameNavLink} ${isActive && activeStyle}`
+              }
+            >
+              Tình nguyện
+            </NavLink>
+            <NavLink
+              to="/faq"
+              className={({ isActive }) =>
+                `${classNameNavLink} ${isActive && activeStyle}`
+              }
+            >
+              Faqs
+            </NavLink>
+            <NavLink
+              to="/donate"
+              className={({ isActive }) =>
+                `${classNameNavLink} ${isActive && activeStyle}`
+              }
+            >
+              Ủng hộ
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `${classNameNavLink} ${isActive && activeStyle}`
+              }
+            >
+              Về chúng tôi
+            </NavLink>
+          </div>
+          {user ? (
+            <div>
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={handleClickName}
+              >
+                <Typo className="mr-4 text-white" size="large">
+                  {user.name}
+                </Typo>
+                <div className="w-10 h-10">
+                  <img
+                    src={user.avatar || '/avartar.png'}
+                    alt="avatar"
+                    className="rounded-full w-full h-full"
+                  />
+                </div>
+              </div>
+              <Menu
+                anchorEl={anchorEl}
+                open={!!anchorEl}
+                onClose={() => setAnchorEl(null)}
+                anchorOrigin={{
+                  vertical: 46,
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem>
+                  <AccountCircleIcon
+                    fontSize="small"
+                    sx={{ marginRight: '8px' }}
+                  />
+                  Thông tin
+                </MenuItem>
+                <GoogleLogout
+                  clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"
+                  buttonText="Logout"
+                  onLogoutSuccess={handleLogout}
+                  render={renderProps => (
+                    <MenuItem
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      <LogoutIcon
+                        fontSize="small"
+                        sx={{ marginRight: '8px' }}
+                      />
+                      Đăng xuất
+                    </MenuItem>
+                  )}
+                />
+              </Menu>
+            </div>
+          ) : (
+            <div>
+              <Button
+                sx={{
+                  marginRight: '8px',
+                }}
+                color="secondary"
+                onClick={() => {
+                  setOpenRegisterModal(true);
+                }}
+              >
+                Đăng kí
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => setOpenLoginModal(true)}
+              >
+                Đăng nhập
+              </Button>
+            </div>
+          )}
+        </div>
+      </header>
+      <Modal
+        isOpen={openLoginModal}
+        title="Đăng nhập"
+        onClose={() => setOpenLoginModal(false)}
+      >
+        <Box
+          component="form"
+          onSubmit={handleSubmitLogin(onSubmitLogin)}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            required
+            fullWidth
+            label="Email"
+            type="email"
+            {...registerLogin('email')}
+            error={!!errorsLogin.email}
+            helperText={errorsLogin.email?.message}
+          />
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Mật khẩu"
+              type="password"
+              {...registerLogin('password')}
+              error={!!errorsLogin.password}
+              helperText={errorsLogin.password?.message}
+            />
+          </div>
+          <div className="text-center mb-8">
+            <Button
+              size="large"
+              variant="outlined"
+              sx={{
+                marginRight: '24px',
+              }}
+              onClick={() => {
+                setOpenLoginModal(false);
+                setOpenRegisterModal(true);
+              }}
+            >
               Đăng kí
             </Button>
+            <Button size="large" variant="contained" type="submit">
+              Đăng nhập
+            </Button>
+          </div>
+          <Typo className="mb-4 text-center">hoặc đăng nhập với</Typo>
+          <div className="text-center">
             <GoogleLogin
               clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"
-              render={renderProps => (
-                <Button
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  color="secondary"
-                >
-                  Đăng nhập
-                </Button>
-              )}
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               cookiePolicy={'single_host_origin'}
+              prompt="select_account"
             />
-            {/* ,<Button color="secondary">Đăng nhập</Button> */}
           </div>
-        )}
-      </div>
-    </header>
+        </Box>
+      </Modal>
+      <Modal
+        isOpen={openRegisterModal}
+        title="Đăng kí"
+        onClose={() => setOpenRegisterModal(false)}
+      >
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            required
+            fullWidth
+            label="Họ và tên"
+            {...register('name')}
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Email"
+              type="email"
+              {...register('email')}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          </div>
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Mật khẩu"
+              type="password"
+              {...register('password')}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+          </div>
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Nhập lại mật khẩu"
+              type="password"
+              {...register('repassword')}
+              error={!!errors.repassword}
+              helperText={errors.repassword?.message}
+            />
+          </div>
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Số điện thoại"
+              type="tel"
+              {...register('tel')}
+              error={!!errors.tel}
+              helperText={errors.tel?.message}
+            />
+          </div>
+          <div className="my-4">
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">
+                Giới tính
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="male"
+                row
+              >
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Nam"
+                  {...register('gender')}
+                />
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Nữ"
+                  {...register('gender')}
+                />
+                <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  label="Khác"
+                  {...register('gender')}
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
+          <div className="text-center">
+            <Button
+              sx={{
+                marginRight: '48px',
+              }}
+              size="large"
+              variant="outlined"
+              onClick={() => setOpenRegisterModal(false)}
+            >
+              Hủy
+            </Button>
+            <Button size="large" variant="contained" type="submit">
+              Đăng kí
+            </Button>
+          </div>
+        </Box>
+      </Modal>
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import qs from 'qs';
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_API_ENDPOINT,
@@ -10,9 +9,9 @@ const instance = axios.create({
 const request = async (config: AxiosRequestConfig) => {
   try {
     const data = await instance(config);
-    return data;
-  } catch (error) {
-    return error;
+    return data.data;
+  } catch (error: any) {
+    return Promise.reject(error.response.data);
   }
 };
 
