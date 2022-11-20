@@ -2,7 +2,7 @@ import React from 'react';
 import Sliders from 'components/Slider';
 import Typo from 'components/Typo';
 import ProjectList from './ProjectList';
-import VolunteerList from './VolunteerList';
+import CampaignList from './CampaignList';
 import AmbassadorList from './AmbassadorList';
 import Statistic from './Statistic';
 
@@ -19,7 +19,7 @@ const Home = () => {
       <div className="my-20">
         <div className="container">
           <ProjectList />
-          <VolunteerList />
+          <CampaignList />
           <AmbassadorList />
         </div>
         <Statistic />

@@ -23,6 +23,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin, schemaRegister } from './constant';
 import { createUser, loginWithUser } from 'apis/users';
 import { toast } from 'react-toastify';
+import { ELocalStorageKey, ELoginType } from 'constant/types';
 
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
@@ -48,7 +49,8 @@ const Header = () => {
   const responseGoogle = response => {
     if (response.profileObj) {
       setOpenLoginModal(false);
-      localStorage.setItem('access_token', response.accessToken);
+      localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, response.accessToken);
+      localStorage.setItem(ELocalStorageKey.LOGIN_TYPE, ELoginType.GOOGLE);
       const { name, imageUrl } = response.profileObj;
       setUser({
         name,
@@ -58,7 +60,7 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
+    localStorage.clear();
     clearUser();
     setAnchorEl(null);
   };
@@ -100,7 +102,8 @@ const Header = () => {
   const onSubmitLogin = async data => {
     try {
       const dataLogin = await loginWithUser(data);
-      localStorage.setItem('access_token', dataLogin.token);
+      localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, dataLogin.token);
+      localStorage.setItem(ELocalStorageKey.LOGIN_TYPE, ELoginType.USER);
       setUser({
         name: dataLogin.name,
       });
