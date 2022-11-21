@@ -28,7 +28,9 @@ const CampaignList = () => {
       {campaigns.length ? (
         <Sliders slidesToScroll={3} slidesToShow={3} isDot={false}>
           {campaigns.map(campaign => (
-            <CardCampaign {...campaign} />
+            <div className="px-4">
+              <CardCampaign {...campaign} />
+            </div>
           ))}
         </Sliders>
       ) : (

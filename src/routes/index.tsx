@@ -1,7 +1,10 @@
-import { routes } from 'contants/routes';
+import { routes } from 'constant/routes';
 import MainLayout from 'layouts/mainLayout';
+import CampaignPage from 'pages/Campaign';
+import CampaignDetail from 'pages/Campaign/Detail';
 import Home from 'pages/Home';
-import Login from 'pages/User';
+import ProjectPage from 'pages/Project';
+import ProjectDetail from 'pages/Project/Detail';
 import { createBrowserRouter } from 'react-router-dom';
 
 const routerConfig = [
@@ -13,14 +16,20 @@ const routerConfig = [
         element: <Home />,
       },
       {
-        path: routes.LOGIN.INDEX,
-        element: <Login />,
-        children: [
-          {
-            path: routes.LOGIN.GOOGLE,
-            element: <Home />,
-          },
-        ],
+        path: routes.PROJECTS,
+        element: <ProjectPage />,
+      },
+      {
+        path: routes.CAMPAIGNS,
+        element: <CampaignPage />,
+      },
+      {
+        path: routes.PROJECTS_DETAIL,
+        element: <ProjectDetail />,
+      },
+      {
+        path: routes.CAMPAIGNS_DETAIL,
+        element: <CampaignDetail />,
       },
     ],
   },

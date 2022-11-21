@@ -23,7 +23,7 @@ const MainLayout = () => {
             name: data.name,
           });
         } catch (error) {
-          console.error(error);
+          localStorage.clear();
         }
       }
     })();
@@ -33,7 +33,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1">
+      <main className="flex flex-1">
         <Outlet />
       </main>
       <Footer />

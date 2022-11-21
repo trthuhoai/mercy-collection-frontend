@@ -13,6 +13,9 @@ module.exports = {
         'primary-600': '#16a34a',
         'primary-700': '#15803d',
       },
+      backgroundImage: {
+        detail: "url('./assets/img/bg-about.png')",
+      },
     },
     container: {
       padding: '2rem',
