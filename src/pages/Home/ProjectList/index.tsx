@@ -28,7 +28,9 @@ const ProjectList = () => {
       {projects.length ? (
         <Sliders slidesToScroll={3} slidesToShow={3} isDot={false}>
           {projects.map(project => (
-            <CardProject {...project} />
+            <div className="px-4">
+              <CardProject {...project} />
+            </div>
           ))}
         </Sliders>
       ) : (

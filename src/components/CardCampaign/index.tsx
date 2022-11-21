@@ -2,6 +2,8 @@ import React from 'react';
 import Typo from 'components/Typo';
 import { ICampaign } from 'pages/Home/CampaignList/types';
 import { ECategoryProject } from 'constant/types';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { routes } from 'constant/routes';
 
 const Card = ({
   id,
@@ -11,8 +13,13 @@ const Card = ({
   pictureUrl,
   category,
 }: ICampaign) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="mx-4 flex flex-col rounded cursor-pointer group shadow-lg">
+    <div
+      className="flex flex-col rounded cursor-pointer group shadow-lg"
+      onClick={() => navigate(generatePath(routes.CAMPAIGNS_DETAIL, { id }))}
+    >
       <div className="relative flex-1 overflow-hidden rounded-t">
         <img
           src={pictureUrl}

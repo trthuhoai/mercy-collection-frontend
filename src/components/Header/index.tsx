@@ -146,7 +146,7 @@ const Header = () => {
               Trang chủ
             </NavLink>
             <NavLink
-              to="/project"
+              to="/campaigns"
               className={({ isActive }) =>
                 `${classNameNavLink} ${isActive && activeStyle}`
               }
@@ -154,7 +154,7 @@ const Header = () => {
               Dự án
             </NavLink>
             <NavLink
-              to="/volunteer"
+              to="/projects"
               className={({ isActive }) =>
                 `${classNameNavLink} ${isActive && activeStyle}`
               }
