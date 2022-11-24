@@ -1,18 +1,2 @@
-import React from 'react';
-
-const Login = () => {
-  return (
-    <>
-      LOGIN
-      <div />
-    </>
-  );
-};
-
-export default Login;
-
-// const Home = () => {
-//   return <div className="text-primary">LOGIN</div>;
-// };
-
-// export default Home;
+export { default as InfoUser } from './Info';
+export { default as ProjectUser } from './Project';

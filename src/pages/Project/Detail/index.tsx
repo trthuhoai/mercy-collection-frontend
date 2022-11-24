@@ -23,7 +23,7 @@ const ProjectDetail = () => {
   if (!projects) return <Loading />;
 
   return (
-    <div className="bg-detail container py-20 bg-cover">
+    <div className="container my-10">
       <div className="flex gap-8">
         <div className="flex-1">
           <img

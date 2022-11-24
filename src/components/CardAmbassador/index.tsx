@@ -3,7 +3,7 @@ import Typo from 'components/Typo';
 
 const CardAmbassador = () => {
   return (
-    <div className="mx-4 p-8 cursor-pointer rounded-2xl shadow-lg text-center">
+    <div className="mx-4 p-8 cursor-pointer rounded-2xl shadow-lg text-center bg-white">
       <div className="w-20 h-20 mx-auto">
         <img
           src="/slider.png"

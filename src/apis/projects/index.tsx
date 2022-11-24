@@ -1,4 +1,5 @@
 import request from 'apis/axios';
+import { ELocalStorageKey } from 'constant/types';
 
 const getCampaigns = () => {
   return request({
@@ -28,4 +29,22 @@ const getProjectsDetail = (id: string) => {
   });
 };
 
-export { getProjects, getCampaigns, getCampaignsDetail, getProjectsDetail };
+const getMyProjects = () => {
+  return request({
+    method: 'GET',
+    url: `/projects/user`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+export {
+  getProjects,
+  getCampaigns,
+  getCampaignsDetail,
+  getProjectsDetail,
+  getMyProjects,
+};

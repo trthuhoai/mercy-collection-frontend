@@ -30,7 +30,7 @@ const Card = ({
           {ECategoryProject[category]}
         </div>
       </div>
-      <div className="flex-1 rounded-b p-4 group-hover:bg-primary-50">
+      <div className="flex-1 rounded-b p-4 group-hover:bg-primary-50 bg-white">
         <Typo className="line-clamp-2" isBold size="large">
           {title}
         </Typo>

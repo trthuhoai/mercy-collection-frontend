@@ -29,4 +29,16 @@ const getInfoUser = () => {
   });
 };
 
-export { createUser, loginWithUser, getInfoUser };
+const authByGoggle = () => {
+  return request({
+    method: 'POST',
+    url: `/auth/register`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+export { createUser, loginWithUser, getInfoUser, authByGoggle };
