@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Typo from 'components/Typo';
 import { gapi } from 'gapi-script';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useUser } from 'store';
 import Modal from 'components/Modal';
 import TextField from '@mui/material/TextField';
@@ -21,9 +21,15 @@ import Box from '@mui/material/Box';
 import { IFormLoginProps, IFormRegisterProps } from './types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin, schemaRegister } from './constant';
-import { createUser, loginWithUser } from 'apis/users';
+import {
+  authByGoggle,
+  createUser,
+  getInfoUser,
+  loginWithUser,
+} from 'apis/users';
 import { toast } from 'react-toastify';
-import { ELocalStorageKey, ELoginType } from 'constant/types';
+import { ELocalStorageKey } from 'constant/types';
+import { routes } from 'constant/routes';
 
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
@@ -46,16 +52,21 @@ const Header = () => {
     });
   }, []);
 
-  const responseGoogle = response => {
+  const responseGoogle = async response => {
     if (response.profileObj) {
-      setOpenLoginModal(false);
-      localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, response.accessToken);
-      localStorage.setItem(ELocalStorageKey.LOGIN_TYPE, ELoginType.GOOGLE);
-      const { name, imageUrl } = response.profileObj;
-      setUser({
-        name,
-        avatar: imageUrl,
-      });
+      try {
+        setOpenLoginModal(false);
+        localStorage.setItem(
+          ELocalStorageKey.ACCESS_TOKEN,
+          response.accessToken,
+        );
+        await authByGoggle();
+        const data = await getInfoUser();
+        setUser(data);
+      } catch (error) {
+        const data = await getInfoUser();
+        setUser(data);
+      }
     }
   };
 
@@ -103,10 +114,8 @@ const Header = () => {
     try {
       const dataLogin = await loginWithUser(data);
       localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, dataLogin.token);
-      localStorage.setItem(ELocalStorageKey.LOGIN_TYPE, ELoginType.USER);
-      setUser({
-        name: dataLogin.name,
-      });
+      const dataUser = await getInfoUser();
+      setUser(dataUser);
       toast.success('Đăng nhập thành công');
     } catch (error) {
       toast.error('Đăng nhập thất bại');
@@ -117,7 +126,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="hidden">
+      {/* <div className="hidden">
         <GoogleLogin
           clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"
           onSuccess={responseGoogle}
@@ -125,7 +134,7 @@ const Header = () => {
           isSignedIn={true}
           cookiePolicy={'single_host_origin'}
         />
-      </div>
+      </div> */}
       <header className="z-10 sticky top-0 h-20 bg-green-900 text-white">
         <div className="container h-full flex items-center justify-between">
           <div className="flex items-center">
@@ -197,7 +206,7 @@ const Header = () => {
                 </Typo>
                 <div className="w-10 h-10">
                   <img
-                    src={user.avatar || '/avartar.png'}
+                    src={user.picture || '/avartar.png'}
                     alt="avatar"
                     className="rounded-full w-full h-full"
                   />
@@ -221,7 +230,7 @@ const Header = () => {
                     fontSize="small"
                     sx={{ marginRight: '8px' }}
                   />
-                  Thông tin
+                  <Link to={routes.ME.INFO}>Thông tin</Link>
                 </MenuItem>
                 <GoogleLogout
                   clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"

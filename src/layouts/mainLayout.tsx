@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from 'components/Footer';
 import { useUser } from 'store';
 import { getInfoUser } from 'apis/users';
-import { ELocalStorageKey, ELoginType } from 'constant/types';
+import { ELocalStorageKey } from 'constant/types';
 
 const MainLayout = () => {
   const { isAuthenticated, setUser } = useUser();
@@ -13,15 +13,10 @@ const MainLayout = () => {
     (async () => {
       if (isAuthenticated) return;
 
-      if (
-        localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN) &&
-        localStorage.getItem(ELocalStorageKey.LOGIN_TYPE) === ELoginType.USER
-      ) {
+      if (localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN)) {
         try {
           const data = await getInfoUser();
-          setUser({
-            name: data.name,
-          });
+          setUser(data);
         } catch (error) {
           localStorage.clear();
         }
@@ -33,7 +28,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex flex-1">
+      <main className="flex flex-1 bg-gray-100">
         <Outlet />
       </main>
       <Footer />

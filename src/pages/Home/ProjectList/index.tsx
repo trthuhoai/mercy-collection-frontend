@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { getProjects } from 'apis/projects';
 import { IProject } from './types';
 import Loading from 'components/Loading';
+import { routes } from 'constant/routes';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
@@ -37,7 +38,7 @@ const ProjectList = () => {
         <Loading />
       )}
       <div className="text-center mt-4">
-        <Link to="#" className="text-primary-500">
+        <Link to={routes.PROJECTS} className="text-primary-500">
           Xem tất cả ({projects.length})
         </Link>
       </div>

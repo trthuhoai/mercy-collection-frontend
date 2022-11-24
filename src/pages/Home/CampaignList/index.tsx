@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { getCampaigns } from 'apis/projects';
 import { ICampaign } from './types';
 import Loading from 'components/Loading';
+import { routes } from 'constant/routes';
 
 const CampaignList = () => {
   const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
@@ -37,7 +38,7 @@ const CampaignList = () => {
         <Loading />
       )}
       <div className="text-center mt-4">
-        <Link to="#" className="text-primary-500">
+        <Link to={routes.CAMPAIGNS} className="text-primary-500">
           Xem tất cả ({campaigns.length})
         </Link>
       </div>

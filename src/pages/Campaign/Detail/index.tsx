@@ -23,7 +23,7 @@ const CampaignDetail = () => {
   if (!campaigns) return <Loading />;
 
   return (
-    <div className="bg-detail container py-20 bg-cover">
+    <div className="container my-10">
       <div className="flex gap-8">
         <div className="flex-1">
           <img
@@ -79,7 +79,7 @@ const CampaignDetail = () => {
             </div>
             <div className="mt-8 text-center">
               <Button size="large" variant="contained">
-                Tham gia ngay
+                Ủng hộ ngay
               </Button>
             </div>
           </div>
