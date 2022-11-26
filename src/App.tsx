@@ -4,13 +4,17 @@ import './App.css';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './mui';
 import { Toast } from 'components/Toast';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </LocalizationProvider>
       <Toast />
     </>
   );

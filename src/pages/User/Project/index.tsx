@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getMyProjects } from 'apis/projects';
+import { getMyProjects, sendMailProject } from 'apis/projects';
 import Table from 'components/Table';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -9,20 +9,40 @@ import Loading from 'components/Loading';
 import { headers } from './constant';
 import { ECategoryProject } from 'constant/types';
 import RemoveIcon from '@mui/icons-material/Remove';
+import CreateProject from './create';
+import Typo from 'components/Typo';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import { toast } from 'react-toastify';
 
 const Project = () => {
-  const [listProject, setListProject] = useState<IProjectDetail[] | null>(null);
+  const [listProject, setListProject] = useState<IProjectDetail[]>([]);
   const [isCreate, setIsCreate] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
       const data = await getMyProjects();
-      setListProject(data);
+      setListProject(data.data);
     })();
   }, []);
 
-  const rows = listProject?.map(
+  const getListProjects = async () => {
+    const data = await getMyProjects();
+    setListProject(data.data);
+  };
+
+  const handleSendMail = async id => {
+    try {
+      await sendMailProject(id);
+      toast.success('Gửi mail cho dự án thành công');
+    } catch (error) {
+      toast.success('Gửi mail cho dự án thất bại');
+    }
+  };
+
+  const rows = listProject.map(
     ({
+      id,
       title,
       people,
       registered,
@@ -43,16 +63,31 @@ const Project = () => {
       endTime: endTime + ' ' + endAt,
       startTime: startTime + ' ' + startAt,
       location,
+      action: (
+        <Button
+          variant="contained"
+          endIcon={<SendIcon />}
+          onClick={() => handleSendMail(id)}
+        >
+          Gửi mail
+        </Button>
+      ),
     }),
   );
 
-  if (!listProject) return <Loading />;
+  if (!listProject.length) return <Loading />;
 
   return (
     <div className="my-10 container">
+      <Typo size="max" isBold className="mb-10">
+        {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách dự án tình nguyện'}
+      </Typo>
       <div className="">
         {isCreate ? (
-          <div>Tạo dự án</div>
+          <CreateProject
+            onGetListProject={getListProjects}
+            onSetIsCreate={setIsCreate}
+          />
         ) : (
           <Table headers={headers} rows={rows} />
         )}
