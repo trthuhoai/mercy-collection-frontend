@@ -1,22 +1,10 @@
 import request from 'apis/axios';
 import { ELocalStorageKey } from 'constant/types';
 
-const registerProject = (id) => {
-  return request({
-    method: 'PATCH',
-    url: `/projects/register/${id}`,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem(
-        ELocalStorageKey.ACCESS_TOKEN,
-      )}`,
-    },
-  });
-};
-
-const getCampaigns = () => {
+const getStatistic = () => {
   return request({
     method: 'GET',
-    url: `/campaigns`,
+    url: `/statistic/projects`,
   });
 };
 
@@ -53,24 +41,10 @@ const getMyProjects = () => {
   });
 };
 
-const getRegisteredProjects = () => {
-  return request({
-    method: 'GET',
-    url: `/projects/user/registed`,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem(
-        ELocalStorageKey.ACCESS_TOKEN,
-      )}`,
-    },
-  });
-};
-
 export {
   getProjects,
-  getCampaigns,
+  getStatistic,
   getCampaignsDetail,
   getProjectsDetail,
   getMyProjects,
-  getRegisteredProjects,
-  registerProject 
 };
