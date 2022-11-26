@@ -5,7 +5,6 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import { IProjectDetail } from 'pages/Project/Detail/types';
-import Loading from 'components/Loading';
 import { headers } from './constant';
 import { ECategoryProject } from 'constant/types';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -75,8 +74,6 @@ const Project = () => {
     }),
   );
 
-  if (!listProject.length) return <Loading />;
-
   return (
     <div className="my-10 container">
       <Typo size="max" isBold className="mb-10">
@@ -88,8 +85,10 @@ const Project = () => {
             onGetListProject={getListProjects}
             onSetIsCreate={setIsCreate}
           />
-        ) : (
+        ) : !!listProject.length ? (
           <Table headers={headers} rows={rows} />
+        ) : (
+          <Typo>Không có dự án</Typo>
         )}
       </div>
       <div
