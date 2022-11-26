@@ -8,7 +8,7 @@ const headers = [
     name: 'Mục tiêu',
   },
   {
-    name: 'Đã đăng ký',
+    name: 'Đã ủng hộ',
   },
   {
     name: 'Thể loại',
@@ -24,9 +24,6 @@ const headers = [
   },
   {
     name: 'Địa điểm',
-  },
-  {
-    name: 'Hành động',
   },
 ];
 
@@ -46,7 +43,7 @@ const defaultValues = {
 const schemaCreate = yup.object().shape({
   title: yup.string().required('Bắt buộc nhập'),
   contend: yup.string().required('Bắt buộc nhập'),
-  people: yup.number().typeError('Phải là số').min(5, 'Nhỏ nhất là 5'),
+  goal: yup.number().typeError('Phải là số').min(500000, 'Nhỏ nhất là 500000'),
   deadline: yup
     .date()
     .typeError('Bắt buộc chọn ngày')

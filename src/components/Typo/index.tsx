@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 
 interface IProps {
   className?: string;
-  size?: 'larger' | 'large' | 'normal';
+  size?: 'larger' | 'large' | 'normal' | 'max';
   isBold?: boolean;
   children: ReactNode;
 }
@@ -19,6 +19,9 @@ const Typo = ({ className, size = 'normal', isBold, children }: IProps) => {
         },
         {
           'text-lg': size === 'large',
+        },
+        {
+          'text-3xl': size === 'max',
         },
         {
           'font-semibold': isBold,

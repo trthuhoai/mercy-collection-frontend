@@ -6,7 +6,8 @@ import CampaignDetail from 'pages/Campaign/Detail';
 import Home from 'pages/Home';
 import ProjectPage from 'pages/Project';
 import ProjectDetail from 'pages/Project/Detail';
-import { InfoUser, ProjectUser } from 'pages/User';
+import { CampaignUser, InfoUser, ProjectUser } from 'pages/User';
+import ProjectRegister from 'pages/User/ProjectRegister';
 import { createBrowserRouter } from 'react-router-dom';
 
 const routerConfig = [
@@ -43,6 +44,14 @@ const routerConfig = [
           {
             path: routes.ME.PROJECT,
             element: <ProjectUser />,
+          },
+          {
+            path: routes.ME.PROJECT_REGISTER,
+            element: <ProjectRegister />,
+          },
+          {
+            path: routes.ME.CAMPAIGN,
+            element: <CampaignUser />,
           },
         ],
       },
