@@ -9,7 +9,12 @@ import { routes } from 'constant/routes';
 
 const MainLayout = () => {
   const { isAuthenticated, setUser } = useUser();
-  const routesPrivate = [routes.ME.INFO, routes.ME.PROJECT];
+  const routesPrivate = [
+    routes.ME.INFO,
+    routes.ME.PROJECT,
+    routes.ME.PROJECT_REGISTER,
+    routes.ME.CAMPAIGN,
+  ];
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
