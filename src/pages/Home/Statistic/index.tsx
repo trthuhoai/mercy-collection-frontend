@@ -1,35 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getStatistic } from 'apis/statistic';
 import Typo from 'components/Typo';
+import { IProject } from './types';
 
 const Statistic = () => {
+  const [project, setProject] = useState<IProject>();
+  useEffect(() => {
+    (async () => {
+      const data = await getStatistic();
+      console.log("data")
+      setProject(data);
+    })();
+  }, []);
   return (
-    <div className="bg-primary-50 py-10 mb-16">
-      <Typo isBold className="text-center text-5xl">
+    <div className="bg-[#6fa85e5c] py-10 mb-16 rounded-2xl font-serif">
+      <Typo isBold className="text-center text-5xl font-mono ">
         Thống kê
       </Typo>
       <div className="flex justify-center gap-60 mt-14 text-center">
         <div>
-          <Typo isBold>Dự án</Typo>
+          <Typo isBold>Dự án thiện nguyện</Typo>
           <Typo className="mt-4 text-5xl" isBold>
-            14
+          {project?.numberProject}
           </Typo>
         </div>
         <div>
-          <Typo isBold>Sứ giả</Typo>
+          <Typo isBold>Dự án gây quỹ</Typo>
           <Typo className="mt-4 text-5xl" isBold>
-            1000
+          {project?.numberCampaign}
           </Typo>
         </div>
         <div>
-          <Typo isBold>Lượt ủng hộ</Typo>
+          <Typo isBold>Lượt đăng ký tình nguyện</Typo>
           <Typo className="mt-4 text-5xl" isBold>
-            1400
+          {project?.numberRegisterPeople}
           </Typo>
         </div>
         <div>
-          <Typo isBold>Tổng tiền</Typo>
+          <Typo isBold>Thành viên</Typo>
           <Typo className="mt-4 text-5xl" isBold>
-            1400M
+          {project?.numberUser}
           </Typo>
         </div>
       </div>

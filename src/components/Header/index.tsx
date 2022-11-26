@@ -135,7 +135,7 @@ const Header = () => {
           cookiePolicy={'single_host_origin'}
         />
       </div> */}
-      <header className="z-10 sticky top-0 h-20 bg-green-900 text-white">
+      <header className="z-10 sticky top-0 h-14 bg-green-900 text-white">
         <div className="container h-full flex items-center justify-between">
           <div className="flex items-center">
             <div className="w-10 h-10">

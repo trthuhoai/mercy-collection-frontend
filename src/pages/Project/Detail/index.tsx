@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { getProjectsDetail } from 'apis/projects';
+import { getProjectsDetail, getRegisteredProjects, registerProject } from 'apis/projects';
 import { useParams } from 'react-router-dom';
 import { IProjectDetail } from './types';
 import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
 import Loading from 'components/Loading';
 import { ECategoryProject } from 'constant/types';
+import { toast } from 'react-toastify';
+
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [projects, setProjects] = useState<IProjectDetail | null>(null);
+
+  const onSubmit = async () => {
+    try {
+      await registerProject(id);
+      toast.success('Đăng kí tham gia thành công');
+    } catch (error) {
+      toast.error('Đăng kí tham gia thất bại vì bạn đã đăng ký');
+    } 
+  };
 
   useEffect(() => {
     (async () => {
@@ -78,7 +89,7 @@ const ProjectDetail = () => {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <Button size="large" variant="contained">
+              <Button size="large" variant="contained"  onClick={onSubmit}>
                 Tham gia ngay
               </Button>
             </div>

@@ -6,7 +6,7 @@ const CardAmbassador = () => {
     <div className="mx-4 p-8 cursor-pointer rounded-2xl shadow-lg text-center bg-white">
       <div className="w-20 h-20 mx-auto">
         <img
-          src="/slider.png"
+          src="/tn.png"
           alt="avatar"
           className="w-full h-full rounded-full"
         />
