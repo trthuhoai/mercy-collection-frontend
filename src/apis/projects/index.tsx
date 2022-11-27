@@ -53,6 +53,18 @@ const getMyProjects = () => {
   });
 };
 
+const getMyProjectPeoples = id => {
+  return request({
+    method: 'GET',
+    url: `/projects/register/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
 const getMyProjectsRegister = () => {
   return request({
     method: 'GET',
@@ -126,4 +138,5 @@ export {
   createCampaign,
   getMyProjectsRegister,
   sendMailProject,
+  getMyProjectPeoples
 };

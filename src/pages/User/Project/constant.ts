@@ -26,7 +26,7 @@ const headers = [
     name: 'Địa điểm',
   },
   {
-    name: 'Hành động',
+    name: 'Người đăng ký',
   },
 ];
 

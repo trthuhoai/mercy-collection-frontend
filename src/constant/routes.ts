@@ -4,10 +4,12 @@ export const routes = {
   CAMPAIGNS: '/campaigns',
   PROJECTS_DETAIL: '/projects/:id',
   CAMPAIGNS_DETAIL: '/campaigns/:id',
+  DONATE: '/donate',
   ME: {
     INFO: '/me/info',
+    DETAIL_PROJECT:'/me/projects/:id',
     PROJECT: '/me/projects',
     PROJECT_REGISTER: '/me/projects-register',
-    CAMPAIGN: '/me/campaigns',
+    CAMPAIGN: '/me/campaigns',  
   },
 };

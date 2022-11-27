@@ -29,8 +29,8 @@ const Table = ({ headers, rows }: IProps) => {
 
   const StyledTableHead = styled(TableHead)(({ theme }) => ({
     '& .css-y8ay40-MuiTableCell-root': {
-      backgroundColor: theme.palette.secondary.contrastText,
-      color: theme.palette.secondary.main,
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.common.white,
     },
   }));
 
