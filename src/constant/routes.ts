@@ -4,7 +4,6 @@ export const routes = {
   CAMPAIGNS: '/campaigns',
   PROJECTS_DETAIL: '/projects/:id',
   CAMPAIGNS_DETAIL: '/campaigns/:id',
-  DONATE: '/donate',
   ME: {
     INFO: '/me/info',
     DETAIL_PROJECT:'/me/projects/:id',
