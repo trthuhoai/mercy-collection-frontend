@@ -22,8 +22,24 @@ const CATEGORY = [
 ];
 
 const FORMAT_DATE = {
+  COMMENT: 'MMM dd, yyyy - HH:mm',
   YEAR_MONTH_DAY: 'yyyy-MM-dd',
   HOUR_MINUTE: 'hh:mm',
 };
 
-export { CATEGORY, FORMAT_DATE };
+const TABS = [
+  {
+    label: 'Đang diễn ra',
+    value: 'registering',
+  },
+  {
+    label: 'Đã kết thúc',
+    value: 'ended',
+  },
+  {
+    label: 'Đã hủy',
+    value: 'cancel',
+  },
+];
+
+export { CATEGORY, FORMAT_DATE, TABS };

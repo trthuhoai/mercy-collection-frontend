@@ -15,4 +15,5 @@ export interface ICampaignDetail {
   startAt: string;
   startTime: string;
   title: string;
+  content: string;
 }

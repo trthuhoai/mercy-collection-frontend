@@ -17,7 +17,7 @@ const Card = ({
 
   return (
     <div
-      className="h-full rounded cursor-pointer group shadow-lg"
+      className="h-[450px] rounded cursor-pointer group shadow-lg"
       onClick={() => navigate(generatePath(routes.PROJECTS_DETAIL, { id }))}
     >
       <div className="relative h-1/2 overflow-hidden rounded-t">
