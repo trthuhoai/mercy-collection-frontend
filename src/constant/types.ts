@@ -13,4 +13,5 @@ export enum ECategoryProject {
   EDUCATION = 'Giáo dục',
   MEDICAL = 'Y tế',
   CALAMITY = 'Thiên tai',
+  ENVIRONMENT = 'Môi trường',
 }

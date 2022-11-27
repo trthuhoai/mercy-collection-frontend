@@ -25,7 +25,7 @@ const Sliders = ({
     dots: isDot,
     infinite: isInfinie,
     speed,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 4000,
     slidesToShow,
     slidesToScroll,

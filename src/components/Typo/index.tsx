@@ -11,6 +11,7 @@ const Typo = ({ className, size = 'normal', isBold, children }: IProps) => {
   return (
     <p
       className={clsx(
+        'break-all',
         {
           'text-gray-500': size === 'normal',
         },

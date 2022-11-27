@@ -15,4 +15,5 @@ export interface IProjectDetail {
   startAt: string;
   startTime: string;
   title: string;
+  content: string;
 }

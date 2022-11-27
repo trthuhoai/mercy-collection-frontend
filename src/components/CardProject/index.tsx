@@ -17,10 +17,10 @@ const Card = ({
 
   return (
     <div
-      className="flex flex-col rounded cursor-pointer group shadow-lg"
+      className="h-full rounded cursor-pointer group shadow-lg"
       onClick={() => navigate(generatePath(routes.PROJECTS_DETAIL, { id }))}
     >
-      <div className="relative flex-1 overflow-hidden rounded-t">
+      <div className="relative h-1/2 overflow-hidden rounded-t">
         <img
           src={pictureUrl}
           alt="anh"
@@ -30,7 +30,7 @@ const Card = ({
           {ECategoryProject[category]}
         </div>
       </div>
-      <div className="flex-1 rounded-b p-4 group-hover:bg-primary-50 bg-white">
+      <div className="h-1/2 rounded-b p-4 group-hover:bg-primary-50 bg-white">
         <Typo className="line-clamp-2" isBold size="large">
           {title}
         </Typo>
