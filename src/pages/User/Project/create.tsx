@@ -82,9 +82,9 @@ const CreateProject = ({ onGetListProject, onSetIsCreate }: IProps) => {
                 required
                 fullWidth
                 label="Nội dung"
-                {...register('contend')}
-                error={!!errors.contend}
-                helperText={errors.contend?.message}
+                {...register('content')}
+                error={!!errors.content}
+                helperText={errors.content?.message}
               />
             </div>
             <div className="mb-8">

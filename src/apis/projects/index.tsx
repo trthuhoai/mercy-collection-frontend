@@ -27,6 +27,20 @@ const getProjects = () => {
   });
 };
 
+const getProjectsByStatus = status => {
+  return request({
+    method: 'GET',
+    url: `/projects/${status}`,
+  });
+};
+
+const getCampaignsByStatus = status => {
+  return request({
+    method: 'GET',
+    url: `/campaigns/${status}`,
+  });
+};
+
 const getCampaignsDetail = (id: string) => {
   return request({
     method: 'GET',
@@ -138,5 +152,7 @@ export {
   createCampaign,
   getMyProjectsRegister,
   sendMailProject,
-  getMyProjectPeoples
+  getMyProjectPeoples,
+  getProjectsByStatus,
+  getCampaignsByStatus,
 };

@@ -27,9 +27,9 @@ const ProjectList = () => {
         Hãy lựa chọn dự án mà bạn quan tâm
       </Typo>
       {projects.length ? (
-        <Sliders slidesToScroll={3} slidesToShow={3} isDot={false}>
+        <Sliders slidesToScroll={4} slidesToShow={4} isDot={false}>
           {projects.map(project => (
-            <div className="px-4">
+            <div className="px-4 h-full">
               <CardProject {...project} />
             </div>
           ))}

@@ -32,7 +32,7 @@ const headers = [
 
 const defaultValues = {
   title: '',
-  contend: '',
+  content: '',
   deadline: null,
   deadlineTime: null,
   startAt: null,
@@ -45,7 +45,7 @@ const defaultValues = {
 
 const schemaCreate = yup.object().shape({
   title: yup.string().required('Bắt buộc nhập'),
-  contend: yup.string().required('Bắt buộc nhập'),
+  content: yup.string().required('Bắt buộc nhập'),
   people: yup.number().typeError('Phải là số').min(5, 'Nhỏ nhất là 5'),
   deadline: yup
     .date()

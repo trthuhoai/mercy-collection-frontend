@@ -139,7 +139,7 @@ const Header = () => {
         <div className="container h-full flex items-center justify-between">
           <div className="flex items-center">
             <div className="w-10 h-10">
-              <img src="/logo192.png" alt="logo" className="w-full h-full" />
+              <img src="/logo.png" alt="logo" className="w-full h-full" />
             </div>
             <Typo size="large" className="ml-4 text-white">
               Mercy Collection
@@ -171,7 +171,7 @@ const Header = () => {
               Tình nguyện
             </NavLink>
             <NavLink
-              to="/faq"
+              to="/faqs"
               className={({ isActive }) =>
                 `${classNameNavLink} ${isActive && activeStyle}`
               }
@@ -257,7 +257,6 @@ const Header = () => {
                 sx={{
                   marginRight: '8px',
                 }}
-                color="secondary"
                 onClick={() => {
                   setOpenRegisterModal(true);
                 }}

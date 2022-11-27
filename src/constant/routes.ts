@@ -12,4 +12,7 @@ export const routes = {
     PROJECT_REGISTER: '/me/projects-register',
     CAMPAIGN: '/me/campaigns',  
   },
+  FAQS: 'faqs',
+  DONATE: 'donate',
+  ABOUT: 'about',
 };

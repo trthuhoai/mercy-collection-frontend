@@ -1,6 +1,6 @@
 interface IPropsCreateForm {
   title: string;
-  contend: string;
+  content: string;
   people: number;
   deadline: string | null;
   deadlineTime: string | null;

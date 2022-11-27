@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Loading from 'components/Loading';
 import { ECategoryProject } from 'constant/types';
 import { toast } from 'react-toastify';
+import Comment from './comment';
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -39,12 +40,19 @@ const ProjectDetail = () => {
           <img
             src={projects.pictureUrl}
             alt="Ảnh từ thiện"
-            className="w-full rounded-md"
+            className="mx-auto max-h-[576px] rounded-md"
           />
+          <div className="mt-10">
+            <Typo size="large" isBold>
+              Nội dung:
+            </Typo>
+            <Typo className="mt-2 text-justify">{projects.content}</Typo>
+          </div>
+          <Comment />
         </div>
-        <div className="sticky top-20 w-[448px]">
+        <div className="sticky top-16 w-1/3 h-fit">
           <div className="bg-white rounded-md py-8 px-10">
-            <div className="bg-primary-500 rounded-md text-white px-4 py-2 mb-4 mx-auto w-fit">
+            <div className="bg-primary-500 rounded-md text-white px-4 py-2 mb-4 ml-auto w-fit">
               {ECategoryProject[projects.category]}
             </div>
             <Typo size="larger" isBold>
@@ -69,6 +77,10 @@ const ProjectDetail = () => {
               <div className="flex items-center justify-between mb-4 last:mb-0">
                 <Typo>Đã đạt được:</Typo>
                 <Typo>{projects.registered.toLocaleString()} người</Typo>
+              </div>
+              <div className="flex items-center justify-between mb-4 last:mb-0">
+                <Typo>Email người tổ chức:</Typo>
+                <Typo>{projects.email}</Typo>
               </div>
               <div className="flex items-center justify-between mb-4 last:mb-0">
                 <Typo>Thời gian bắt đầu:</Typo>
