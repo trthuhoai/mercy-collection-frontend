@@ -41,8 +41,14 @@ const ProjectDetail = () => {
             alt="Ảnh từ thiện"
             className="w-full rounded-md"
           />
+          <div className="mt-10">
+            <Typo size="large" isBold>
+              Nội dung:
+            </Typo>
+            <Typo className="mt-2 text-justify">{projects.content}</Typo>
+          </div>
         </div>
-        <div className="sticky top-20 w-[448px]">
+        <div className="w-1/3">
           <div className="bg-white rounded-md py-8 px-10">
             <div className="bg-primary-500 rounded-md text-white px-4 py-2 mb-4 mx-auto w-fit">
               {ECategoryProject[projects.category]}

@@ -27,9 +27,9 @@ const CampaignList = () => {
         Hãy lựa chọn dự án mà bạn quan tâm
       </Typo>
       {campaigns.length ? (
-        <Sliders slidesToScroll={3} slidesToShow={3} isDot={false}>
+        <Sliders slidesToScroll={4} slidesToShow={4} isDot={false}>
           {campaigns.map(campaign => (
-            <div className="px-4">
+            <div className="px-4 h-full">
               <CardCampaign {...campaign} />
             </div>
           ))}
