@@ -13,10 +13,12 @@ import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { toast } from 'react-toastify';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 const Project = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
   const [isCreate, setIsCreate] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -30,14 +32,6 @@ const Project = () => {
     setListProject(data.data);
   };
 
-  const handleSendMail = async id => {
-    try {
-      await sendMailProject(id);
-      toast.success('Gửi mail cho dự án thành công');
-    } catch (error) {
-      toast.success('Gửi mail cho dự án thất bại');
-    }
-  };
 
   const rows = listProject.map(
     ({
@@ -65,11 +59,12 @@ const Project = () => {
       action: (
         <Button
           variant="contained"
-          endIcon={<SendIcon />}
-          onClick={() => handleSendMail(id)}
+          // endIcon={<SendIcon />}
+          onClick={() => navigate(`/me/projects/${id}`)}
         >
-          Gửi mail
+          Chi tiết
         </Button>
+        // <NavLink to='/signout' className='k-button k-flat'>Sign out</NavLink>
       ),
     }),
   );
@@ -85,10 +80,12 @@ const Project = () => {
             onGetListProject={getListProjects}
             onSetIsCreate={setIsCreate}
           />
-        ) : !!listProject.length ? (
-          <Table headers={headers} rows={rows} />
+        ) : !listProject.length ? (
+          <Table headers={headers} />
+       
         ) : (
-          <Typo>Không có dự án</Typo>
+          <Table headers={headers} rows={rows} />
+          // <Typo>Không có dự án</Typo>
         )}
       </div>
       <div

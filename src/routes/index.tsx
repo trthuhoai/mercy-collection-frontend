@@ -9,6 +9,7 @@ import Faqs from 'pages/Faq';
 import Home from 'pages/Home';
 import ProjectPage from 'pages/Project';
 import ProjectDetail from 'pages/Project/Detail';
+import MyProjectDetail from 'pages/User/Project/Detail';
 import { CampaignUser, InfoUser, ProjectUser } from 'pages/User';
 import ProjectRegister from 'pages/User/ProjectRegister';
 import { createBrowserRouter } from 'react-router-dom';
@@ -38,11 +39,19 @@ const routerConfig = [
         element: <CampaignDetail />,
       },
       {
+        path: routes.DONATE,
+        element: <Donate />,
+      },
+      {
         element: <UserLayout />,
         children: [
           {
             path: routes.ME.INFO,
             element: <InfoUser />,
+          },
+          {
+            path: routes.ME.DETAIL_PROJECT,
+            element: <MyProjectDetail />,
           },
           {
             path: routes.ME.PROJECT,
