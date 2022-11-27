@@ -1,8 +1,11 @@
 import { routes } from 'constant/routes';
 import MainLayout from 'layouts/mainLayout';
 import UserLayout from 'layouts/userLayout';
+import About from 'pages/About';
 import CampaignPage from 'pages/Campaign';
 import CampaignDetail from 'pages/Campaign/Detail';
+import Donate from 'pages/Donate';
+import Faqs from 'pages/Faq';
 import Home from 'pages/Home';
 import ProjectPage from 'pages/Project';
 import ProjectDetail from 'pages/Project/Detail';
@@ -54,6 +57,18 @@ const routerConfig = [
             element: <CampaignUser />,
           },
         ],
+      },
+      {
+        path: routes.FAQS,
+        element: <Faqs />,
+      },
+      {
+        path: routes.DONATE,
+        element: <Donate />,
+      },
+      {
+        path: routes.ABOUT,
+        element: <About />,
       },
     ],
   },

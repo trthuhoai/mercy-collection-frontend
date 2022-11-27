@@ -4,10 +4,17 @@ import React, { ReactNode } from 'react';
 interface IProps {
   className?: string;
   size?: 'larger' | 'large' | 'normal' | 'max';
+  align?: 'right' | 'center';
   isBold?: boolean;
   children: ReactNode;
 }
-const Typo = ({ className, size = 'normal', isBold, children }: IProps) => {
+const Typo = ({
+  className,
+  size = 'normal',
+  isBold,
+  align,
+  children,
+}: IProps) => {
   return (
     <p
       className={clsx(
@@ -26,6 +33,12 @@ const Typo = ({ className, size = 'normal', isBold, children }: IProps) => {
         },
         {
           'font-semibold': isBold,
+        },
+        {
+          'text-right': align === 'right',
+        },
+        {
+          'text-center': align === 'center',
         },
         className,
       )}

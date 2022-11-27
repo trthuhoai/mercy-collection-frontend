@@ -17,3 +17,18 @@ export interface IProjectDetail {
   title: string;
   content: string;
 }
+
+export interface ICommentList {
+  content: string;
+  date: string;
+  id: string;
+  memberId: string;
+  name: string;
+  picture: string | null;
+  projectId: string;
+  rootId: string;
+}
+
+export interface IFormComment {
+  comment: string;
+}
