@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Loading from 'components/Loading';
 import { ECategoryProject } from 'constant/types';
 import { toast } from 'react-toastify';
-import Comment from './comment';
+import Comment from './Comment';
 
 const ProjectDetail = () => {
   const { id } = useParams();

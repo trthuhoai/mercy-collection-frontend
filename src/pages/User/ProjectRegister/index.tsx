@@ -5,14 +5,22 @@ import { ECategoryProject } from 'constant/types';
 import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
 import Typo from 'components/Typo';
+import Loading from 'components/Loading';
 
 const ProjectRegister = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      const data = await getMyProjectsRegister();
-      setListProject(data.data);
+      try {
+        setLoading(true);
+        const data = await getMyProjectsRegister();
+        setListProject(data.data);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -46,10 +54,12 @@ const ProjectRegister = () => {
       <Typo size="max" isBold className="mb-10">
         Danh sách dự án tình nguyện đã đăng kí
       </Typo>
-      {!!listProject.length ? (
+      {loading ? (
+        <Loading />
+      ) : listProject.length ? (
         <Table headers={headers} rows={rows} />
       ) : (
-        <Typo>Chưa tham gia dự án nào</Typo>
+        <Typo>Không có dự án</Typo>
       )}
     </div>
   );

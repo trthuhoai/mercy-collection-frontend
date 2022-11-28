@@ -27,6 +27,18 @@ export interface ICommentList {
   picture: string | null;
   projectId: string;
   rootId: string;
+  childrenComment: IChildrenComment[];
+}
+
+export interface IChildrenComment {
+  content: string;
+  date: string;
+  id: string;
+  memberId: string;
+  name: string;
+  picture: string | null;
+  projectId: string;
+  rootId: string;
 }
 
 export interface IFormComment {
