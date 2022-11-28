@@ -8,17 +8,23 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { ICommentList, IFormComment } from './types';
-import { schemaComment } from './constant';
+import { ICommentList, IFormComment } from '../types';
+import { schemaComment } from '../constant';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUser } from 'store';
 import { useParams } from 'react-router-dom';
-import { createComment, getListComment } from 'apis/comment';
+import { createComment, createReply, getListComment } from 'apis/comment';
 import { toast } from 'react-toastify';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { convertDate } from 'untils';
 import { FORMAT_DATE } from 'constant';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Reply from './reply';
 
 const Comment = () => {
   const { isAuthenticated } = useUser();
@@ -43,6 +49,16 @@ const Comment = () => {
     mode: 'onSubmit',
     resolver: yupResolver(schemaComment),
   });
+
+  const onSubmitReply = async (rootId, data) => {
+    try {
+      await createReply(id, rootId, data);
+      const list = await getListComment(id);
+      setListComment(list);
+    } catch (error) {
+      toast.success('Bình luận thất bại');
+    }
+  };
 
   const onSubmit = async data => {
     try {
@@ -100,9 +116,13 @@ const Comment = () => {
             }}
           >
             {listComment.map((comment, index) => (
-              <>
+              <div key={comment.id}>
                 <ListItem>
-                  <ListItemAvatar>
+                  <ListItemAvatar
+                    sx={{
+                      alignSelf: 'self-start',
+                    }}
+                  >
                     <Avatar>
                       <img
                         src={comment.picture || '/avartar.png'}
@@ -125,13 +145,61 @@ const Comment = () => {
                         </Typo>
                       </div>
                     }
-                    secondary={comment.content}
+                    secondary={
+                      <>
+                        <div className="mb-2">{comment.content}</div>
+                        <Accordion
+                          key={index}
+                          sx={{
+                            boxShadow: 'none',
+                            margin: '0 !important',
+                            '&::before': {
+                              height: 0,
+                            },
+                          }}
+                        >
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            sx={{
+                              minHeight: '0 !important',
+                              '& > .MuiAccordionSummary-content': {
+                                margin: '0 !important',
+                              },
+                            }}
+                          >
+                            <Typography
+                              component={'span'}
+                              sx={{
+                                textDecoration: 'underline',
+                                fontStyle: 'italic',
+                              }}
+                            >
+                              Phản hồi
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails
+                            sx={{
+                              padding: '8px 0 0',
+                            }}
+                          >
+                            <Reply
+                              childrenComment={comment.childrenComment}
+                              onSubmitReply={data =>
+                                onSubmitReply(comment.id, data)
+                              }
+                            />
+                          </AccordionDetails>
+                        </Accordion>
+                      </>
+                    }
                   />
                 </ListItem>
                 {index + 1 !== listComment.length && (
                   <Divider variant="inset" component="li" />
                 )}
-              </>
+              </div>
             ))}
           </List>
         ) : (

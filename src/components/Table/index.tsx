@@ -36,7 +36,7 @@ const Table = ({ headers, rows }: IProps) => {
 
   return (
     <TableContainer component={Paper} sx={{ maxHeight: 'calc(100vh - 340px)' }}>
-      <TableM sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
+      <TableM sx={{ minWidth: 1300 }} stickyHeader aria-label="sticky table">
         <StyledTableHead>
           <TableRow>
             {headers.map(header => (

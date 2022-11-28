@@ -25,6 +25,7 @@ const FORMAT_DATE = {
   COMMENT: 'MMM dd, yyyy - HH:mm',
   YEAR_MONTH_DAY: 'yyyy-MM-dd',
   HOUR_MINUTE: 'hh:mm',
+  FULL_DATE_HOUR: 'yyyy-MM-dd hh:mm',
 };
 
 const TABS = [
