@@ -13,7 +13,7 @@ const Donate = () => {
       </Typo>
       <Typo align="center">
         Số tài khoản: 123456789 <br />
-        Ngân hàng: TMCP Quân đội, CN Tây Hà Nội <br />
+        Ngân hàng: Vietcombank, DANANG-PGD HOA KHANH <br />
         Chủ tài khoản: Công ty Cổ phần Mercy Collection
       </Typo>
       <div className="my-8 mx-auto w-52 h-52">
