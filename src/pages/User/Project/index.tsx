@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getMyProjects, sendMailProject } from 'apis/projects';
+import { getMyProjects } from 'apis/projects';
 import Table from 'components/Table';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -11,19 +11,26 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import CreateProject from './create';
 import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import { toast } from 'react-toastify';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Loading from 'components/Loading';
 
 const Project = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
   const [isCreate, setIsCreate] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      const data = await getMyProjects();
-      setListProject(data.data);
+      try {
+        setLoading(true);
+        const data = await getMyProjects();
+        setListProject(data.data);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
@@ -31,7 +38,6 @@ const Project = () => {
     const data = await getMyProjects();
     setListProject(data.data);
   };
-
 
   const rows = listProject.map(
     ({
@@ -53,18 +59,16 @@ const Project = () => {
       registered,
       category: ECategoryProject[category],
       deadline: deadlineTime + ' ' + deadline,
-      endTime: endTime + ' ' + endAt,
       startTime: startTime + ' ' + startAt,
+      endTime: endTime + ' ' + endAt,
       location,
       action: (
         <Button
           variant="contained"
-          // endIcon={<SendIcon />}
           onClick={() => navigate(`/me/projects/${id}`)}
         >
           Chi tiết
         </Button>
-        // <NavLink to='/signout' className='k-button k-flat'>Sign out</NavLink>
       ),
     }),
   );
@@ -80,12 +84,12 @@ const Project = () => {
             onGetListProject={getListProjects}
             onSetIsCreate={setIsCreate}
           />
-        ) : !listProject.length ? (
-          <Table headers={headers} />
-       
-        ) : (
+        ) : loading ? (
+          <Loading />
+        ) : listProject.length ? (
           <Table headers={headers} rows={rows} />
-          // <Typo>Không có dự án</Typo>
+        ) : (
+          <Typo>Không có dự án</Typo>
         )}
       </div>
       <div

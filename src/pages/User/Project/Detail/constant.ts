@@ -1,5 +1,3 @@
-import * as yup from 'yup';
-
 const headers = [
   {
     name: 'Tên',

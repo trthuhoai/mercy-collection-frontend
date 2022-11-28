@@ -17,11 +17,28 @@ const createComment = (id, content) => {
   });
 };
 
-const getListComment = id => {
+const createReply = (id, rootId, content) => {
   return request({
-    method: 'GET',
-    url: `/comments/${id}`,
+    method: 'POST',
+    url: `/comments/children`,
+    data: {
+      projectId: id,
+      rootId,
+      content,
+    },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
   });
 };
 
-export { createComment, getListComment };
+const getListComment = id => {
+  return request({
+    method: 'GET',
+    url: `/comments/all/${id}`,
+  });
+};
+
+export { createComment, getListComment, createReply };
