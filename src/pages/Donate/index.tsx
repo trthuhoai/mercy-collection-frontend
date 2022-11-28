@@ -12,7 +12,7 @@ const Donate = () => {
         mã QR dưới đây:
       </Typo>
       <Typo align="center">
-        Số tài khoản: 123456789 <br />
+        Số tài khoản: 0041000346317 <br />
         Ngân hàng: Vietcombank, DANANG-PGD HOA KHANH <br />
         Chủ tài khoản: Công ty Cổ phần Mercy Collection
       </Typo>
