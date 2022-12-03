@@ -4,5 +4,10 @@
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "cSpell.ignoreWords": ["clsx"]
+  "cSpell.ignoreWords": [
+    "clsx"
+  ],
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }

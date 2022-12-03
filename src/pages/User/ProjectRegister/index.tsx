@@ -6,11 +6,14 @@ import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
 import Typo from 'components/Typo';
 import Loading from 'components/Loading';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { routes } from 'constant/routes';
 
 const ProjectRegister = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const navigate = useNavigate();
   useEffect(() => {
     (async () => {
       try {
@@ -25,10 +28,8 @@ const ProjectRegister = () => {
   }, []);
 
   const rows = listProject.map(
-    ({
+    ({ projectId,
       title,
-      people,
-      registered,
       category,
       deadlineTime,
       deadline,
@@ -37,15 +38,19 @@ const ProjectRegister = () => {
       startAt,
       startTime,
       location,
+      status
     }) => ({
+
       title,
-      people,
-      registered,
       category: ECategoryProject[category],
       deadline: deadlineTime + ' ' + deadline,
       endTime: endTime + ' ' + endAt,
       startTime: startTime + ' ' + startAt,
       location,
+      status,
+      onClick: () =>
+        navigate(generatePath(routes.PROJECTS_DETAIL, { id: projectId }))
+
     }),
   );
 

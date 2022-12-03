@@ -7,6 +7,7 @@ export const routes = {
   ME: {
     INFO: '/me/info',
     DETAIL_PROJECT:'/me/projects/:id',
+    UPDATE_PROJECT:'/me/projects/update/:id',
     PROJECT: '/me/projects',
     PROJECT_REGISTER: '/me/projects-register',
     CAMPAIGN: '/me/campaigns',  

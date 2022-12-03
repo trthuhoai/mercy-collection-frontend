@@ -16,6 +16,9 @@ export interface IProjectDetail {
   startTime: string;
   title: string;
   content: string;
+  registerStatus: boolean;
+  status: string;
+  projectId: string;
 }
 
 export interface ICommentList {
