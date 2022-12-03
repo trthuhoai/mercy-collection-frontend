@@ -15,11 +15,12 @@ interface IProps {
   }[];
   rows?: {
     [key: string]: any;
+    onClick?: () => void
   }[];
 }
 const Table = ({ headers, rows }: IProps) => {
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
+    '&:hover': {
       backgroundColor: theme.palette.action.hover,
     },
     '&:last-child td': {
@@ -36,11 +37,12 @@ const Table = ({ headers, rows }: IProps) => {
 
   return (
     <TableContainer component={Paper} sx={{ maxHeight: 'calc(100vh - 340px)' }}>
-      <TableM sx={{ minWidth: 1300 }} stickyHeader aria-label="sticky table">
+      <TableM stickyHeader aria-label="sticky table">
         <StyledTableHead>
           <TableRow>
             {headers.map(header => (
-              <TableCell align={header.align || 'left'}>
+              <TableCell align={header.align || 'left'} sx={{ minWidth: 150 }}
+              >
                 {header.name}
               </TableCell>
             ))}
@@ -50,10 +52,15 @@ const Table = ({ headers, rows }: IProps) => {
           {rows?.map(row => (
             <StyledTableRow
               key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{
+                '&:last-child td, &:last-child th': { border: 0 },
+                cursor: row.onClick && 'pointer'
+              }}
+
+              onClick={row.onClick}
             >
               {Object.keys(row).map(key => (
-                <TableCell align="left">{row[key]}</TableCell>
+                <TableCell align="left" > {row[key]}</TableCell>
               ))}
             </StyledTableRow>
           ))}

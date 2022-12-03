@@ -11,8 +11,9 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import CreateProject from './create';
 import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import Loading from 'components/Loading';
+import { routes } from 'constant/routes';
 
 const Project = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
@@ -65,11 +66,17 @@ const Project = () => {
       action: (
         <Button
           variant="contained"
-          onClick={() => navigate(`/me/projects/${id}`)}
+          onClick={(e) => {
+            e.stopPropagation()
+            navigate(generatePath(routes.ME.DETAIL_PROJECT, { id }))
+          }}
         >
           Chi tiết
         </Button>
       ),
+      onClick: () =>
+        navigate(generatePath(routes.ME.UPDATE_PROJECT, { id }))
+
     }),
   );
 

@@ -256,6 +256,8 @@ const Header = () => {
               <Button
                 sx={{
                   marginRight: '8px',
+                  color: 'white',
+                  hover: 'red'
                 }}
                 onClick={() => {
                   setOpenRegisterModal(true);

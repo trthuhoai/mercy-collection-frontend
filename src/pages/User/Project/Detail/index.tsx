@@ -53,7 +53,8 @@ const People = () => {
       <Typo size="max" isBold className="mb-10">
         Danh sách người đăng ký tham gia dự án tình nguyện
       </Typo>
-      <div className="mt-8 text-right mb-4 mr-28">
+
+      {/* <div className="mt-8 text-right mb-4 mr-28">
         <Button
           variant="contained"
           endIcon={<SendIcon />}
@@ -62,14 +63,39 @@ const People = () => {
         >
           Gửi mail
         </Button>
-      </div>
+      </div> */}
       <div className="">
         {loading ? (
           <Loading />
         ) : listPeople.length ? (
-          <Table headers={headers} rows={rows} />
+          <div>
+            <div className="mt-8 text-right mb-4 mr-28">
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                color="secondary"
+                onClick={() => handleSendMail()}
+              >
+                Gửi mail
+              </Button>
+            </div>
+            <Table headers={headers} rows={rows} /></div>
+
         ) : (
-          <Typo>Không có dự án</Typo>
+          <div>
+            <div className="mt-8 text-right mb-4 mr-28">
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                color="secondary"
+                disabled
+              >
+                Gửi mail
+              </Button>
+            </div>
+            <Typo>Không có người đăng ký tham gia</Typo>
+          </div>
+
         )}
       </div>
     </div>

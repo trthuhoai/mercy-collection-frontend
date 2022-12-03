@@ -1,10 +1,30 @@
 import request from 'apis/axios';
 import { ELocalStorageKey } from 'constant/types';
 
+const checkLogin = () => {
+
+  if (localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN,) == null) {
+    return false
+  }
+  return true
+};
+
 const registerProject = id => {
   return request({
     method: 'PATCH',
     url: `/projects/register/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+const cancelRegisterProject = id => {
+  return request({
+    method: 'PATCH',
+    url: `/projects/register/cancel/${id}`,
     headers: {
       Authorization: `Bearer ${localStorage.getItem(
         ELocalStorageKey.ACCESS_TOKEN,
@@ -49,6 +69,19 @@ const getCampaignsDetail = (id: string) => {
 };
 
 const getProjectsDetail = (id: string) => {
+  if (localStorage.getItem(
+    ELocalStorageKey.ACCESS_TOKEN,
+  )) {
+    return request({
+      method: 'GET',
+      url: `/projects/${id}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(
+          ELocalStorageKey.ACCESS_TOKEN,
+        )}`,
+      },
+    });
+  }
   return request({
     method: 'GET',
     url: `/projects/${id}`,
@@ -127,6 +160,30 @@ const createProject = data => {
     },
   });
 };
+const updateProject = (data, id) => {
+  return request({
+    method: 'PATCH',
+    url: `/projects/${id}`,
+    data,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+const cancelProject = (id) => {
+  return request({
+    method: 'PATCH',
+    url: `/projects/cancel/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
 
 const createCampaign = data => {
   return request({
@@ -155,4 +212,8 @@ export {
   getMyProjectPeoples,
   getProjectsByStatus,
   getCampaignsByStatus,
+  checkLogin,
+  cancelRegisterProject,
+  updateProject,
+  cancelProject
 };
