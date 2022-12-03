@@ -7,7 +7,7 @@ const About = () => {
       <div className="mx-auto w-40 h-40 mb-8">
         <img src="/logo.png" alt="Mã QR" className="w-full h-full" />
       </div>
-      <div className="mx-auto w-1/2">
+      <div className="mx-auto lg:w-1/2">
         <Typo>
           Mercy Collection.vn là nền tảng gây quỹ cộng đồng trực tuyến tiện lợi,
           tin cậy và minh bạch. Được phát triển và vận hành bởi Doanh nghiệp xã

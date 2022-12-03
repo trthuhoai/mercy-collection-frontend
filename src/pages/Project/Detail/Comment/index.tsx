@@ -133,9 +133,12 @@ const Comment = () => {
                   <ListItemText
                     sx={{
                       whiteSpace: 'pre-line',
+                      '& > p': {
+                        wordBreak: 'break-word',
+                      },
                     }}
                     primary={
-                      <div className="flex gap-2">
+                      <div className="sm:flex gap-2">
                         {comment.name}
                         <Typo>
                           {convertDate(
