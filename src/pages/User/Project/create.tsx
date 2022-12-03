@@ -48,7 +48,7 @@ const CreateProject = ({ onGetListProject, onSetIsCreate }: IProps) => {
         pictureFile: await getBase64(data.pictureFile[0]),
         startTime: convertDate(data.startTime, FORMAT_DATE.HOUR_MINUTE),
         endTime: convertDate(data.endTime, FORMAT_DATE.HOUR_MINUTE),
-        content: data.content
+        content: data.content,
       };
       await createProject(body);
       onGetListProject();
@@ -66,7 +66,7 @@ const CreateProject = ({ onGetListProject, onSetIsCreate }: IProps) => {
         noValidate
         autoComplete="off"
       >
-        <div className="flex gap-20">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
           <div className="flex-1">
             <div className="mb-8">
               <TextField
