@@ -75,6 +75,7 @@ const Reply = ({ childrenComment, onSubmitReply }: IProps) => {
             fullWidth
             label="Nhập phản hồi"
             id="outlined-size-small"
+            multiline
             size="small"
             value={valueReply}
             onChange={e => setValueReply(e.target.value)}

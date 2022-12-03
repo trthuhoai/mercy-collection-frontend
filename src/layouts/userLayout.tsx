@@ -10,8 +10,8 @@ const UserLayout = () => {
   const activeClassName = 'bg-primary-500 !text-white';
 
   return (
-    <div className="flex flex-1">
-      <aside className="w-[260px] bg-white border-r border-gray-300">
+    <div className="flex w-full">
+      <aside className="w-1/5 bg-white border-r border-gray-300">
         <nav className="mt-10 mx-6">
           <ul>
             <li className="mb-4">
@@ -81,7 +81,7 @@ const UserLayout = () => {
           </ul>
         </nav>
       </aside>
-      <div className="flex-1">
+      <div className="w-4/5">
         <Outlet />
       </div>
     </div>

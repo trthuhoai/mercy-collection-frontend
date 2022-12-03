@@ -3,12 +3,6 @@ const headers = [
     name: 'Tiêu đề',
   },
   {
-    name: 'Mục tiêu',
-  },
-  {
-    name: 'Đã đăng ký',
-  },
-  {
     name: 'Thể loại',
   },
   {
@@ -22,6 +16,9 @@ const headers = [
   },
   {
     name: 'Địa điểm',
+  },
+  {
+    name: 'Trạng thái',
   },
 ];
 

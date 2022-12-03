@@ -15,3 +15,10 @@ export enum ECategoryProject {
   CALAMITY = 'Thiên tai',
   ENVIRONMENT = 'Môi trường',
 }
+
+export enum EStatusProject {
+  ACTIVE = 'Đang mở đơn đăng ký',
+  CANCELLED = 'Đã bị huỷ',
+  EXPIRED = 'Hết hạn đăng ký',
+  ENDED = 'Đã kết thúc',
+}

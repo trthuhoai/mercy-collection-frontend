@@ -10,6 +10,7 @@ import Home from 'pages/Home';
 import ProjectPage from 'pages/Project';
 import ProjectDetail from 'pages/Project/Detail';
 import MyProjectDetail from 'pages/User/Project/Detail';
+import UpdateProject from 'pages/User/Project/Update';
 import { CampaignUser, InfoUser, ProjectUser } from 'pages/User';
 import ProjectRegister from 'pages/User/ProjectRegister';
 import { createBrowserRouter } from 'react-router-dom';
@@ -52,6 +53,10 @@ const routerConfig = [
           {
             path: routes.ME.DETAIL_PROJECT,
             element: <MyProjectDetail />,
+          },
+          {
+            path: routes.ME.UPDATE_PROJECT,
+            element: <UpdateProject />,
           },
           {
             path: routes.ME.PROJECT,
