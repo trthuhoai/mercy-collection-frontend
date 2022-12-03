@@ -66,22 +66,20 @@ const Project = () => {
       action: (
         <Button
           variant="contained"
-          onClick={(e) => {
-            e.stopPropagation()
-            navigate(generatePath(routes.ME.DETAIL_PROJECT, { id }))
+          onClick={e => {
+            e.stopPropagation();
+            navigate(generatePath(routes.ME.DETAIL_PROJECT, { id }));
           }}
         >
           Chi tiết
         </Button>
       ),
-      onClick: () =>
-        navigate(generatePath(routes.ME.UPDATE_PROJECT, { id }))
-
+      onClick: () => navigate(generatePath(routes.ME.UPDATE_PROJECT, { id })),
     }),
   );
 
   return (
-    <div className="my-10 container">
+    <div className="md:my-10 container">
       <Typo size="max" isBold className="mb-10">
         {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách dự án tình nguyện'}
       </Typo>
@@ -100,7 +98,7 @@ const Project = () => {
         )}
       </div>
       <div
-        className="fixed bottom-28 right-28"
+        className="fixed bottom-8 right-8 md:bottom-20 md:right-20 lg:bottom-28 lg:right-28"
         onClick={() => setIsCreate(!isCreate)}
       >
         <Tooltip

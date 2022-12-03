@@ -30,6 +30,7 @@ import {
 import { toast } from 'react-toastify';
 import { ELocalStorageKey } from 'constant/types';
 import { routes } from 'constant/routes';
+import NavMobile from './NavMobile';
 
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
@@ -145,7 +146,11 @@ const Header = () => {
               Mercy Collection
             </Typo>
           </div>
-          <div className="flex gap-16">
+          <NavMobile
+            onLogin={() => setOpenLoginModal(true)}
+            onLogout={handleLogout}
+          />
+          <div className="hidden lg:flex gap-16">
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -196,7 +201,7 @@ const Header = () => {
             </NavLink>
           </div>
           {user ? (
-            <div>
+            <div className="hidden lg:block">
               <div
                 className="flex items-center cursor-pointer"
                 onClick={handleClickName}
@@ -225,7 +230,7 @@ const Header = () => {
                   horizontal: 'right',
                 }}
               >
-                <MenuItem>
+                <MenuItem onClick={() => setAnchorEl(null)}>
                   <AccountCircleIcon
                     fontSize="small"
                     sx={{ marginRight: '8px' }}
@@ -252,12 +257,12 @@ const Header = () => {
               </Menu>
             </div>
           ) : (
-            <div>
+            <div className="hidden lg:block">
               <Button
                 sx={{
                   marginRight: '8px',
                   color: 'white',
-                  hover: 'red'
+                  hover: 'red',
                 }}
                 onClick={() => {
                   setOpenRegisterModal(true);

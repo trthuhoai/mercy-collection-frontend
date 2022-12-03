@@ -20,6 +20,7 @@ body {
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   line-height: 1.4;
   font-size: 16px;
+  padding: 0 !important;
 }
 
 ul,
