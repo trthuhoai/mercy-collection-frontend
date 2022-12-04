@@ -30,7 +30,7 @@ const FORMAT_DATE = {
 
 const TABS = [
   {
-    label: 'Đang diễn ra',
+    label: 'Đang mở đơn',
     value: 'registering',
   },
   {

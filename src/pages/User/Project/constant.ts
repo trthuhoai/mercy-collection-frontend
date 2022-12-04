@@ -13,17 +13,17 @@ const headers = [
   {
     name: 'Thể loại',
   },
+  // {
+  //   name: 'Thời gian bắt đầu',
+  // },
+  // {
+  //   name: 'Thời gian kết thúc',
+  // },
   {
-    name: 'Hạn đăng ký',
+    name: 'Địa điểm tình nguyện',
   },
   {
-    name: 'Thời gian bắt đầu',
-  },
-  {
-    name: 'Thời gian kết thúc',
-  },
-  {
-    name: 'Địa điểm',
+    name: 'Trạng thái',
   },
   {
     name: 'Người đăng ký',

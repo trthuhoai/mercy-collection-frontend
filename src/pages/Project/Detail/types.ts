@@ -19,6 +19,7 @@ export interface IProjectDetail {
   registerStatus: boolean;
   status: string;
   projectId: string;
+  reasion: string;
 }
 
 export interface ICommentList {

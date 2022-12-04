@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getMyProjectsRegister } from 'apis/projects';
 import Table from 'components/Table';
-import { ECategoryProject } from 'constant/types';
+import { ECategoryProject, EStatusProject } from 'constant/types';
 import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
 import Typo from 'components/Typo';
@@ -47,7 +47,7 @@ const ProjectRegister = () => {
       endTime: endTime + ' ' + endAt,
       startTime: startTime + ' ' + startAt,
       location,
-      status,
+      status: EStatusProject[status],
       onClick: () =>
         navigate(generatePath(routes.PROJECTS_DETAIL, { id: projectId })),
     }),
