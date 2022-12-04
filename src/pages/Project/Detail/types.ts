@@ -19,7 +19,7 @@ export interface IProjectDetail {
   title: string;
   content: string;
   registerStatus: boolean;
-  status: EStatusProject;
+  status: string;
   projectId: string;
   reasion: string;
 }

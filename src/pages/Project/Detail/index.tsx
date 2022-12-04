@@ -158,14 +158,14 @@ const ProjectDetail = () => {
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Địa điểm:</Typo>
                   <Typo>{projects.location}</Typo>
-                </div>
+                </div>{projects.status}
          
                 {projects.reasion && (<div className="flex justify-between mb-4 last:mb-0">
                   <Typo>Lý do huỷ:</Typo>
                   <Typo className="whitespace-pre-line">{projects.reasion}</Typo>
                 </div>)}
               </div>
-              {projects.status === EStatusProject.ACTIVE ?
+              {projects.status === 'ACTIVE' ?
                 (<div className="mt-4 text-center">
                   {isAuthenticated ?
                     projects.registerStatus ? ((
@@ -216,7 +216,7 @@ const ProjectDetail = () => {
                       </div>
                     )}
 
-                </div>) : projects.status === EStatusProject.CANCELLED ?
+                </div>) : projects.status === 'CANCELLED' ?
                   (<div className="mt-8 text-center">
                     <div className='font-serif text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ BỊ HUỶ</div>
                   </div>) : (
