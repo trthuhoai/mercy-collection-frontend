@@ -28,7 +28,8 @@ const ProjectRegister = () => {
   }, []);
 
   const rows = listProject.map(
-    ({ projectId,
+    ({
+      projectId,
       title,
       category,
       deadlineTime,
@@ -38,9 +39,8 @@ const ProjectRegister = () => {
       startAt,
       startTime,
       location,
-      status
+      status,
     }) => ({
-
       title,
       category: ECategoryProject[category],
       deadline: deadlineTime + ' ' + deadline,
@@ -49,13 +49,12 @@ const ProjectRegister = () => {
       location,
       status: EStatusProject[status],
       onClick: () =>
-        navigate(generatePath(routes.PROJECTS_DETAIL, { id: projectId }))
-
+        navigate(generatePath(routes.PROJECTS_DETAIL, { id: projectId })),
     }),
   );
 
   return (
-    <div className="my-10 container">
+    <div className="lg:my-10 container">
       <Typo size="max" isBold className="mb-10">
         Danh sách dự án tình nguyện đã đăng kí
       </Typo>

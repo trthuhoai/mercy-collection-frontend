@@ -6,7 +6,7 @@ const Info = () => {
   const { user } = useUser();
 
   return (
-    <div className="my-10">
+    <div className="md:my-10">
       <div className="h-52 bg-gradient-to-r from-violet-100 via-purple-100 to-pink-100 rounded-tl-[90px]" />
       <div className="container">
         <div className="flex gap-6 -translate-y-1/2 ">

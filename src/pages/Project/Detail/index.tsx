@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getProjectsDetail, registerProject, cancelRegisterProject } from 'apis/projects';
+import {
+  getProjectsDetail,
+  registerProject,
+  cancelRegisterProject,
+} from 'apis/projects';
 import { useParams } from 'react-router-dom';
 import { IProjectDetail } from './types';
 import Typo from 'components/Typo';
@@ -11,7 +15,6 @@ import Comment from './Comment';
 import ListItemText from '@mui/material/ListItemText';
 import { useUser } from 'store';
 import Modal from 'components/Modal';
-
 
 const ProjectDetail = () => {
   const { id } = useParams();
@@ -69,7 +72,7 @@ const ProjectDetail = () => {
   return (
     <>
       <div className="container my-10">
-        <div className="flex gap-8">
+        <div className="flex flex-col-reverse lg:flex-row gap-8">
           <div className="flex-1">
             <img
               src={projects.pictureUrl}
@@ -87,15 +90,16 @@ const ProjectDetail = () => {
                 secondary={
                   <>
                     <Typo className="mt-2 text-justify ">
-                      {projects.content}</Typo>
+                      {projects.content}
+                    </Typo>
                   </>
                 }
               />
             </div>
             <Comment />
           </div>
-          <div className="sticky top-16 w-1/3 h-fit">
-            <div className="bg-white rounded-md py-8 px-10">
+          <div className="lg:sticky top-16 lg:w-1/3 h-fit">
+            <div className="bg-white rounded-md p-4 sm:py-8 sm:px-10">
               <div className="bg-primary-500 rounded-md text-white px-4 py-2 mb-4 ml-auto w-fit">
                 {ECategoryProject[projects.category]}
               </div>
@@ -103,7 +107,7 @@ const ProjectDetail = () => {
                 {projects.title}
               </Typo>
               <div className="mt-4">
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Mục tiêu dự án:</Typo>
                   <Typo>{projects.people.toLocaleString()} người</Typo>
                 </div>
@@ -118,39 +122,40 @@ const ProjectDetail = () => {
                     className="absolute bg-primary-500 inset-0 rounded-md"
                   />
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Đã đạt được:</Typo>
                   <Typo>{projects.registered.toLocaleString()} người</Typo>
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Tỉ lệ đạt được:</Typo>
-                  <Typo>  {Math.floor(
-                    (projects.registered / projects.people) * 100,
-                  )}%</Typo>
+                  <Typo>
+                    {' '}
+                    {Math.floor((projects.registered / projects.people) * 100)}%
+                  </Typo>
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Email người tổ chức:</Typo>
                   <Typo>{projects.email}</Typo>
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Thời gian bắt đầu:</Typo>
                   <Typo>
                     {projects.startAt} {projects.startTime}
                   </Typo>
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Thời gian kết thúc:</Typo>
                   <Typo>
                     {projects.endAt} {projects.endTime}
                   </Typo>
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Thời hạn đăng ký:</Typo>
                   <Typo>
                     {projects.deadline} {projects.deadlineTime}
                   </Typo>
                 </div>
-                <div className="flex items-center justify-between mb-4 last:mb-0">
+                <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Địa điểm:</Typo>
                   <Typo>{projects.location}</Typo>
                 </div>
@@ -168,10 +173,13 @@ const ProjectDetail = () => {
                         <button className='bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={() => setOpenCancelModal(true)}>
                           Huỷ đăng ký
                         </button>
-
                       </div>
-                    )) : (
-                      <Button size="large" variant="contained" onClick={onSubmit}>
+                    ) : (
+                      <Button
+                        size="large"
+                        variant="contained"
+                        onClick={onSubmit}
+                      >
                         Tham gia ngay
                       </Button>) : (
                       <div className='font-serif text-2xl text-sky-600 bg-slate-300'> Hãy đăng nhập để đăng ký tham gia hoạt động này</div>
@@ -199,7 +207,6 @@ const ProjectDetail = () => {
       >
         Bạn có chắc chắn muốn huỷ đăng ký tham gia hoạt động này không?
         <div className="text-center mt-4">
-
           <Button
             sx={{
               marginRight: '48px',
@@ -210,15 +217,20 @@ const ProjectDetail = () => {
           >
             Hủy
           </Button>
-          <Button color='error' size="large" variant="contained" type="submit" onClick={onCancel}>
+          <Button
+            color="error"
+            size="large"
+            variant="contained"
+            type="submit"
+            onClick={onCancel}
+          >
             Huỷ đăng ký
           </Button>
           {/* <button className='bg-red-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={onCancel}>
             Huỷ đăng ký
           </button> */}
         </div>
-
-      </Modal >
+      </Modal>
     </>
   );
 };

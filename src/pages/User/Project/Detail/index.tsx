@@ -49,7 +49,7 @@ const People = () => {
   }));
 
   return (
-    <div className="my-10 container">
+    <div className="lg:my-10 container">
       <Typo size="max" isBold className="mb-10">
         Danh sách người đăng ký tham gia dự án tình nguyện
       </Typo>
@@ -79,8 +79,8 @@ const People = () => {
                 Gửi mail
               </Button>
             </div>
-            <Table headers={headers} rows={rows} /></div>
-
+            <Table headers={headers} rows={rows} />
+          </div>
         ) : (
           <div>
             <div className="mt-8 text-right mb-4 mr-28">
@@ -95,7 +95,6 @@ const People = () => {
             </div>
             <Typo>Không có người đăng ký tham gia</Typo>
           </div>
-
         )}
       </div>
     </div>

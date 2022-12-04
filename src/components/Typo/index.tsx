@@ -18,7 +18,7 @@ const Typo = ({
   return (
     <p
       className={clsx(
-        'break-all',
+        'break-word',
         {
           'text-gray-500': size === 'normal',
         },

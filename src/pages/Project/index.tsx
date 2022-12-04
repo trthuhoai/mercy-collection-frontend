@@ -55,7 +55,7 @@ const ProjectPage = () => {
         ) : projects.length ? (
           <Grid container spacing={4}>
             {projects.map(project => (
-              <Grid item xs={6} md={4} xl={3}>
+              <Grid item xs={12} sm={6} md={4} xl={3}>
                 <CardProject {...project} />
               </Grid>
             ))}
