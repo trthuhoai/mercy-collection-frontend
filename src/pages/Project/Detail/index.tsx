@@ -174,7 +174,7 @@ const ProjectDetail = () => {
                           Huỷ đăng ký
                         </button>
                       </div>
-                    ) : (
+                    )) : (
                       <Button
                         size="large"
                         variant="contained"
