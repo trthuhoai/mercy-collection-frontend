@@ -15,6 +15,13 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
 
+const className = {
+  ACTIVE: 'border-green-500 text-green-500',
+  CANCELLED: 'border-red-500 text-red-500',
+  EXPIRED: 'border-yellow-500 text-yellow-500',
+  ENDED: 'border-gray-500 text-gray-500',
+};
+
 const Project = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
   const [isCreate, setIsCreate] = useState<boolean>(false);
@@ -64,7 +71,13 @@ const Project = () => {
       // startTime: startTime + ' ' + startAt,
       // endTime: endTime + ' ' + endAt,
       location,
-      status: EStatusProject[status],
+      status: (
+        <div
+          className={'w-fit px-3 py-1 rounded-md border ' + className[status]}
+        >
+          {EStatusProject[status]}
+        </div>
+      ),
       action: (
         <Button
           variant="contained"

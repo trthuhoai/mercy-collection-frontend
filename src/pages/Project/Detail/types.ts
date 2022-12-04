@@ -1,3 +1,5 @@
+import { EStatusProject } from 'constant/types';
+
 export interface IProjectDetail {
   category: string;
   deadline: string;
@@ -17,7 +19,7 @@ export interface IProjectDetail {
   title: string;
   content: string;
   registerStatus: boolean;
-  status: string;
+  status: EStatusProject;
   projectId: string;
   reasion: string;
 }

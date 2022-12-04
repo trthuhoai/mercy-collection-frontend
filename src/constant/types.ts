@@ -17,8 +17,19 @@ export enum ECategoryProject {
 }
 
 export enum EStatusProject {
-  ACTIVE = 'Đang mở đơn đăng ký',
+  ACTIVE = 'Đang mở đơn',
   CANCELLED = 'Đã bị huỷ',
-  EXPIRED = 'Hết hạn đăng ký',
+  EXPIRED = 'Hết hạn',
   ENDED = 'Đã kết thúc',
+}
+
+export enum ERoles {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
+export enum EGender {
+  FEMALE = 'female',
+  MALE = 'male',
+  OTHER = 'USER',
 }
