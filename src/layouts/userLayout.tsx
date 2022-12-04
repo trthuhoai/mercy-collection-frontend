@@ -97,6 +97,23 @@ const UserLayout = () => {
                 )}
               </NavLink>
             </li>
+
+            <li>
+              <NavLink to={routes.ME.CAMPAIGN}>
+                {({ isActive }) => (
+                  <Typo
+                    isBold
+                    className={clsx(
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      isActive && activeClassName,
+                    )}
+                  >
+                    <FolderIcon />
+                    Tạo dự án
+                  </Typo>
+                )}
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </aside>
