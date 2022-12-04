@@ -12,4 +12,8 @@ interface IFormLoginProps {
   password: string;
 }
 
-export type { IFormRegisterProps, IFormLoginProps };
+interface IFormResionProps {
+  reasion: string;
+}
+
+export type { IFormRegisterProps, IFormLoginProps, IFormResionProps };

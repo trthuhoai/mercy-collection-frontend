@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
-import { ECategoryProject } from 'constant/types';
+import { ECategoryProject, EStatusProject } from 'constant/types';
 import RemoveIcon from '@mui/icons-material/Remove';
 import CreateProject from './create';
 import Typo from 'components/Typo';
@@ -53,16 +53,18 @@ const Project = () => {
       endTime,
       startAt,
       startTime,
+      status,
       location,
     }) => ({
       title,
       people,
       registered,
       category: ECategoryProject[category],
-      deadline: deadlineTime + ' ' + deadline,
-      startTime: startTime + ' ' + startAt,
-      endTime: endTime + ' ' + endAt,
+      // deadline: deadlineTime + ' ' + deadline,
+      // startTime: startTime + ' ' + startAt,
+      // endTime: endTime + ' ' + endAt,
       location,
+      status: EStatusProject[status],
       action: (
         <Button
           variant="contained"
