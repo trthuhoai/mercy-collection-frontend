@@ -34,6 +34,10 @@ const TABS = [
     value: 'registering',
   },
   {
+    label: 'Hết hạn đăng ký',
+    value: 'expired',
+  },
+  {
     label: 'Đã kết thúc',
     value: 'ended',
   },

@@ -158,7 +158,7 @@ const ProjectDetail = () => {
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Địa điểm:</Typo>
                   <Typo>{projects.location}</Typo>
-                </div>{projects.status}
+                </div>
          
                 {projects.reasion && (<div className="flex justify-between mb-4 last:mb-0">
                   <Typo>Lý do huỷ:</Typo>
@@ -218,7 +218,10 @@ const ProjectDetail = () => {
 
                 </div>) : projects.status === 'CANCELLED' ?
                   (<div className="mt-8 text-center">
-                    <div className='font-serif text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ BỊ HUỶ</div>
+                    <div className='font-mono text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ BỊ HUỶ</div>
+                  </div>): projects.status === 'EXPIRED' ?
+                  (<div className="mt-8 text-center">
+                    <div className='font-mono text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ HẾT HẠN ĐĂNG KÝ</div>
                   </div>) : (
                     <div className="mt-8 text-center">
                       <div className='font-mono text-1xl py-1 text-sky-700 bg-slate-300'> DỰ ÁN ĐÃ KẾT THÚC</div>
