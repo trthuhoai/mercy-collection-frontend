@@ -173,10 +173,11 @@ const updateProject = (data, id) => {
   });
 };
 
-const cancelProject = (id) => {
+const cancelProject = (data, id) => {
   return request({
     method: 'PATCH',
     url: `/projects/cancel/${id}`,
+    data,
     headers: {
       Authorization: `Bearer ${localStorage.getItem(
         ELocalStorageKey.ACCESS_TOKEN,

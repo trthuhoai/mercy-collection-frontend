@@ -9,17 +9,20 @@ import { IProjectDetail } from './types';
 import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
 import Loading from 'components/Loading';
-import { ECategoryProject } from 'constant/types';
+import { ECategoryProject, EStatusProject } from 'constant/types';
 import { toast } from 'react-toastify';
 import Comment from './Comment';
 import ListItemText from '@mui/material/ListItemText';
 import { useUser } from 'store';
 import Modal from 'components/Modal';
+import ShareLink from 'react-facebook-share-link'
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const [projects, setProjects] = useState<IProjectDetail | null>(null);
-  const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const [projects, setProjects] = useState<IProjectDetail>();
+  const [loading, setLoading] = useState(false);
+  const [openCancelModal, setOpenCancelModal] = useState(false);
   const { isAuthenticated, setUser } = useUser();
   // const login = checkLogin();
   const onSubmit = async () => {
@@ -40,7 +43,7 @@ const ProjectDetail = () => {
         await cancelRegisterProject(id);
         const data = await getProjectsDetail(id);
         setProjects(data);
-        setOpenRegisterModal(false);
+        setOpenCancelModal(false);
         toast.success('Huỷ đăng kí tham gia thành công');
       }
     } catch (error) {
@@ -51,13 +54,20 @@ const ProjectDetail = () => {
   useEffect(() => {
     (async () => {
       if (id) {
-        const data = await getProjectsDetail(id);
-        setProjects(data);
+        try {
+          setLoading(true);
+
+          const data = await getProjectsDetail(id);
+          setProjects(data);
+        } catch (error) {
+        } finally {
+          setLoading(false);
+        }
       }
     })();
-  }, [id]);
+  }, [id, isAuthenticated]);
 
-  if (!projects) return <Loading />;
+  if (loading || !projects) return <Loading />;
 
   return (
     <>
@@ -149,24 +159,41 @@ const ProjectDetail = () => {
                   <Typo>Địa điểm:</Typo>
                   <Typo>{projects.location}</Typo>
                 </div>
+         
+                {projects.reasion && (<div className="flex justify-between mb-4 last:mb-0">
+                  <Typo>Lý do huỷ:</Typo>
+                  <Typo className="whitespace-pre-line">{projects.reasion}</Typo>
+                </div>)}
               </div>
-              {projects.status === 'ACTIVE' && (
-                <div className="mt-8 text-center">
-                  {isAuthenticated ? (
-                    projects.registerStatus ? (
+              {projects.status === 'ACTIVE' ?
+                (<div className="mt-4 text-center">
+                  {isAuthenticated ?
+                    projects.registerStatus ? ((
                       <div>
-                        <div className="font-serif text-1xl py-1 text-sky-600 bg-slate-300">
-                          {' '}
-                          BẠN ĐÃ ĐĂNG KÝ THAM GIA HOẠT ĐỘNG NÀY
-                        </div>
-                        <button
-                          className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6"
-                          onClick={() => setOpenRegisterModal(true)}
-                        >
+                        <div className='text-left'>
+                          <FacebookIcon/>
+                <ShareLink>
+                  {link => (  
+                          <a href={link} target='_blank'>Chia sẻ lên Facebook</a>
+                            )}
+                </ShareLink>
+                </div>
+                        <div className=' mt-6 font-serif text-1xl py-1 text-sky-600 bg-slate-300'> BẠN ĐÃ ĐĂNG KÝ THAM GIA HOẠT ĐỘNG NÀY</div>
+                        <button className='bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={() => setOpenCancelModal(true)}>
                           Huỷ đăng ký
                         </button>
                       </div>
-                    ) : (
+                    )) : (
+                      <div>
+                        <div className='text-left'>
+                      <FacebookIcon/>
+                      <ShareLink>
+                        {link => (  
+                                <a href={link} target='_blank'>Chia sẻ lên Facebook</a>
+                                  )}
+                      </ShareLink>
+                      </div>
+                      <div className=' mt-6 text-center'>
                       <Button
                         size="large"
                         variant="contained"
@@ -174,24 +201,43 @@ const ProjectDetail = () => {
                       >
                         Tham gia ngay
                       </Button>
-                    )
-                  ) : (
-                    <div className="font-serif text-2xl text-sky-600 bg-slate-300">
-                      {' '}
-                      Hãy đăng nhập để đăng ký tham gia hoạt động này
+                      </div>
+                      </div>) : (
+                        <div>
+                           <div className='text-left'>
+                            <FacebookIcon/>
+                      <ShareLink>
+                        {link => (  
+                                <a href={link} target='_blank'>Chia sẻ lên Facebook</a>
+                                  )}
+                      </ShareLink>
+                      </div>
+                      <div className=' mt-6 text-center font-serif text-2xl text-sky-600 bg-slate-300'> Hãy đăng nhập để đăng ký tham gia hoạt động này</div>
+                      </div>
+                    )}
+
+                </div>) : projects.status === 'CANCELLED' ?
+                  (<div className="mt-8 text-center">
+                    <div className='font-mono text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ BỊ HUỶ</div>
+                  </div>): projects.status === 'EXPIRED' ?
+                  (<div className="mt-8 text-center">
+                    <div className='font-mono text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ HẾT HẠN ĐĂNG KÝ</div>
+                  </div>) : (
+                    <div className="mt-8 text-center">
+                      <div className='font-mono text-1xl py-1 text-sky-700 bg-slate-300'> DỰ ÁN ĐÃ KẾT THÚC</div>
                     </div>
-                  )}
-                </div>
-              )}
+                  )
+              }
             </div>
           </div>
         </div>
       </div>
 
+
       <Modal
-        isOpen={openRegisterModal}
+        isOpen={openCancelModal}
         title="Xác nhận huỷ đăng ký"
-        onClose={() => setOpenRegisterModal(false)}
+        onClose={() => setOpenCancelModal(false)}
       >
         Bạn có chắc chắn muốn huỷ đăng ký tham gia hoạt động này không?
         <div className="text-center mt-4">
@@ -201,7 +247,7 @@ const ProjectDetail = () => {
             }}
             size="large"
             variant="outlined"
-            onClick={() => setOpenRegisterModal(false)}
+            onClick={() => setOpenCancelModal(false)}
           >
             Hủy
           </Button>

@@ -40,4 +40,8 @@ const schemaUpdate = yup.object().shape({
   location: yup.string().required('Bắt buộc nhập'),
 });
 
-export {defaultValues,  schemaUpdate };
+const schemaCancel = yup.object().shape({
+  reasion: yup.string().required('Bắt buộc nhập'),
+});
+
+export {defaultValues,  schemaUpdate, schemaCancel };

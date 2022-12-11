@@ -1,3 +1,5 @@
+import { EStatusProject } from 'constant/types';
+
 export interface IProjectDetail {
   category: string;
   deadline: string;
@@ -19,6 +21,7 @@ export interface IProjectDetail {
   registerStatus: boolean;
   status: string;
   projectId: string;
+  reasion: string;
 }
 
 export interface ICommentList {

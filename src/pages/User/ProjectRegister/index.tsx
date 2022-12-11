@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getMyProjectsRegister } from 'apis/projects';
 import Table from 'components/Table';
-import { ECategoryProject } from 'constant/types';
+import { ECategoryProject, EStatusProject } from 'constant/types';
 import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
 import Typo from 'components/Typo';
 import Loading from 'components/Loading';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { routes } from 'constant/routes';
+
+const className = {
+  ACTIVE: 'border-green-500 text-green-500',
+  CANCELLED: 'border-red-500 text-red-500',
+  EXPIRED: 'border-yellow-500 text-yellow-500',
+  ENDED: 'border-gray-500 text-gray-500',
+};
 
 const ProjectRegister = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
@@ -47,7 +54,13 @@ const ProjectRegister = () => {
       endTime: endTime + ' ' + endAt,
       startTime: startTime + ' ' + startAt,
       location,
-      status,
+      status: (
+        <div
+          className={'w-fit px-3 py-1 rounded-md border ' + className[status]}
+        >
+          {EStatusProject[status]}
+        </div>
+      ),
       onClick: () =>
         navigate(generatePath(routes.PROJECTS_DETAIL, { id: projectId })),
     }),

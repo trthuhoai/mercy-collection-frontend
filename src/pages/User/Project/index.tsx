@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
-import { ECategoryProject } from 'constant/types';
+import { ECategoryProject, EStatusProject } from 'constant/types';
 import RemoveIcon from '@mui/icons-material/Remove';
 import CreateProject from './create';
 import Typo from 'components/Typo';
@@ -14,6 +14,13 @@ import Button from '@mui/material/Button';
 import { generatePath, useNavigate } from 'react-router-dom';
 import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
+
+const className = {
+  ACTIVE: 'border-green-500 text-green-500',
+  CANCELLED: 'border-red-500 text-red-500',
+  EXPIRED: 'border-yellow-500 text-yellow-500',
+  ENDED: 'border-gray-500 text-gray-500',
+};
 
 const Project = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
@@ -53,16 +60,24 @@ const Project = () => {
       endTime,
       startAt,
       startTime,
+      status,
       location,
     }) => ({
       title,
       people,
       registered,
       category: ECategoryProject[category],
-      deadline: deadlineTime + ' ' + deadline,
-      startTime: startTime + ' ' + startAt,
-      endTime: endTime + ' ' + endAt,
+      // deadline: deadlineTime + ' ' + deadline,
+      // startTime: startTime + ' ' + startAt,
+      // endTime: endTime + ' ' + endAt,
       location,
+      status: (
+        <div
+          className={'w-fit px-3 py-1 rounded-md border ' + className[status]}
+        >
+          {EStatusProject[status]}
+        </div>
+      ),
       action: (
         <Button
           variant="contained"

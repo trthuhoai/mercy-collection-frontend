@@ -41,4 +41,36 @@ const authByGoggle = () => {
   });
 };
 
-export { createUser, loginWithUser, getInfoUser, authByGoggle };
+const updateUser = data => {
+  return request({
+    method: 'PATCH',
+    url: `/user`,
+    data,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+const getStatistic = () => {
+  return request({
+    method: 'GET',
+    url: `/projects/statistic`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+export {
+  createUser,
+  loginWithUser,
+  getInfoUser,
+  authByGoggle,
+  updateUser,
+  getStatistic,
+};
