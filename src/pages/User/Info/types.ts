@@ -7,8 +7,8 @@ interface IFormEditProps {
 }
 
 interface IFormEditPasswordProps {
-  oldPassword: string;
-  newPassword: string;
+  oldPassword: string|null;
+  password: string;
   reNewPassword: string;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { IFormEditPasswordProps } from './types';
 import { schemaEditPassword } from './contants';
@@ -7,13 +7,25 @@ import Box from '@mui/material/Box';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { getInfoUser, updatePassword } from 'apis/users';
+
 
 const UpdatePassword = () => {
+  const [havePassword, setHavePassword] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
   const defaultValues = {
     oldPassword: '',
-    newPassword: '',
+    password: '',
     reNewPassword: '',
   };
+
+  useEffect(() => {
+    (async () => {
+      const data = await getInfoUser();
+      setHavePassword(data.pass);
+    })();
+  }, []);
+
 
   const {
     control,
@@ -28,9 +40,16 @@ const UpdatePassword = () => {
 
   const onSubmit = async data => {
     try {
-      toast.success('Cập thông tin thành công');
+      const result =await updatePassword(data)
+      console.log(result)
+      toast.success('Cập mật khẩu thành công');
+      setHavePassword(true)
+      setMessage("Bạn đã cập nhật mật khẩu thành công! ")
       reset();
-    } catch (error) {}
+    } catch (error) {
+      setMessage("Mật khẩu cũ không đúng! ")
+      console.log(error)
+    }
   };
 
   return (
@@ -41,32 +60,36 @@ const UpdatePassword = () => {
         noValidate
         autoComplete="off"
       >
-        <Controller
+<div  className='text-red-700 mb-3'>{message}</div>
+        {havePassword&&
+        (<Controller
           control={control}
           name="oldPassword"
           render={({ field }) => (
             <TextField
-              required
               fullWidth
+              required
+              type="password"
               label="Nhập mật khẩu cũ"
               {...field}
               error={!!errors.oldPassword}
               helperText={errors.oldPassword?.message}
             />
           )}
-        />
+        />)
+      }
         <div className="my-4">
           <Controller
             control={control}
-            name="newPassword"
+            name="password"
             render={({ field }) => (
               <TextField
                 fullWidth
                 required
                 label="Mật khẩu mới"
                 {...field}
-                error={!!errors.newPassword}
-                helperText={errors.newPassword?.message}
+                error={!!errors.password}
+                helperText={errors.password?.message}
               />
             )}
           />
