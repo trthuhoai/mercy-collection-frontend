@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getMyProjectPeoples, sendMailProject } from 'apis/projects';
-import { IProjectPeople } from 'pages/User/Project/Detail/types';
+import { IProjectPeople } from 'pages/Me/Project/Detail/types';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Typo from 'components/Typo';

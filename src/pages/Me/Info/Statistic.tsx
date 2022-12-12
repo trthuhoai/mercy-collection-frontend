@@ -22,7 +22,7 @@ const Statistic = () => {
   }, []);
   return (
     <div className="my-10 container">
-      <Stack direction="row" spacing={2}>
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-2">
         <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
           <div className="text-gray-500">
             <Typo className="mb-2" size="large" isBold>
@@ -74,7 +74,7 @@ const Statistic = () => {
             <AssignmentIcon />
           </Avatar>
         </div>
-      </Stack>
+      </div>
     </div>
   );
 };
