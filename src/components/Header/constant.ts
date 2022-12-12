@@ -30,7 +30,7 @@ const schemaRegister = yup.object().shape({
       REGEX_PASSWORD,
       'Mật khẩu bắt buộc 8 đến 20 kí tự và có chữ, số, kí tự đặc biệt',
     )
-    .oneOf([yup.ref('password'), null], 'Nhap lai mat khau sai'),
+    .oneOf([yup.ref('password'), null], 'Nhập lại mật khẩu sai!'),
   gender: yup.string().required('Bắt buộc nhập'),
 });
 

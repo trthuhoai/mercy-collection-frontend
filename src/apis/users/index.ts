@@ -54,6 +54,19 @@ const updateUser = data => {
   });
 };
 
+const updatePassword = data => {
+  return request({
+    method: 'PATCH',
+    url: `/user/password`,
+    data,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
 const getStatistic = () => {
   return request({
     method: 'GET',
@@ -73,4 +86,5 @@ export {
   authByGoggle,
   updateUser,
   getStatistic,
+  updatePassword
 };
