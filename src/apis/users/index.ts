@@ -79,6 +79,13 @@ const getStatistic = () => {
   });
 };
 
+const getUserById = id => {
+  return request({
+    method: 'GET',
+    url: `/user/${id}`,
+  });
+};
+
 export {
   createUser,
   loginWithUser,
@@ -86,5 +93,6 @@ export {
   authByGoggle,
   updateUser,
   getStatistic,
-  updatePassword
+  updatePassword,
+  getUserById,
 };

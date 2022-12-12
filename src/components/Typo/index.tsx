@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
+import React, { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
 
 interface IProps {
   className?: string;
@@ -14,7 +14,8 @@ const Typo = ({
   isBold,
   align,
   children,
-}: IProps) => {
+  ...rest
+}: IProps & HTMLAttributes<HTMLParagraphElement>) => {
   return (
     <p
       className={clsx(
@@ -42,6 +43,7 @@ const Typo = ({
         },
         className,
       )}
+      {...rest}
     >
       {children}
     </p>

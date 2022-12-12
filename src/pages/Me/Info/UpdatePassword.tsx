@@ -8,11 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { getInfoUser, updatePassword } from 'apis/users';
-
+import Loading from 'components/Loading';
 
 const UpdatePassword = () => {
-  const [havePassword, setHavePassword] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>("");
+  const [havePassword, setHavePassword] = useState<boolean>();
+  const [message, setMessage] = useState<string>('');
   const defaultValues = {
     oldPassword: '',
     password: '',
@@ -25,7 +25,6 @@ const UpdatePassword = () => {
       setHavePassword(data.pass);
     })();
   }, []);
-
 
   const {
     control,
@@ -40,17 +39,19 @@ const UpdatePassword = () => {
 
   const onSubmit = async data => {
     try {
-      const result =await updatePassword(data)
-      console.log(result)
+      const result = await updatePassword(data);
+      console.log(result);
       toast.success('Cập mật khẩu thành công');
-      setHavePassword(true)
-      setMessage("Bạn đã cập nhật mật khẩu thành công! ")
+      setHavePassword(true);
+      setMessage('Bạn đã cập nhật mật khẩu thành công! ');
       reset();
     } catch (error) {
-      setMessage("Mật khẩu cũ không đúng! ")
-      console.log(error)
+      setMessage('Mật khẩu cũ không đúng! ');
+      console.log(error);
     }
   };
+
+  if (havePassword === undefined) return <Loading />;
 
   return (
     <div className="my-10 w-1/3 container mx-auto">
@@ -60,24 +61,24 @@ const UpdatePassword = () => {
         noValidate
         autoComplete="off"
       >
-<div  className='text-red-700 mb-3'>{message}</div>
-        {havePassword&&
-        (<Controller
-          control={control}
-          name="oldPassword"
-          render={({ field }) => (
-            <TextField
-              fullWidth
-              required
-              type="password"
-              label="Nhập mật khẩu cũ"
-              {...field}
-              error={!!errors.oldPassword}
-              helperText={errors.oldPassword?.message}
-            />
-          )}
-        />)
-      }
+        <div className="text-red-700 mb-3">{message}</div>
+        {havePassword && (
+          <Controller
+            control={control}
+            name="oldPassword"
+            render={({ field }) => (
+              <TextField
+                fullWidth
+                required
+                type="password"
+                label="Nhập mật khẩu cũ"
+                {...field}
+                error={!!errors.oldPassword}
+                helperText={errors.oldPassword?.message}
+              />
+            )}
+          />
+        )}
         <div className="my-4">
           <Controller
             control={control}

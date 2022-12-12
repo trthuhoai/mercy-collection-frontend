@@ -13,11 +13,11 @@ import { schemaComment } from '../constant';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUser } from 'store';
-import { useParams } from 'react-router-dom';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { createComment, createReply, getListComment } from 'apis/comment';
 import { toast } from 'react-toastify';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { convertDate } from 'untils';
+import { convertDate, distanceDateFromNow } from 'untils';
 import { FORMAT_DATE } from 'constant';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -25,11 +25,14 @@ import Typography from '@mui/material/Typography';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Reply from './reply';
+import { routes } from 'constant/routes';
+import Loading from 'components/Loading';
 
 const Comment = () => {
   const { isAuthenticated } = useUser();
   const { id } = useParams();
-  const [listComment, setListComment] = useState<ICommentList[]>([]);
+  const [listComment, setListComment] = useState<ICommentList[]>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -70,6 +73,8 @@ const Comment = () => {
       toast.success('Bình luận thất bại');
     }
   };
+
+  if (!listComment) return <Loading />;
 
   return (
     <div className="my-4">
@@ -139,13 +144,18 @@ const Comment = () => {
                     }}
                     primary={
                       <div className="sm:flex gap-2">
-                        {comment.name}
-                        <Typo>
-                          {convertDate(
-                            new Date(comment.date),
-                            FORMAT_DATE.COMMENT,
-                          )}
+                        <Typo
+                          className="text-black cursor-pointer"
+                          isBold
+                          onClick={() =>
+                            navigate(
+                              generatePath(routes.USER, { id: comment.id }),
+                            )
+                          }
+                        >
+                          {comment.name}
                         </Typo>
+                        <Typo>{distanceDateFromNow(comment.date)}</Typo>
                       </div>
                     }
                     secondary={
