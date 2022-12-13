@@ -9,6 +9,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { getInfoUser, updatePassword } from 'apis/users';
 import Loading from 'components/Loading';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Visibility from '@mui/icons-material/Visibility';
 
 const UpdatePassword = () => {
   const [havePassword, setHavePassword] = useState<boolean>();
@@ -18,6 +22,9 @@ const UpdatePassword = () => {
     password: '',
     reNewPassword: '',
   };
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+  const [showPasswordOld, setShowPasswordOld] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -54,7 +61,7 @@ const UpdatePassword = () => {
   if (havePassword === undefined) return <Loading />;
 
   return (
-    <div className="my-10 w-1/3 container mx-auto">
+    <div className="my-10 md:w-3/4 lg:w-1/3 container mx-auto">
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -70,11 +77,23 @@ const UpdatePassword = () => {
               <TextField
                 fullWidth
                 required
-                type="password"
+                type={showPasswordOld ? 'text' : 'password'}
                 label="Nhập mật khẩu cũ"
                 {...field}
                 error={!!errors.oldPassword}
                 helperText={errors.oldPassword?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPasswordOld(!showPasswordOld)}
+                        edge="end"
+                      >
+                        {showPasswordOld ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             )}
           />
@@ -87,10 +106,23 @@ const UpdatePassword = () => {
               <TextField
                 fullWidth
                 required
+                type={showPassword ? 'text' : 'password'}
                 label="Mật khẩu mới"
                 {...field}
                 error={!!errors.password}
                 helperText={errors.password?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             )}
           />
@@ -103,10 +135,23 @@ const UpdatePassword = () => {
               <TextField
                 fullWidth
                 required
+                type={showRePassword ? 'text' : 'password'}
                 label="Xác nhận mật khẩu mới"
                 {...field}
                 error={!!errors.reNewPassword}
                 helperText={errors.reNewPassword?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowRePassword(!showRePassword)}
+                        edge="end"
+                      >
+                        {showRePassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             )}
           />

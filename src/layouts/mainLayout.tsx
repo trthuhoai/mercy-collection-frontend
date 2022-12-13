@@ -11,6 +11,8 @@ const MainLayout = () => {
   const { isAuthenticated, setUser } = useUser();
   const routesPrivate = [
     routes.ME.INFO,
+    routes.ME.DETAIL_PROJECT,
+    routes.ME.UPDATE_PROJECT,
     routes.ME.PROJECT,
     routes.ME.PROJECT_REGISTER,
     routes.ME.CAMPAIGN,
