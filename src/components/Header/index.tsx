@@ -31,6 +31,12 @@ import { toast } from 'react-toastify';
 import { ELocalStorageKey } from 'constant/types';
 import { routes } from 'constant/routes';
 import NavMobile from './NavMobile';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import SearchIcon from '@mui/icons-material/Search';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
@@ -38,7 +44,11 @@ const Header = () => {
   const { user, setUser, clearUser } = useUser();
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRePassword, setShowRePassword] = useState(false);
+  const [showPasswordLogin, setShowPasswordLogin] = useState(false);
+  const [hasSearch, setHasSearch] = useState(false);
 
   const handleClickName = event => {
     setAnchorEl(event.currentTarget);
@@ -200,6 +210,22 @@ const Header = () => {
               Về chúng tôi
             </NavLink>
           </div>
+          <div className="relative ml-4 lg:ml-0">
+            <div
+              className="cursor-pointer hover:text-gray-400"
+              onClick={() => setHasSearch(!hasSearch)}
+            >
+              {hasSearch ? <SearchOffIcon /> : <SearchIcon />}
+            </div>
+            {hasSearch && (
+              <div className="absolute bg-white shadow-lg text-gray-700 top-full right-0 py-2 px-6 rounded-3xl">
+                <input
+                  className="w-[200px] outline-none"
+                  placeholder="Tìm kiếm...."
+                />
+              </div>
+            )}
+          </div>
           {user ? (
             <div className="hidden lg:block">
               <div
@@ -305,10 +331,22 @@ const Header = () => {
               required
               fullWidth
               label="Mật khẩu"
-              type="password"
+              type={showPasswordLogin ? 'text' : 'password'}
               {...registerLogin('password')}
               error={!!errorsLogin.password}
               helperText={errorsLogin.password?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPasswordLogin(!showPasswordLogin)}
+                      edge="end"
+                    >
+                      {showPasswordLogin ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
           <div className="text-center mb-8">
@@ -376,10 +414,22 @@ const Header = () => {
               required
               fullWidth
               label="Mật khẩu"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               {...register('password')}
               error={!!errors.password}
               helperText={errors.password?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
           <div className="my-4">
@@ -387,10 +437,22 @@ const Header = () => {
               required
               fullWidth
               label="Nhập lại mật khẩu"
-              type="password"
+              type={showRePassword ? 'text' : 'password'}
               {...register('repassword')}
               error={!!errors.repassword}
               helperText={errors.repassword?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowRePassword(!showRePassword)}
+                      edge="end"
+                    >
+                      {showRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
           <div className="my-4">

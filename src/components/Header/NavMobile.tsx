@@ -29,7 +29,7 @@ const NavMobile = ({ onLogin, onLogout }: IProps) => {
   };
 
   return (
-    <div className="lg:hidden">
+    <div className="ml-auto lg:hidden">
       <IconButton
         onClick={handleClick}
         size="small"
