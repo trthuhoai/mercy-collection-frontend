@@ -1,6 +1,7 @@
 import { routes } from 'constant/routes';
 import MainLayout from 'layouts/mainLayout';
 import UserLayout from 'layouts/userLayout';
+import AdminLayout from 'layouts/adminLayout';
 import About from 'pages/About';
 import CampaignPage from 'pages/Campaign';
 import CampaignDetail from 'pages/Campaign/Detail';
@@ -12,6 +13,9 @@ import ProjectDetail from 'pages/Project/Detail';
 import MyProjectDetail from 'pages/Me/Project/Detail';
 import UpdateProject from 'pages/Me/Project/Update';
 import { CampaignUser, InfoUser, ProjectUser } from 'pages/Me';
+import ManagerProject from 'pages/Admin/ManagerProject';
+import ManagerMember from 'pages/Admin/ManagerMember'
+import PendingProjectDetail from 'pages/Admin/ManagerProject/Detail'
 import ProjectRegister from 'pages/Me/ProjectRegister';
 import { createBrowserRouter } from 'react-router-dom';
 import User from 'pages/User';
@@ -70,6 +74,43 @@ const routerConfig = [
           {
             path: routes.ME.CAMPAIGN,
             element: <CampaignUser />,
+          },
+        ],
+      },
+       {
+        element: <AdminLayout />,
+        children: [
+          {
+            path: routes.ADMIN.INFO,
+            element: <InfoUser />,
+          },
+          {
+            path: routes.ADMIN.DETAIL_PROJECT,
+            element: <PendingProjectDetail />,
+          },
+          {
+            path: routes.ADMIN.DETAIL_PENDING,
+            element: <PendingProjectDetail />,
+          },
+          {
+            path: routes.ADMIN.UPDATE_PROJECT,
+            element: <UpdateProject />,
+          },
+          {
+            path: routes.ADMIN.PROJECT,
+            element: <ProjectUser />,
+          },
+          {
+            path: routes.ADMIN.PROJECT_REGISTER,
+            element: <ProjectRegister />,
+          },
+          {
+            path: routes.ADMIN.MANAGER_PROJECT,
+            element: <ManagerProject />,
+          },
+          {
+            path: routes.ADMIN.MANAGER_MEMBER,
+            element: <ManagerMember />,
           },
         ],
       },

@@ -20,6 +20,19 @@ const registerProject = id => {
     },
   });
 };
+const activeProject = id => {
+  return request({
+    method: 'PATCH',
+    url: `/projects/admin/active/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+
 
 const cancelRegisterProject = id => {
   return request({
@@ -124,6 +137,18 @@ const getMyProjectsRegister = () => {
   });
 };
 
+const getPendingProjects = () => {
+  return request({
+    method: 'GET',
+    url: `/projects/pending`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
 const sendMailProject = id => {
   return request({
     method: 'POST',
@@ -216,5 +241,7 @@ export {
   checkLogin,
   cancelRegisterProject,
   updateProject,
-  cancelProject
+  cancelProject,
+  getPendingProjects,
+  activeProject
 };
