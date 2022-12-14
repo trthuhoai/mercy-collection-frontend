@@ -17,6 +17,7 @@ export enum ECategoryProject {
 }
 
 export enum EStatusProject {
+  PENDING='Chờ phê duyệt',
   ACTIVE = 'Đang mở đơn',
   CANCELLED = 'Đã bị huỷ',
   EXPIRED = 'Hết hạn',

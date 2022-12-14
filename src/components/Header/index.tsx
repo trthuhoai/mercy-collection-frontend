@@ -235,7 +235,8 @@ const Header = () => {
                     fontSize="small"
                     sx={{ marginRight: '8px' }}
                   />
-                  <Link to={routes.ME.INFO}>Thông tin</Link>
+                  {user.permission==='ADMIN'?( <Link to={routes.ADMIN.INFO}>Quản lý</Link>):( <Link to={routes.ME.INFO}>Thông tin</Link>)}
+                 
                 </MenuItem>
                 <GoogleLogout
                   clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"

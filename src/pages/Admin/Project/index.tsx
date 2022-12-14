@@ -16,7 +16,6 @@ import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
 
 const className = {
-  PENDING:'border-blue-500 text-blue-500',
   ACTIVE: 'border-green-500 text-green-500',
   CANCELLED: 'border-red-500 text-red-500',
   EXPIRED: 'border-yellow-500 text-yellow-500',
