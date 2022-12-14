@@ -31,9 +31,10 @@ const AdminLayout = () => {
   return (
     <div className="md:flex w-full">
       <aside className="hidden md:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
-        
         <nav className="mt-10 mx-6">
-        <div className="mb-4 text-center text-3xl font-serif subpixel-antialiased font-semibold text-emerald-700 list-disc">ADMIN</div>
+          <div className="mb-4 text-center text-3xl font-serif subpixel-antialiased font-semibold text-emerald-700 list-disc">
+            ADMIN
+          </div>
           <ul>
             <li className="mb-4">
               <NavLink to={routes.ADMIN.INFO}>
@@ -100,7 +101,7 @@ const AdminLayout = () => {
               </NavLink>
             </li>
 
-            <li>
+            <li className="mb-4">
               <NavLink to={routes.ADMIN.MANAGER_PROJECT}>
                 {({ isActive }) => (
                   <Typo
@@ -112,6 +113,22 @@ const AdminLayout = () => {
                   >
                     <FolderIcon />
                     Quản lý dự án
+                  </Typo>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={routes.ADMIN.MANAGER_STATISTIC}>
+                {({ isActive }) => (
+                  <Typo
+                    isBold
+                    className={clsx(
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      isActive && activeClassName,
+                    )}
+                  >
+                    <FolderIcon />
+                    Thống kê
                   </Typo>
                 )}
               </NavLink>

@@ -22,6 +22,7 @@ export interface IProjectDetail {
   status: string;
   projectId: string;
   reasion: string;
+  createdAt: string;
 }
 
 export interface ICommentList {

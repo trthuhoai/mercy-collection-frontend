@@ -16,7 +16,7 @@ import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
 
 const className = {
-  PENDING:'border-blue-500 text-blue-500',
+  PENDING: 'border-blue-500 text-blue-500',
   ACTIVE: 'border-green-500 text-green-500',
   CANCELLED: 'border-red-500 text-red-500',
   EXPIRED: 'border-yellow-500 text-yellow-500',
@@ -96,9 +96,21 @@ const Project = () => {
 
   return (
     <div className="md:my-10 container">
-      <Typo size="max" isBold className="mb-10">
-        {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách dự án tình nguyện'}
-      </Typo>
+      <div className="flex items-center justify-between mb-10">
+        <Typo size="max" isBold>
+          {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách dự án tình nguyện'}
+        </Typo>
+        <div onClick={() => setIsCreate(!isCreate)}>
+          <Tooltip
+            placement="top"
+            title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
+          >
+            <Fab color="primary" aria-label="add">
+              {isCreate ? <RemoveIcon /> : <AddIcon />}
+            </Fab>
+          </Tooltip>
+        </div>
+      </div>
       <div className="">
         {isCreate ? (
           <CreateProject
@@ -112,19 +124,6 @@ const Project = () => {
         ) : (
           <Typo>Không có dự án</Typo>
         )}
-      </div>
-      <div
-        className="fixed bottom-8 right-8 md:bottom-20 md:right-20 lg:bottom-28 lg:right-28"
-        onClick={() => setIsCreate(!isCreate)}
-      >
-        <Tooltip
-          placement="top"
-          title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
-        >
-          <Fab color="primary" aria-label="add">
-            {isCreate ? <RemoveIcon /> : <AddIcon />}
-          </Fab>
-        </Tooltip>
       </div>
     </div>
   );

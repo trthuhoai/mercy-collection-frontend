@@ -16,13 +16,16 @@ interface User {
 
 interface UserState {
   isAuthenticated: boolean;
+  isLocked: boolean;
   user: User | null;
   setUser: (user: User) => void;
   getUser: () => void;
   clearUser: () => void;
+  setLocked: (locked: boolean) => void;
 }
 
 const useUser = create<UserState>(set => ({
+  isLocked: false,
   isAuthenticated: false,
   user: null,
   setUser: (user: User) =>
@@ -40,6 +43,10 @@ const useUser = create<UserState>(set => ({
     set(() => ({
       isAuthenticated: false,
       user: null,
+    })),
+  setLocked: (locked: boolean) =>
+    set(() => ({
+      isLocked: locked,
     })),
 }));
 
