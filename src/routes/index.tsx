@@ -10,14 +10,15 @@ import Faqs from 'pages/Faq';
 import Home from 'pages/Home';
 import ProjectPage from 'pages/Project';
 import ProjectDetail from 'pages/Project/Detail';
-import MyProjectDetail from 'pages/User/Project/Detail';
-import UpdateProject from 'pages/User/Project/Update';
-import { CampaignUser, InfoUser, ProjectUser } from 'pages/User';
+import MyProjectDetail from 'pages/Me/Project/Detail';
+import UpdateProject from 'pages/Me/Project/Update';
+import { CampaignUser, InfoUser, ProjectUser } from 'pages/Me';
 import ManagerProject from 'pages/Admin/ManagerProject';
 import ManagerMember from 'pages/Admin/ManagerMember'
 import PendingProjectDetail from 'pages/Admin/ManagerProject/Detail'
-import ProjectRegister from 'pages/User/ProjectRegister';
+import ProjectRegister from 'pages/Me/ProjectRegister';
 import { createBrowserRouter } from 'react-router-dom';
+import User from 'pages/User';
 
 const routerConfig = [
   {
@@ -124,6 +125,10 @@ const routerConfig = [
       {
         path: routes.ABOUT,
         element: <About />,
+      },
+      {
+        path: routes.USER,
+        element: <User />,
       },
     ],
   },

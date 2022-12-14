@@ -6,11 +6,11 @@ export const routes = {
   CAMPAIGNS_DETAIL: '/campaigns/:id',
   ME: {
     INFO: '/me/info',
-    DETAIL_PROJECT:'/me/projects/:id',
-    UPDATE_PROJECT:'/me/projects/update/:id',
+    DETAIL_PROJECT: '/me/projects/:id',
+    UPDATE_PROJECT: '/me/projects/update/:id',
     PROJECT: '/me/projects',
     PROJECT_REGISTER: '/me/projects-register',
-    CAMPAIGN: '/me/campaigns',  
+    CAMPAIGN: '/me/campaigns',
   },
   ADMIN: {
     INFO: '/admin/info',
@@ -23,7 +23,8 @@ export const routes = {
     MANAGER_MEMBER: '/admin/manager/members',
     MANAGER_PROJECT: '/admin/manager/project', 
   },
-  FAQS: 'faqs',
-  DONATE: 'donate',
-  ABOUT: 'about',
+  FAQS: '/faqs',
+  DONATE: '/donate',
+  ABOUT: '/about',
+  USER: '/user/:id',
 };

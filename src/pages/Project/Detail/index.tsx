@@ -15,7 +15,7 @@ import Comment from './Comment';
 import ListItemText from '@mui/material/ListItemText';
 import { useUser } from 'store';
 import Modal from 'components/Modal';
-import ShareLink from 'react-facebook-share-link'
+import ShareLink from 'react-facebook-share-link';
 import FacebookIcon from '@mui/icons-material/Facebook';
 
 const ProjectDetail = () => {
@@ -159,80 +159,110 @@ const ProjectDetail = () => {
                   <Typo>Địa điểm:</Typo>
                   <Typo>{projects.location}</Typo>
                 </div>
-         
-                {projects.reasion && (<div className="flex justify-between mb-4 last:mb-0">
-                  <Typo>Lý do huỷ:</Typo>
-                  <Typo className="whitespace-pre-line">{projects.reasion}</Typo>
-                </div>)}
+
+                {projects.reasion && (
+                  <div className="flex justify-between mb-4 last:mb-0">
+                    <Typo>Lý do huỷ:</Typo>
+                    <Typo className="whitespace-pre-line">
+                      {projects.reasion}
+                    </Typo>
+                  </div>
+                )}
               </div>
-              {projects.status === 'ACTIVE' ?
-                (<div className="mt-4 text-center">
-                  {isAuthenticated ?
-                    projects.registerStatus ? ((
+              {projects.status === 'ACTIVE' ? (
+                <div className="mt-4 text-center">
+                  {isAuthenticated ? (
+                    projects.registerStatus ? (
                       <div>
-                        <div className='text-left'>
-                          <FacebookIcon/>
-                <ShareLink>
-                  {link => (  
-                          <a href={link} target='_blank'>Chia sẻ lên Facebook</a>
+                        <div className="text-left">
+                          <FacebookIcon />
+                          <ShareLink>
+                            {link => (
+                              <a href={link} target="_blank" rel="noreferrer">
+                                Chia sẻ lên Facebook
+                              </a>
                             )}
-                </ShareLink>
-                </div>
-                        <div className=' mt-6 font-serif text-1xl py-1 text-sky-600 bg-slate-300'> BẠN ĐÃ ĐĂNG KÝ THAM GIA HOẠT ĐỘNG NÀY</div>
-                        <button className='bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={() => setOpenCancelModal(true)}>
+                          </ShareLink>
+                        </div>
+                        <div className=" mt-6 font-serif text-1xl py-1 text-sky-600 bg-slate-300">
+                          {' '}
+                          BẠN ĐÃ ĐĂNG KÝ THAM GIA HOẠT ĐỘNG NÀY
+                        </div>
+                        <button
+                          className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6"
+                          onClick={() => setOpenCancelModal(true)}
+                        >
                           Huỷ đăng ký
                         </button>
                       </div>
-                    )) : (
+                    ) : (
                       <div>
-                        <div className='text-left'>
-                      <FacebookIcon/>
-                      <ShareLink>
-                        {link => (  
-                                <a href={link} target='_blank'>Chia sẻ lên Facebook</a>
-                                  )}
-                      </ShareLink>
+                        <div className="text-left">
+                          <FacebookIcon />
+                          <ShareLink>
+                            {link => (
+                              <a href={link} target="_blank" rel="noreferrer">
+                                Chia sẻ lên Facebook
+                              </a>
+                            )}
+                          </ShareLink>
+                        </div>
+                        <div className=" mt-6 text-center">
+                          <Button
+                            size="large"
+                            variant="contained"
+                            onClick={onSubmit}
+                          >
+                            Tham gia ngay
+                          </Button>
+                        </div>
                       </div>
-                      <div className=' mt-6 text-center'>
-                      <Button
-                        size="large"
-                        variant="contained"
-                        onClick={onSubmit}
-                      >
-                        Tham gia ngay
-                      </Button>
+                    )
+                  ) : (
+                    <div>
+                      <div className="text-left">
+                        <FacebookIcon />
+                        <ShareLink>
+                          {link => (
+                            <a href={link} target="_blank" rel="noreferrer">
+                              Chia sẻ lên Facebook
+                            </a>
+                          )}
+                        </ShareLink>
                       </div>
-                      </div>) : (
-                        <div>
-                           <div className='text-left'>
-                            <FacebookIcon/>
-                      <ShareLink>
-                        {link => (  
-                                <a href={link} target='_blank'>Chia sẻ lên Facebook</a>
-                                  )}
-                      </ShareLink>
+                      <div className=" mt-6 text-center font-serif text-2xl text-sky-600 bg-slate-300">
+                        {' '}
+                        Hãy đăng nhập để đăng ký tham gia hoạt động này
                       </div>
-                      <div className=' mt-6 text-center font-serif text-2xl text-sky-600 bg-slate-300'> Hãy đăng nhập để đăng ký tham gia hoạt động này</div>
-                      </div>
-                    )}
-
-                </div>) : projects.status === 'CANCELLED' ?
-                  (<div className="mt-8 text-center">
-                    <div className='font-mono text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ BỊ HUỶ</div>
-                  </div>): projects.status === 'EXPIRED' ?
-                  (<div className="mt-8 text-center">
-                    <div className='font-mono text-1xl py-1 text-sky-600 bg-slate-300'> DỰ ÁN ĐÃ HẾT HẠN ĐĂNG KÝ</div>
-                  </div>) : (
-                    <div className="mt-8 text-center">
-                      <div className='font-mono text-1xl py-1 text-sky-700 bg-slate-300'> DỰ ÁN ĐÃ KẾT THÚC</div>
                     </div>
-                  )
-              }
+                  )}
+                </div>
+              ) : projects.status === 'CANCELLED' ? (
+                <div className="mt-8 text-center">
+                  <div className="font-mono text-1xl py-1 text-sky-600 bg-slate-300">
+                    {' '}
+                    DỰ ÁN ĐÃ BỊ HUỶ
+                  </div>
+                </div>
+              ) : projects.status === 'EXPIRED' ? (
+                <div className="mt-8 text-center">
+                  <div className="font-mono text-1xl py-1 text-sky-600 bg-slate-300">
+                    {' '}
+                    DỰ ÁN ĐÃ HẾT HẠN ĐĂNG KÝ
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-8 text-center">
+                  <div className="font-mono text-1xl py-1 text-sky-700 bg-slate-300">
+                    {' '}
+                    DỰ ÁN ĐÃ KẾT THÚC
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-
 
       <Modal
         isOpen={openCancelModal}

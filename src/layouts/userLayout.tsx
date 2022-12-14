@@ -29,8 +29,8 @@ const UserLayout = () => {
   };
 
   return (
-    <div className="md:flex w-full">
-      <aside className="hidden md:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
+    <div className="lg:flex w-full">
+      <aside className="hidden lg:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
         <nav className="mt-10 mx-6">
           <ul>
             <li className="mb-4">
@@ -117,7 +117,7 @@ const UserLayout = () => {
           </ul>
         </nav>
       </aside>
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <IconButton
           onClick={handleClick}
           size="small"
@@ -187,7 +187,7 @@ const UserLayout = () => {
           </MenuItem>
         </Menu>
       </div>
-      <div className="w-full md:w-4/6 lg:w-4/5">
+      <div className="w-full lg:w-4/5">
         <Outlet />
       </div>
     </div>

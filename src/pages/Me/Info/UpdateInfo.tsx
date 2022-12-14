@@ -59,7 +59,7 @@ const UpdateInfo = () => {
   };
 
   return (
-    <div className="my-10 w-1/2 container mx-auto">
+    <div className="my-10 md:w-3/4 lg:w-1/2 container mx-auto">
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
