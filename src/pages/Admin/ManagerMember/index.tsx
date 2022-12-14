@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getMembers,disableUser, enableUser } from 'apis/admin';
+import { getMembers, disableUser, enableUser } from 'apis/admin';
 import Table from 'components/Table';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import { IMemberDetail } from './types';
 import { headers } from './constant';
-import { ERoles} from 'constant/types';
+import { ERoles } from 'constant/types';
 import RemoveIcon from '@mui/icons-material/Remove';
 import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
@@ -28,7 +28,7 @@ const ManagerMember = () => {
   const [openDisableModal, setOpenDisableModal] = useState(false);
   const [openEnableModal, setOpenEnableModal] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [position, setPosition] = useState<string>("");
+  const [position, setPosition] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -50,21 +50,22 @@ const ManagerMember = () => {
     setListMember(data);
   };
 
-  const onDisable = async (id) => {
+  const onDisable = async id => {
     try {
       if (id) {
         await disableUser(id);
         const data = await await getMembers();
         setListMember(data);
-        setOpenDisableModal(false);
-        toast.success('Huỷ đăng kí tham gia thành công');
+        toast.success('Khóa người dùng thành công');
       }
     } catch (error) {
-      toast.error('Đăng kí tham gia thất bại vì bạn đã đăng ký');
+      toast.error('Thất bại');
+    } finally {
+      setOpenDisableModal(false);
     }
   };
 
-  const onEnable = async (id) => {
+  const onEnable = async id => {
     try {
       if (id) {
         await enableUser(id);
@@ -87,19 +88,14 @@ const ManagerMember = () => {
       successProject,
       registeredProject,
       permission,
-      disableUser
-
+      disableUser,
     }) => ({
-      picture:(
+      picture: (
         <div>
-       <Avatar>
-                      <img
-                        src={picture || '/avartar.png'}
-                        alt="Ảnh đại diện"
-                      />
-                    </Avatar>
-                   
-      </div>
+          <Avatar>
+            <img src={picture || '/avartar.png'} alt="Ảnh đại diện" />
+          </Avatar>
+        </div>
       ),
       name,
       email,
@@ -107,137 +103,139 @@ const ManagerMember = () => {
       registeredProject,
       permission: (
         <div
-          className={'w-fit px-3 py-1 rounded-md border ' + className[permission]}
+          className={
+            'w-fit px-3 py-1 rounded-md border ' + className[permission]
+          }
         >
           {ERoles[permission]}
         </div>
       ),
       action: (
         <div>
-          {disableUser?(<Button
-          variant="contained"
-
-          onClick={e => {
-            e.stopPropagation();
-            setPosition(id)
-            setOpenEnableModal(true)
-          }}
-        >
-          Mở khoá
-        </Button>):(
-        <Button
-        color='error'
-          variant="contained"
-          onClick={e => {
-            e.stopPropagation();
-            setPosition(id)
-            setOpenDisableModal(true)
-          }}
-        >
-          Khoá
-        </Button>)}
-        
+          {disableUser ? (
+            <Button
+              variant="contained"
+              onClick={e => {
+                e.stopPropagation();
+                setPosition(id);
+                setOpenEnableModal(true);
+              }}
+            >
+              Mở khoá
+            </Button>
+          ) : (
+            <Button
+              color="error"
+              variant="contained"
+              onClick={e => {
+                e.stopPropagation();
+                setPosition(id);
+                setOpenDisableModal(true);
+              }}
+            >
+              Khoá
+            </Button>
+          )}
         </div>
       ),
-      onClick: () => navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id })),
+      onClick: () =>
+        navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id })),
     }),
   );
 
-
   return (
     <>
-    <div className="md:my-10 container">
-      <Typo size="max" isBold className="mb-10">
-        {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách thành viên'}
-      </Typo>
-      <div className="">
-        {isCreate ? (
-          <div>aa</div>
-        ) : loading ? (
-          <Loading />
-        ) : listMember.length ? (
-          <Table headers={headers} rows={rows} />
-        ) : (
-          <Typo>Không có dự án</Typo>
-        )}
+      <div className="md:my-10 container">
+        <div className="flex items-center justify-between mb-10">
+          <Typo size="max" isBold>
+            {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách thành viên'}
+          </Typo>
+          <div onClick={() => setIsCreate(!isCreate)}>
+            <Tooltip
+              placement="top"
+              title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
+            >
+              <Fab color="primary" aria-label="add">
+                {isCreate ? <RemoveIcon /> : <AddIcon />}
+              </Fab>
+            </Tooltip>
+          </div>
+        </div>
+        <div className="">
+          {isCreate ? (
+            <div>aa</div>
+          ) : loading ? (
+            <Loading />
+          ) : listMember.length ? (
+            <Table headers={headers} rows={rows} />
+          ) : (
+            <Typo>Không có dự án</Typo>
+          )}
+        </div>
       </div>
-      <div
-        className="fixed bottom-8 right-8 md:bottom-20 md:right-20 lg:bottom-28 lg:right-28"
-        onClick={() => setIsCreate(!isCreate)}
+      <Modal
+        isOpen={openDisableModal}
+        title="Xác nhận vô hiệu hoá"
+        onClose={() => setOpenDisableModal(false)}
       >
-        <Tooltip
-          placement="top"
-          title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
-        >
-          <Fab color="primary" aria-label="add">
-            {isCreate ? <RemoveIcon /> : <AddIcon />}
-          </Fab>
-        </Tooltip>
-      </div>
-    </div>
-    <Modal
-    isOpen={openDisableModal}
-    title="Xác nhận vô hiệu hoá"
-    onClose={() => setOpenDisableModal(false)}
-  >
-    Bạn có chắc chắn muốn vô hiệu hoá tài khoản này không?
-    <div className="text-center mt-4">
-      <Button
-        sx={{
-          marginRight: '48px',
-        }}
-        size="large"
-        variant="outlined"
-        onClick={() => setOpenDisableModal(false)}
-      >
-        Hủy
-      </Button>
-      <Button
-        color="error"
-        size="large"
-        variant="contained"
-        type="submit"
-        onClick={()=>onDisable(position)}
-      >
-        Xác nhận
-      </Button>
-      {/* <button className='bg-red-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={onCancel}>
+        Bạn có chắc chắn muốn vô hiệu hoá tài khoản này không?
+        <div className="text-center mt-4">
+          <Button
+            sx={{
+              marginRight: '48px',
+            }}
+            size="large"
+            variant="outlined"
+            onClick={() => setOpenDisableModal(false)}
+          >
+            Hủy
+          </Button>
+          <Button
+            color="error"
+            size="large"
+            variant="contained"
+            type="submit"
+            onClick={() => onDisable(position)}
+          >
+            Xác nhận
+          </Button>
+          {/* <button className='bg-red-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={onCancel}>
         Huỷ đăng ký
       </button> */}
-    </div>
-  </Modal>
-  <Modal
-    isOpen={openEnableModal}
-    title="Xác nhận mở lại tài khoản"
-    onClose={() => setOpenEnableModal(false)}
-  >
-    Bạn có chắc chắn muốn bỏ vô hiệu hoá tài khoản này không?
-    <div className="text-center mt-4">
-      <Button
-        sx={{
-          marginRight: '48px',
-        }}
-        size="large"
-        variant="outlined"
-        onClick={() => setOpenEnableModal(false)}
+        </div>
+      </Modal>
+      <Modal
+        isOpen={openEnableModal}
+        title="Xác nhận mở lại tài khoản"
+        onClose={() => setOpenEnableModal(false)}
       >
-        Hủy
-      </Button>
-      <Button
-        color="error"
-        size="large"
-        variant="contained"
-        type="submit"
-        onClick={()=>onEnable(position)}
-      >
-        Xác nhận
-      </Button>
-      {/* <button className='bg-red-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={onCancel}>
+        Bạn có chắc chắn muốn bỏ vô hiệu hoá tài khoản này không?
+        <div className="text-center mt-4">
+          <Button
+            sx={{
+              marginRight: '48px',
+            }}
+            size="large"
+            variant="outlined"
+            onClick={() => setOpenEnableModal(false)}
+          >
+            Hủy
+          </Button>
+          <Button
+            color="error"
+            size="large"
+            variant="contained"
+            type="submit"
+            onClick={() => onEnable(position)}
+          >
+            Xác nhận
+          </Button>
+          {/* <button className='bg-red-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={onCancel}>
         Huỷ đăng ký
       </button> */}
-    </div>
-  </Modal>
-  </>
+        </div>
+      </Modal>
+    </>
   );
 };
 

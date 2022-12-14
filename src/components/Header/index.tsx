@@ -41,7 +41,7 @@ import SearchOffIcon from '@mui/icons-material/SearchOff';
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
   const activeStyle = 'border-b-2 border-white hover:border-gray-500';
-  const { user, setUser, clearUser } = useUser();
+  const { user, setUser, clearUser, setLocked } = useUser();
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -74,9 +74,11 @@ const Header = () => {
         await authByGoggle();
         const data = await getInfoUser();
         setUser(data);
-      } catch (error) {
-        const data = await getInfoUser();
-        setUser(data);
+      } catch (error: any) {
+        if (error.code === 400) {
+          const data = await getInfoUser();
+          setUser(data);
+        }
       }
     }
   };
@@ -128,7 +130,7 @@ const Header = () => {
       const dataUser = await getInfoUser();
       setUser(dataUser);
       toast.success('Đăng nhập thành công');
-    } catch (error) {
+    } catch (error: any) {
       toast.error('Đăng nhập thất bại');
     } finally {
       setOpenLoginModal(false);
@@ -261,8 +263,11 @@ const Header = () => {
                     fontSize="small"
                     sx={{ marginRight: '8px' }}
                   />
-                  {user.permission==='ADMIN'?( <Link to={routes.ADMIN.INFO}>Quản lý</Link>):( <Link to={routes.ME.INFO}>Thông tin</Link>)}
-                 
+                  {user.permission === 'ADMIN' ? (
+                    <Link to={routes.ADMIN.INFO}>Quản lý</Link>
+                  ) : (
+                    <Link to={routes.ME.INFO}>Thông tin</Link>
+                  )}
                 </MenuItem>
                 <GoogleLogout
                   clientId="297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com"

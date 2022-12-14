@@ -6,13 +6,10 @@ import Stack from '@mui/material/Stack';
 import { getStatistic } from 'apis/users';
 import { IStatisticState } from './types';
 import { deepOrange, lightBlue } from '@mui/material/colors';
+import Loading from 'components/Loading';
 
 const Statistic = () => {
-  const [statistic, setStatistic] = useState<IStatisticState>({
-    numberProjects: 0,
-    numberRegistered: 0,
-    successProject: 0,
-  });
+  const [statistic, setStatistic] = useState<IStatisticState>();
 
   useEffect(() => {
     (async () => {
@@ -20,6 +17,8 @@ const Statistic = () => {
       setStatistic(data);
     })();
   }, []);
+
+  if (!statistic) return <Loading />;
   return (
     <div className="my-10 container">
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-2">
