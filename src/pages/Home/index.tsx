@@ -51,9 +51,7 @@ const Home = () => {
               DaNang, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng Lưới Tình Nguyện xanh Việt
               Nam, Trung tâm hợp tác phát triển Trung Bộ và nhiều tổ chức khác.{' '}
               <br />
-              Mercy Collection được hỗ trợ công nghệ bởi FPT Smart Cloud,
-              Comartek, Viettel Pay và VNPay, đảm bảo ứng dụng hoạt động ổn
-              định, phương thức thanh toán đa dạng và an toàn.
+        
             </Typo>
           </div>
         </div>
