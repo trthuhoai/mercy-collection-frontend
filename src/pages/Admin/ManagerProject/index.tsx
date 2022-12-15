@@ -78,17 +78,6 @@ const ManagerProject = () => {
           {EStatusProject[status]}
         </div>
       ),
-      action: (
-        <Button
-          variant="contained"
-          onClick={e => {
-            e.stopPropagation();
-            navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id }));
-          }}
-        >
-          Chi tiết
-        </Button>
-      ),
       onClick: () =>
         navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id })),
     }),
