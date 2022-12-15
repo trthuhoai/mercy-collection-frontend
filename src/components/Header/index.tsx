@@ -162,7 +162,7 @@ const Header = () => {
             onLogin={() => setOpenLoginModal(true)}
             onLogout={handleLogout}
           />
-          <div className="hidden lg:flex gap-16">
+          <div className="hidden lg:flex gap-16 ml-28">
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -171,21 +171,21 @@ const Header = () => {
             >
               Trang chủ
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to="/campaigns"
               className={({ isActive }) =>
                 `${classNameNavLink} ${isActive && activeStyle}`
               }
             >
-              Dự án
-            </NavLink>
+              Gây quỹ
+            </NavLink> */}
             <NavLink
               to="/projects"
               className={({ isActive }) =>
                 `${classNameNavLink} ${isActive && activeStyle}`
               }
             >
-              Tình nguyện
+              Dự án
             </NavLink>
             <NavLink
               to="/faqs"
@@ -212,7 +212,7 @@ const Header = () => {
               Về chúng tôi
             </NavLink>
           </div>
-          <div className="relative ml-4 lg:ml-0">
+          <div className="relative ml-0 lg:ml-0">
             <div
               className="cursor-pointer hover:text-gray-400"
               onClick={() => setHasSearch(!hasSearch)}

@@ -13,9 +13,12 @@ import { ECategoryProject, EStatusProject } from 'constant/types';
 import { toast } from 'react-toastify';
 import ListItemText from '@mui/material/ListItemText';
 import { useUser } from 'store';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { routes } from 'constant/routes';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<IProjectDetail>();
   const [loading, setLoading] = useState(false);
   const [openCancelModal, setOpenCancelModal] = useState(false);
@@ -116,8 +119,14 @@ const ProjectDetail = () => {
                   </Typo>
                 </div>
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
-                  <Typo>Email người tổ chức:</Typo>
-                  <Typo>{projects.email}</Typo>
+                  <Typo>Người tổ chức:</Typo>
+                  <Typo
+                      isBold
+                      onClick={() =>
+                        navigate(
+                          generatePath(routes.USER, { id: projects.memberId }),
+                        )}>{projects.email}
+                        </Typo>
                 </div>
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Thời gian bắt đầu:</Typo>

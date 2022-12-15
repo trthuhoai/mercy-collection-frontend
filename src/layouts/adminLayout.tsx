@@ -14,7 +14,7 @@ import Divider from '@mui/material/Divider';
 import { Avatar } from '@mui/material';
 
 const AdminLayout = () => {
-  const activeClassName = 'bg-primary-500 !text-white';
+  const activeClassName = 'bg-primary-700 !text-white';
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -42,7 +42,7 @@ const AdminLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -58,7 +58,7 @@ const AdminLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -74,7 +74,7 @@ const AdminLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -90,7 +90,7 @@ const AdminLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -107,7 +107,7 @@ const AdminLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -123,7 +123,7 @@ const AdminLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >

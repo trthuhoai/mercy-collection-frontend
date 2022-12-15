@@ -27,11 +27,11 @@ const Home = () => {
 
   return (
     <div className="w-full">
-      <Sliders responsive={false}>{imagesSlider}</Sliders>
+      <Sliders autoplay responsive={false}>{imagesSlider}</Sliders>
       <div className="my-20">
         <div className="container">
           <ProjectList />
-          <CampaignList />
+          {/* <CampaignList /> */}
           <AmbassadorList />
         </div>
         <Statistic />
@@ -48,7 +48,7 @@ const Home = () => {
               nguyện, nền tảng gây quỹ cộng đồng trực tuyến tiện lợi, tin cậy và
               minh bạch. <br /> Mercy Collection được tin dùng bởi các tổ chức
               cộng đồng uy tín như: Quỹ Bảo Trợ Trẻ Em Việt Nam, Operation Smile
-              DaNang, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng Lưới Ung Thư Vú Việt
+              DaNang, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng Lưới Tình Nguyện xanh Việt
               Nam, Trung tâm hợp tác phát triển Trung Bộ và nhiều tổ chức khác.{' '}
               <br />
               Mercy Collection được hỗ trợ công nghệ bởi FPT Smart Cloud,

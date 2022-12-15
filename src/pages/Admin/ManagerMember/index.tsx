@@ -138,8 +138,6 @@ const ManagerMember = () => {
           )}
         </div>
       ),
-      onClick: () =>
-        navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id })),
     }),
   );
 
@@ -150,16 +148,6 @@ const ManagerMember = () => {
           <Typo size="max" isBold>
             {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách thành viên'}
           </Typo>
-          <div onClick={() => setIsCreate(!isCreate)}>
-            <Tooltip
-              placement="top"
-              title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
-            >
-              <Fab color="primary" aria-label="add">
-                {isCreate ? <RemoveIcon /> : <AddIcon />}
-              </Fab>
-            </Tooltip>
-          </div>
         </div>
         <div className="">
           {isCreate ? (
