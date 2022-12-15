@@ -25,9 +25,6 @@ const headers = [
   {
     name: 'Trạng thái',
   },
-  {
-    name: 'Người đăng ký',
-  },
 ];
 
 const defaultValues = {
