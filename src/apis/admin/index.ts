@@ -1,26 +1,34 @@
 import request from 'apis/axios';
 import { ELocalStorageKey } from 'constant/types';
 
-const createUser = body => {
-  return request({
-    method: 'POST',
-    url: `/user/register`,
-    data: body,
-  });
-};
-
-const loginWithUser = body => {
-  return request({
-    method: 'POST',
-    url: `/user/login`,
-    data: body,
-  });
-};
-
-const getInfoUser = () => {
+const getMembers = () => {
   return request({
     method: 'GET',
-    url: `/user`,
+    url: `/user/all`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+const disableUser = (id) => {
+  return request({
+    method: 'PATCH',
+    url: `/user/disable/${id}`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
+const enableUser = (id) => {
+  return request({
+    method: 'PATCH',
+    url: `/user/enable/${id}`,
     headers: {
       Authorization: `Bearer ${localStorage.getItem(
         ELocalStorageKey.ACCESS_TOKEN,
@@ -79,20 +87,12 @@ const getStatistic = () => {
   });
 };
 
-const getUserById = id => {
-  return request({
-    method: 'GET',
-    url: `/user/${id}`,
-  });
-};
-
 export {
-  createUser,
-  loginWithUser,
-  getInfoUser,
+  disableUser,
+  enableUser,
+  getMembers,
   authByGoggle,
   updateUser,
   getStatistic,
-  updatePassword,
-  getUserById,
+  updatePassword
 };

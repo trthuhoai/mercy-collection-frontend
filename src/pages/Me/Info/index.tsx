@@ -89,7 +89,7 @@ const Info = () => {
           </div>
         </div>
         <div className="container">
-          <div className="flex gap-6 -translate-y-1/2 ">
+          <div className="flex flex-col sm:flex-row gap-6 -translate-y-1/2 ">
             <div className="relative w-36 h-36">
               <img
                 src={user?.picture || '/avartar.png'}
@@ -108,7 +108,7 @@ const Info = () => {
                 <CameraAltIcon />
               </div>
             </div>
-            <div className="self-end">
+            <div className="sm:self-end">
               <Typo className="mb-2" size="larger" isBold>
                 {user?.name}
               </Typo>

@@ -3,26 +3,17 @@ import Typo from 'components/Typo';
 import Avatar from '@mui/material/Avatar';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import Stack from '@mui/material/Stack';
-import { getStatistic } from 'apis/users';
 import { IStatisticState } from './types';
 import { deepOrange, lightBlue } from '@mui/material/colors';
 
-const Statistic = () => {
-  const [statistic, setStatistic] = useState<IStatisticState>({
-    numberProjects: 0,
-    numberRegistered: 0,
-    successProject: 0,
-  });
+interface IProps {
+  statistic: IStatisticState;
+}
 
-  useEffect(() => {
-    (async () => {
-      const data = await getStatistic();
-      setStatistic(data);
-    })();
-  }, []);
+const Statistic = ({ statistic }: IProps) => {
   return (
     <div className="my-10 container">
-      <Stack direction="row" spacing={2}>
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-2">
         <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
           <div className="text-gray-500">
             <Typo className="mb-2" size="large" isBold>
@@ -74,7 +65,7 @@ const Statistic = () => {
             <AssignmentIcon />
           </Avatar>
         </div>
-      </Stack>
+      </div>
     </div>
   );
 };

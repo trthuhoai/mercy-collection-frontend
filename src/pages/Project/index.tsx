@@ -9,11 +9,15 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { TABS } from 'constant';
+import Pagination from '@mui/material/Pagination';
+import { ITEMS_PER_PAGE } from 'constant/pagination';
+import { pagination } from 'untils';
 
 const ProjectPage = () => {
   const [projects, setProjects] = useState<IProject[]>([]);
   const [tabValue, setTabValue] = useState<string>(TABS[0].value);
   const [loading, setLoading] = useState<boolean>(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     (async () => {
@@ -53,13 +57,23 @@ const ProjectPage = () => {
         {loading ? (
           <CardSkeleton />
         ) : projects.length ? (
-          <Grid container spacing={4}>
-            {projects.map(project => (
-              <Grid item xs={12} sm={6} md={4} xl={3}>
-                <CardProject {...project} />
-              </Grid>
-            ))}
-          </Grid>
+          <>
+            <Grid container spacing={4}>
+              {pagination(projects, ITEMS_PER_PAGE, page).map(project => (
+                <Grid item xs={12} sm={6} md={4} xl={3}>
+                  <CardProject {...project} />
+                </Grid>
+              ))}
+            </Grid>
+            <div className="flex justify-center mt-10">
+              <Pagination
+                page={page}
+                onChange={(e, page) => setPage(page)}
+                count={Math.ceil(projects.length / ITEMS_PER_PAGE)}
+                color="primary"
+              />
+            </div>
+          </>
         ) : (
           <Typo align="center">Không có dự án nào</Typo>
         )}

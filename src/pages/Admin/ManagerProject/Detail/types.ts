@@ -22,32 +22,4 @@ export interface IProjectDetail {
   status: string;
   projectId: string;
   reasion: string;
-  createdAt: string;
-}
-
-export interface ICommentList {
-  content: string;
-  date: string;
-  id: string;
-  memberId: string;
-  name: string;
-  picture: string | null;
-  projectId: string;
-  rootId: string;
-  childrenComment: IChildrenComment[];
-}
-
-export interface IChildrenComment {
-  content: string;
-  date: string;
-  id: string;
-  memberId: string;
-  name: string;
-  picture: string | null;
-  projectId: string;
-  rootId: string;
-}
-
-export interface IFormComment {
-  comment: string;
 }

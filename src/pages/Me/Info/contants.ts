@@ -25,14 +25,13 @@ const schemaEdit = yup.object().shape(
 );
 
 const schemaEditPassword = yup.object().shape({
-  oldPassword: yup
-    .string()
-    .required('Bắt buộc nhập')
-    .matches(
-      REGEX_PASSWORD,
-      'Mật khẩu bắt buộc 8 đến 20 kí tự và có chữ, số, kí tự đặc biệt',
-    ),
-  newPassword: yup
+  // oldPassword: yup
+  //   .string()
+  //   .matches(
+  //     REGEX_PASSWORD,
+  //     'Mật khẩu bắt buộc 8 đến 20 kí tự và có chữ, số, kí tự đặc biệt',
+  //   ),
+  password: yup
     .string()
     .required('Bắt buộc nhập')
     .matches(
@@ -46,7 +45,7 @@ const schemaEditPassword = yup.object().shape({
       REGEX_PASSWORD,
       'Mật khẩu bắt buộc 8 đến 20 kí tự và có chữ, số, kí tự đặc biệt',
     )
-    .oneOf([yup.ref('password'), null], 'Nhap lai mat khau sai'),
+    .oneOf([yup.ref('password'), null], 'Nhập lại mật khẩu sai!'),
 });
 
 export { schemaEdit, schemaEditPassword };

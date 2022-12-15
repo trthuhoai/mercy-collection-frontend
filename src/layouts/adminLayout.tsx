@@ -13,7 +13,7 @@ import { useUser } from 'store';
 import Divider from '@mui/material/Divider';
 import { Avatar } from '@mui/material';
 
-const UserLayout = () => {
+const AdminLayout = () => {
   const activeClassName = 'bg-primary-500 !text-white';
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -29,12 +29,15 @@ const UserLayout = () => {
   };
 
   return (
-    <div className="lg:flex w-full">
-      <aside className="hidden lg:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
+    <div className="md:flex w-full">
+      <aside className="hidden md:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
         <nav className="mt-10 mx-6">
+          <div className="mb-4 text-center text-3xl font-serif subpixel-antialiased font-semibold text-emerald-700 list-disc">
+            ADMIN
+          </div>
           <ul>
             <li className="mb-4">
-              <NavLink to={routes.ME.INFO}>
+              <NavLink to={routes.ADMIN.INFO}>
                 {({ isActive }) => (
                   <Typo
                     isBold
@@ -50,7 +53,7 @@ const UserLayout = () => {
               </NavLink>
             </li>
             <li className="mb-4">
-              <NavLink to={routes.ME.PROJECT}>
+              <NavLink to={routes.ADMIN.PROJECT}>
                 {({ isActive }) => (
                   <Typo
                     isBold
@@ -66,7 +69,7 @@ const UserLayout = () => {
               </NavLink>
             </li>
             <li className="mb-4">
-              <NavLink to={routes.ME.PROJECT_REGISTER}>
+              <NavLink to={routes.ADMIN.PROJECT_REGISTER}>
                 {({ isActive }) => (
                   <Typo
                     isBold
@@ -81,8 +84,8 @@ const UserLayout = () => {
                 )}
               </NavLink>
             </li>
-            <li>
-              <NavLink to={routes.ME.CAMPAIGN}>
+            <li className="mb-4">
+              <NavLink to={routes.ADMIN.MANAGER_MEMBER}>
                 {({ isActive }) => (
                   <Typo
                     isBold
@@ -92,14 +95,14 @@ const UserLayout = () => {
                     )}
                   >
                     <FolderIcon />
-                    Dự án
+                    Quản lý thành viên
                   </Typo>
                 )}
               </NavLink>
             </li>
 
-            <li>
-              <NavLink to={routes.ME.CAMPAIGN}>
+            <li className="mb-4">
+              <NavLink to={routes.ADMIN.MANAGER_PROJECT}>
                 {({ isActive }) => (
                   <Typo
                     isBold
@@ -109,7 +112,23 @@ const UserLayout = () => {
                     )}
                   >
                     <FolderIcon />
-                    Tạo dự án
+                    Quản lý dự án
+                  </Typo>
+                )}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={routes.ADMIN.MANAGER_STATISTIC}>
+                {({ isActive }) => (
+                  <Typo
+                    isBold
+                    className={clsx(
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      isActive && activeClassName,
+                    )}
+                  >
+                    <FolderIcon />
+                    Thống kê
                   </Typo>
                 )}
               </NavLink>
@@ -117,7 +136,7 @@ const UserLayout = () => {
           </ul>
         </nav>
       </aside>
-      <div className="lg:hidden">
+      <div className="md:hidden">
         <IconButton
           onClick={handleClick}
           size="small"
@@ -187,11 +206,11 @@ const UserLayout = () => {
           </MenuItem>
         </Menu>
       </div>
-      <div className="w-full lg:w-4/5">
+      <div className="w-full md:w-4/6 lg:w-4/5">
         <Outlet />
       </div>
     </div>
   );
 };
 
-export default UserLayout;
+export default AdminLayout;

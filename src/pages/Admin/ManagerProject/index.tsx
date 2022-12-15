@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getMyProjects } from 'apis/projects';
+import { getPendingProjects } from 'apis/projects';
 import Table from 'components/Table';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,7 +8,6 @@ import { IProjectDetail } from 'pages/Project/Detail/types';
 import { headers } from './constant';
 import { ECategoryProject, EStatusProject } from 'constant/types';
 import RemoveIcon from '@mui/icons-material/Remove';
-import CreateProject from './create';
 import Typo from 'components/Typo';
 import Button from '@mui/material/Button';
 import { generatePath, useNavigate } from 'react-router-dom';
@@ -16,13 +15,14 @@ import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
 
 const className = {
+  PENDING: 'border-blue-500 text-blue-500',
   ACTIVE: 'border-green-500 text-green-500',
   CANCELLED: 'border-red-500 text-red-500',
   EXPIRED: 'border-yellow-500 text-yellow-500',
   ENDED: 'border-gray-500 text-gray-500',
 };
 
-const Project = () => {
+const ManagerProject = () => {
   const [listProject, setListProject] = useState<IProjectDetail[]>([]);
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,8 +33,8 @@ const Project = () => {
     (async () => {
       try {
         setLoading(true);
-        const data = await getMyProjects();
-        setListProject(data.data);
+        const data = await getPendingProjects();
+        setListProject(data);
       } catch (error) {
       } finally {
         setLoading(false);
@@ -43,8 +43,8 @@ const Project = () => {
   }, []);
 
   const getListProjects = async () => {
-    const data = await getMyProjects();
-    setListProject(data.data);
+    const data = await getPendingProjects();
+    setListProject(data);
   };
 
   const rows = listProject.map(
@@ -83,27 +83,39 @@ const Project = () => {
           variant="contained"
           onClick={e => {
             e.stopPropagation();
-            navigate(generatePath(routes.ME.DETAIL_PROJECT, { id }));
+            navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id }));
           }}
         >
           Chi tiết
         </Button>
       ),
-      onClick: () => navigate(generatePath(routes.ME.UPDATE_PROJECT, { id })),
+      onClick: () =>
+        navigate(generatePath(routes.ADMIN.DETAIL_PENDING, { id })),
     }),
   );
 
   return (
     <div className="md:my-10 container">
-      <Typo size="max" isBold className="mb-10">
-        {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách dự án tình nguyện'}
-      </Typo>
+      <div className="flex items-center justify-between mb-10">
+        <Typo size="max" isBold>
+          {isCreate
+            ? ' Tạo dự án tình nguyện'
+            : 'Danh sách dự án chờ phê duyệt'}
+        </Typo>
+        <div onClick={() => setIsCreate(!isCreate)}>
+          <Tooltip
+            placement="top"
+            title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
+          >
+            <Fab color="primary" aria-label="add">
+              {isCreate ? <RemoveIcon /> : <AddIcon />}
+            </Fab>
+          </Tooltip>
+        </div>
+      </div>
       <div className="">
         {isCreate ? (
-          <CreateProject
-            onGetListProject={getListProjects}
-            onSetIsCreate={setIsCreate}
-          />
+          <div>aa</div>
         ) : loading ? (
           <Loading />
         ) : listProject.length ? (
@@ -112,21 +124,8 @@ const Project = () => {
           <Typo>Không có dự án</Typo>
         )}
       </div>
-      <div
-        className="fixed bottom-8 right-8 md:bottom-20 md:right-20 lg:bottom-28 lg:right-28"
-        onClick={() => setIsCreate(!isCreate)}
-      >
-        <Tooltip
-          placement="top"
-          title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
-        >
-          <Fab color="primary" aria-label="add">
-            {isCreate ? <RemoveIcon /> : <AddIcon />}
-          </Fab>
-        </Tooltip>
-      </div>
     </div>
   );
 };
 
-export default Project;
+export default ManagerProject;
