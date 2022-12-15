@@ -102,16 +102,6 @@ const ManagerProject = () => {
             ? ' Tạo dự án tình nguyện'
             : 'Danh sách dự án chờ phê duyệt'}
         </Typo>
-        <div onClick={() => setIsCreate(!isCreate)}>
-          <Tooltip
-            placement="top"
-            title={isCreate ? 'Hiển thị danh sách' : 'Thêm dự án'}
-          >
-            <Fab color="primary" aria-label="add">
-              {isCreate ? <RemoveIcon /> : <AddIcon />}
-            </Fab>
-          </Tooltip>
-        </div>
       </div>
       <div className="">
         {isCreate ? (

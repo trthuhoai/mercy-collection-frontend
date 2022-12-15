@@ -3,4 +3,5 @@ export interface IProject {
   numberCampaign: string;
   numberUser: string;
   numberRegisterPeople: string;
+  success: number;
 }
