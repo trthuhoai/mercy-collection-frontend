@@ -41,10 +41,18 @@ const getMyProjects = () => {
   });
 };
 
+const getAmbassador = () => {
+  return request({
+    method: 'GET',
+    url: `/user/ambassador`,
+  });
+};
+
 export {
   getProjects,
   getStatistic,
   getCampaignsDetail,
   getProjectsDetail,
   getMyProjects,
+  getAmbassador
 };

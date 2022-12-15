@@ -17,9 +17,13 @@ import { useUser } from 'store';
 import Modal from 'components/Modal';
 import ShareLink from 'react-facebook-share-link';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { routes } from 'constant/routes';
+import { p } from 'chart.js/dist/chunks/helpers.core';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState<IProjectDetail>();
   const [loading, setLoading] = useState(false);
   const [openCancelModal, setOpenCancelModal] = useState(false);
@@ -134,8 +138,15 @@ const ProjectDetail = () => {
                   </Typo>
                 </div>
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
-                  <Typo>Email người tổ chức:</Typo>
-                  <Typo>{projects.email}</Typo>
+                  <Typo>Người tổ chức:</Typo>
+                  <Typo
+                  className="text-black cursor-pointer"
+                  isBold
+                  onClick={() =>
+                    navigate(
+                      generatePath(routes.USER, { id: projects.memberId }),
+                    )
+                  }>{projects.email}</Typo>
                 </div>
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Thời gian bắt đầu:</Typo>

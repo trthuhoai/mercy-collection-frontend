@@ -39,7 +39,7 @@ const UserLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -55,7 +55,7 @@ const UserLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -71,7 +71,7 @@ const UserLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -81,13 +81,13 @@ const UserLayout = () => {
                 )}
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to={routes.ME.CAMPAIGN}>
                 {({ isActive }) => (
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -104,7 +104,7 @@ const UserLayout = () => {
                   <Typo
                     isBold
                     className={clsx(
-                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-500 hover:text-white transition-all',
+                      'flex items-center gap-2 py-3 px-4 rounded-md hover:bg-primary-600 hover:text-white transition-all',
                       isActive && activeClassName,
                     )}
                   >
@@ -113,7 +113,7 @@ const UserLayout = () => {
                   </Typo>
                 )}
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </aside>

@@ -76,7 +76,7 @@ const MainLayout = () => {
       >
         <div className="text-center">
           <Typo className="mb-10">
-            Tài khoản của bạn đã bị khóa vui lòng liên hệ tr.thuhoai@gmail.com
+            Tài khoản của bạn đã bị khóa vì vi phạm quy định ban đầu của chúng tôi, vui lòng gửi thư đến địa chỉ email tr.thuhoai@gmail.com
             để được hổ trợ.
           </Typo>
           <Button

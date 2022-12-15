@@ -12,6 +12,7 @@ interface IProps {
   slidesToScroll?: number;
   slidesToShow?: number;
   responsive?: boolean;
+  autoplay?: boolean;
 }
 
 const Sliders = ({
@@ -21,13 +22,14 @@ const Sliders = ({
   slidesToScroll = 1,
   slidesToShow = 1,
   responsive = true,
+  autoplay=true,
   children,
 }: IProps) => {
   const settings = {
     dots: isDot,
     infinite: isInfinie,
     speed,
-    autoplay: false,
+    autoplay,
     autoplaySpeed: 4000,
     slidesToShow,
     slidesToScroll,
