@@ -51,8 +51,8 @@ const ProjectRegister = () => {
       title,
       category: ECategoryProject[category],
       deadline: deadlineTime + ' ' + deadline,
-      endTime: endTime + ' ' + endAt,
       startTime: startTime + ' ' + startAt,
+      endTime: endTime + ' ' + endAt,
       location,
       status: (
         <div
