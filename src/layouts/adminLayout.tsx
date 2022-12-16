@@ -63,7 +63,7 @@ const AdminLayout = () => {
                     )}
                   >
                     <FolderIcon />
-                    Tình nguyện
+                    Dự án của tôi
                   </Typo>
                 )}
               </NavLink>
@@ -79,7 +79,7 @@ const AdminLayout = () => {
                     )}
                   >
                     <FolderIcon />
-                    Đăng kí tình nguyện
+                    Dự án đã đăng ký
                   </Typo>
                 )}
               </NavLink>
