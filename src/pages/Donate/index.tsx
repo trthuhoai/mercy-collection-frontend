@@ -21,7 +21,7 @@ const Donate = () => {
       </div>
       <Typo className="text-justify">
         Số tiền bạn ủng hộ được dùng để bù đắp cho các chi phí vận hành của
-        Mercy Collection, nhằm xây dựng một nền tảng gây quỹ cộng đồng trực
+        Mercy Collection, nhằm xây dựng một nền tảng tình nguyện cộng đồng trực
         tuyến tiện lợi, tin cậy và minh bạch cho người dùng và hoàn toàn MIỄN
         PHÍ cho các tổ chức phi lợi nhuận, bao gồm:
         <br />
