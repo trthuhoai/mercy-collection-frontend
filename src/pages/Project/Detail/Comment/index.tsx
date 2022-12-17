@@ -27,6 +27,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Reply from './reply';
 import { routes } from 'constant/routes';
 import Loading from 'components/Loading';
+import Tooltip from '@mui/material/Tooltip';
 
 const Comment = () => {
   const { isAuthenticated } = useUser();
@@ -143,20 +144,30 @@ const Comment = () => {
                       },
                     }}
                     primary={
-                      <div className="sm:flex gap-2">
-                        <Typo
-                          className="text-black cursor-pointer"
-                          isBold
-                          onClick={() =>
-                            navigate(
-                              generatePath(routes.USER, { id: comment.id }),
-                            )
-                          }
-                        >
-                          {comment.name}
-                        </Typo>
-                        <Typo>{distanceDateFromNow(comment.date)}</Typo>
-                      </div>
+                      <Tooltip
+                        placement="right"
+                        title={convertDate(
+                          new Date(comment.date),
+                          FORMAT_DATE.COMMENT,
+                        )}
+                      >
+                        <div className="sm:flex gap-2 w-fit">
+                          <Typo
+                            className="text-black cursor-pointer"
+                            isBold
+                            onClick={() =>
+                              navigate(
+                                generatePath(routes.USER, {
+                                  id: comment.memberId,
+                                }),
+                              )
+                            }
+                          >
+                            {comment.name}
+                          </Typo>
+                          <Typo>{distanceDateFromNow(comment.date)}</Typo>
+                        </div>
+                      </Tooltip>
                     }
                     secondary={
                       <>
@@ -189,7 +200,7 @@ const Comment = () => {
                                 fontStyle: 'italic',
                               }}
                             >
-                              Phản hồi
+                              {comment.childrenComment.length} Phản hồi
                             </Typography>
                           </AccordionSummary>
                           <AccordionDetails

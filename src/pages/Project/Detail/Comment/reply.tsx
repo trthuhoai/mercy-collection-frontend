@@ -8,10 +8,13 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 import { IChildrenComment } from '../types';
-import { convertDate } from 'untils';
+import { convertDate, distanceDateFromNow } from 'untils';
 import { FORMAT_DATE } from 'constant';
 import Button from '@mui/material/Button';
 import { useUser } from 'store';
+import Tooltip from '@mui/material/Tooltip';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
+import { routes } from 'constant/routes';
 
 interface IProps {
   childrenComment: IChildrenComment[];
@@ -21,6 +24,7 @@ interface IProps {
 const Reply = ({ childrenComment, onSubmitReply }: IProps) => {
   const [valueReply, setValueReply] = useState<string>('');
   const { isAuthenticated } = useUser();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -46,21 +50,42 @@ const Reply = ({ childrenComment, onSubmitReply }: IProps) => {
                 </ListItemAvatar>
                 <ListItemText
                   sx={{
+                    width: 'fit-content',
                     whiteSpace: 'pre-line',
                     '& > p': {
                       wordBreak: 'break-word',
                     },
                   }}
                   primary={
-                    <div className="sm:flex gap-2">
-                      {children.name}
-                      <Typo>
-                        {convertDate(
+                    <Tooltip
+                      placement="right"
+                      title={convertDate(
+                        new Date(children.date),
+                        FORMAT_DATE.COMMENT,
+                      )}
+                    >
+                      <div className="sm:flex gap-2 w-fit">
+                        <Typo
+                          className="text-black cursor-pointer"
+                          isBold
+                          onClick={() =>
+                            navigate(
+                              generatePath(routes.USER, {
+                                id: children.memberId,
+                              }),
+                            )
+                          }
+                        >
+                          {children.name}
+                        </Typo>
+
+                        {/* {convertDate(
                           new Date(children.date),
                           FORMAT_DATE.COMMENT,
-                        )}
-                      </Typo>
-                    </div>
+                        )} */}
+                        {distanceDateFromNow(children.date)}
+                      </div>
+                    </Tooltip>
                   }
                   secondary={children.content}
                 />
