@@ -14,6 +14,8 @@ import Button from '@mui/material/Button';
 import { generatePath, useNavigate } from 'react-router-dom';
 import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
+import { getInfoUser } from 'apis/users';
+import { useUser } from 'store';
 
 const className = {
   PENDING: 'border-blue-500 text-blue-500',
@@ -29,6 +31,8 @@ const Project = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const { isAdmin } = useUser();
+console.log(isAdmin);
 
   useEffect(() => {
     (async () => {
@@ -79,8 +83,17 @@ const Project = () => {
           {EStatusProject[status]}
         </div>
       ),
-      action: (
-        <Button
+      action: isAdmin?
+        (     
+          <Button
+          variant="contained"
+          onClick={e => {
+            e.stopPropagation();
+            navigate(generatePath(routes.ADMIN.DETAIL_PROJECT, { id }));
+          }}
+        >
+          Chi tiết
+        </Button>):(     <Button
           variant="contained"
           onClick={e => {
             e.stopPropagation();
@@ -88,9 +101,9 @@ const Project = () => {
           }}
         >
           Chi tiết
-        </Button>
-      ),
-      onClick: () => navigate(generatePath(routes.ME.UPDATE_PROJECT, { id })),
+        </Button>)
+      ,
+      onClick: () => navigate(generatePath(isAdmin?routes.ADMIN.UPDATE_PROJECT:routes.ME.UPDATE_PROJECT, { id })),
     }),
   );
 

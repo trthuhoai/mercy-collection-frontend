@@ -103,7 +103,7 @@ const UpdateProject = () => {
 
   useEffect(() => {
     if (project) {
-      if (project.status === 'ACTIVE') {
+      if (project.status === 'ACTIVE'||project.status==='PENDING') {
         setInactive(false)
       }
       reset({
@@ -152,6 +152,7 @@ const UpdateProject = () => {
   return (
     <>
       <div className=" container my-10">
+        <div className='bg-white p-4 rounded-md !text-black'>
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -173,15 +174,8 @@ const UpdateProject = () => {
                       label="Tiêu đề"
                       {...field}
                       error={!!errors.title}
-                      helperText={errors.title?.message}
-                      sx={{
-                        '& input:disabled': {
-                          // cursor: 'not-allowed',
-                          color: 'error.main',
-                          bgcolor: 'common.white',
-
-                        }
-                      }}
+                      helperText={errors.title?.message}                      
+                  
                     />
                   )}
                 />
@@ -438,7 +432,7 @@ const UpdateProject = () => {
               </div>
             </div>
           </div>
-          {project?.status === 'ACTIVE' ?
+          {project?.status === 'ACTIVE' || project?.status === 'PENDING'?
             (<div className="text-center mt-8">
 
               <Button
@@ -458,6 +452,7 @@ const UpdateProject = () => {
             </div >) : project?.status === 'ENDED' ? (<div className='text-center text-2xl'>Dự án đã kết thúc</div>) : project?.status === 'EXPIRED' ? (<div className='text-center text-2xl'>Dự án đã hết thời gian đăng ký</div>) : (<div className='text-center text-2xl'>Dự án đã bị huỷ</div>)}
 
         </Box>
+        </div>
       </div>
       <Modal
         isOpen={openCancelModal}

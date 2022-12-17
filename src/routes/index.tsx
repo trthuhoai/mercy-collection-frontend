@@ -87,7 +87,7 @@ const routerConfig = [
           },
           {
             path: routes.ADMIN.DETAIL_PROJECT,
-            element: <PendingProjectDetail />,
+            element: <MyProjectDetail />,
           },
           {
             path: routes.ADMIN.DETAIL_PENDING,
