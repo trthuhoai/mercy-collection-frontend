@@ -9,7 +9,7 @@ const About = () => {
       </div>
       <div className="mx-auto lg:w-1/2">
         <Typo>
-          Mercy Collection.vn là nền tảng gây quỹ cộng đồng trực tuyến tiện lợi,
+          Mercy Collection là nền tảng tình nguyện cộng đồng trực tuyến tiện lợi,
           tin cậy và minh bạch. Được phát triển và vận hành bởi Doanh nghiệp xã
           hội Mercy Collection.
         </Typo>
@@ -17,13 +17,11 @@ const About = () => {
           Mercy Collection được tin dùng bởi các tổ chức cộng đồng uy tín, như:
           Quỹ Bảo Trợ Trẻ Em Việt Nam, Quỹ từ thiện Bông Sen, Quỹ xã hội Phan
           Anh, Operation Smile Vietnam, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng
-          Lưới Ung Thư Vú Việt Nam, Trung tâm hợp tác phát triển Tây Bắc, và
+          Lưới Ung Thư Vú Việt Nam, Trung tâm hợp tác phát triển Trung Bộ, và
           nhiều tổ chức khác.
         </Typo>
         <Typo>
-          Mercy Collection được hỗ trợ công nghệ bởi Comartek, FPT Smart Cloud,
-          Viettel Money và VNPay, đảm bảo ứng dụng hoạt động ổn định và phương
-          thức thanh toán đa dạng, an toàn.
+        Mercy Collection mang đến sự tiện ích, nhanh chóng và rõ ràng cho người sử dụng.
         </Typo>
       </div>
     </div>
