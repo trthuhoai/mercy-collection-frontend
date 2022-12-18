@@ -9,6 +9,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
+import InsightsIcon from '@mui/icons-material/Insights';
 import { useUser } from 'store';
 import Divider from '@mui/material/Divider';
 import { Avatar } from '@mui/material';
@@ -78,7 +82,7 @@ const AdminLayout = () => {
                       isActive && activeClassName,
                     )}
                   >
-                    <FolderIcon />
+                    <AppRegistrationIcon />
                     Dự án đã đăng ký
                   </Typo>
                 )}
@@ -94,7 +98,7 @@ const AdminLayout = () => {
                       isActive && activeClassName,
                     )}
                   >
-                    <FolderIcon />
+                    <PeopleAltIcon />
                     Quản lý thành viên
                   </Typo>
                 )}
@@ -111,7 +115,7 @@ const AdminLayout = () => {
                       isActive && activeClassName,
                     )}
                   >
-                    <FolderIcon />
+                    <FolderCopyIcon />
                     Quản lý dự án
                   </Typo>
                 )}
@@ -127,7 +131,7 @@ const AdminLayout = () => {
                       isActive && activeClassName,
                     )}
                   >
-                    <FolderIcon />
+                    <InsightsIcon />
                     Thống kê
                   </Typo>
                 )}
