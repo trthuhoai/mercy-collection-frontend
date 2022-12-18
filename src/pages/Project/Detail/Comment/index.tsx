@@ -133,6 +133,14 @@ const Comment = () => {
                       <img
                         src={comment.picture || '/avartar.png'}
                         alt="Ảnh đại diện"
+                        className="text-black cursor-pointer"
+                        onClick={() =>
+                          navigate(
+                            generatePath(routes.USER, {
+                              id: comment.memberId,
+                            }),
+                          )
+                        }
                       />
                     </Avatar>
                   </ListItemAvatar>

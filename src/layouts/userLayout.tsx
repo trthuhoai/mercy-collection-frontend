@@ -9,6 +9,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import { useUser } from 'store';
 import Divider from '@mui/material/Divider';
 import { Avatar } from '@mui/material';
@@ -60,7 +61,7 @@ const UserLayout = () => {
                     )}
                   >
                     <FolderIcon />
-                    Tình nguyện
+                    Dự án của tôi
                   </Typo>
                 )}
               </NavLink>
@@ -75,8 +76,8 @@ const UserLayout = () => {
                       isActive && activeClassName,
                     )}
                   >
-                    <FolderIcon />
-                    Đăng kí tình nguyện
+                    <AppRegistrationIcon />
+                    Dự án đã đăng ký
                   </Typo>
                 )}
               </NavLink>

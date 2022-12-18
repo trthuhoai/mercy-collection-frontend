@@ -45,6 +45,14 @@ const Reply = ({ childrenComment, onSubmitReply }: IProps) => {
                     <img
                       src={children.picture || '/avartar.png'}
                       alt="Ảnh đại diện"
+                      className="text-black cursor-pointer"
+                      onClick={() =>
+                        navigate(
+                          generatePath(routes.USER, {
+                            id: children.memberId,
+                          }),
+                        )
+                      }
                     />
                   </Avatar>
                 </ListItemAvatar>

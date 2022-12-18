@@ -21,15 +21,15 @@ const AmbassadorList = () => {
         Sứ giả
       </Typo>
       <Typo className="text-center my-8">
-        Bạn có thể trở thành sứ giả gây quỹ cho các dự án bằng cách ủng hộ gây
-        quỹ hoặc tham gia tình nguyện với mục tiêu của riêng mình.
+        Bạn có thể trở thành sứ giả cho các dự án bằng cách tổ chức hoặc tham
+        gia tình nguyện với mục tiêu của riêng mình.
       </Typo>
       <Sliders slidesToScroll={5} slidesToShow={5} isDot={false}>
-      {ambassador.map(am => (
-            <div className="px-4 h-full">
-              <CardAmbassador  {...am} />
-            </div>
-          ))}
+        {ambassador.map(am => (
+          <div className="px-4 h-full">
+            <CardAmbassador {...am} />
+          </div>
+        ))}
         {/* <CardAmbassador />
         <CardAmbassador />
         <CardAmbassador />
