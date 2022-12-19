@@ -43,7 +43,7 @@ const Statistic = () => {
         setLoading(true);
         const data = await getProjects();
         setListProject(data);
-        const dataMember = await getMembers();
+        const dataMember = await getMembers('');
         setListMember(dataMember);
       } catch (error) {
       } finally {
