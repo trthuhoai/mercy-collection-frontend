@@ -68,9 +68,9 @@ const Table = ({ headers, rows }: IProps) => {
             </TableRow>
           </StyledTableHead>
           <TableBody>
-            {pagination(rows, rowsPerPage, page + 1)?.map(row => (
+            {pagination(rows, rowsPerPage, page + 1)?.map((row, index) => (
               <StyledTableRow
-                key={row.name}
+                key={index}
                 sx={{
                   '&:last-child td, &:last-child th': { border: 0 },
                   cursor: row.onClick && 'pointer',

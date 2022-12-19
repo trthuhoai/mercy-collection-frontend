@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Typo from 'components/Typo';
 import { gapi } from 'gapi-script';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { Link, NavLink } from 'react-router-dom';
+import {
+  generatePath,
+  Link,
+  matchPath,
+  NavLink,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { useUser } from 'store';
 import Modal from 'components/Modal';
 import TextField from '@mui/material/TextField';
@@ -37,11 +44,14 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import SearchIcon from '@mui/icons-material/Search';
 import SearchOffIcon from '@mui/icons-material/SearchOff';
+import useDebounce from 'hooks/useDebounce';
+import { useSearch } from 'store/search';
 
 const Header = () => {
   const classNameNavLink = 'hover:text-gray-500 pb-2';
   const activeStyle = 'border-b-2 border-white hover:border-gray-500';
   const { user, setUser, clearUser, setLocked } = useUser();
+  const { setValue } = useSearch();
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -49,6 +59,17 @@ const Header = () => {
   const [showRePassword, setShowRePassword] = useState(false);
   const [showPasswordLogin, setShowPasswordLogin] = useState(false);
   const [hasSearch, setHasSearch] = useState(false);
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+  const valueSearch = useDebounce<string>(search);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (!matchPath(routes.SEARCH, pathname) && valueSearch) {
+      navigate(generatePath(routes.SEARCH));
+    }
+    setValue(valueSearch);
+  }, [valueSearch]);
 
   const handleClickName = event => {
     setAnchorEl(event.currentTarget);
@@ -224,6 +245,7 @@ const Header = () => {
                 <input
                   className="w-[200px] outline-none"
                   placeholder="Tìm kiếm...."
+                  onChange={e => setSearch(e.target.value)}
                 />
               </div>
             )}

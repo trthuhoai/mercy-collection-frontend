@@ -28,4 +28,5 @@ export const routes = {
   DONATE: '/donate',
   ABOUT: '/about',
   USER: '/user/:id',
+  SEARCH: '/search',
 };
