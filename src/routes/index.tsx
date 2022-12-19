@@ -20,6 +20,7 @@ import ProjectRegister from 'pages/Me/ProjectRegister';
 import { createBrowserRouter } from 'react-router-dom';
 import User from 'pages/User';
 import Statistic from 'pages/Admin/Statistic';
+import Search from 'pages/Search';
 
 const routerConfig = [
   {
@@ -134,6 +135,10 @@ const routerConfig = [
       {
         path: routes.USER,
         element: <User />,
+      },
+      {
+        path: routes.SEARCH,
+        element: <Search />,
       },
     ],
   },

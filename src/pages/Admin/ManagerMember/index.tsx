@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { getMembers, disableUser, enableUser } from 'apis/admin';
 import Table from 'components/Table';
 import Fab from '@mui/material/Fab';
@@ -16,6 +16,8 @@ import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
 import Modal from 'components/Modal';
 import { toast } from 'react-toastify';
+import Box from '@mui/material/Box';
+import useDebounce from 'hooks/useDebounce';
 
 const className = {
   USER: 'border-green-500 text-green-500',
@@ -28,21 +30,21 @@ const ManagerMember = () => {
   const [openEnableModal, setOpenEnableModal] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [position, setPosition] = useState<string>('');
-
-  const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const valueSearch = useDebounce<string>(search);
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const data = await getMembers();
+        const data = await getMembers(valueSearch);
         setListMember(data);
       } catch (error) {
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [valueSearch]);
 
   const getListMembers = async () => {
     const data = await getMembers();
@@ -77,7 +79,6 @@ const ManagerMember = () => {
       toast.error('Đã có lỗi xảy ra');
     }
   };
-
   const rows = listMember.map(
     ({
       id,
@@ -147,6 +148,13 @@ const ManagerMember = () => {
           <Typo size="max" isBold>
             Danh sách thành viên
           </Typo>
+          <div className="w-1/3 bg-white shadow-lg text-gray-700 top-full right-0 py-2 px-6 rounded-3xl">
+            <input
+              className="outline-none"
+              placeholder="Tìm kiếm...."
+              onChange={e => setSearch(e.target.value)}
+            />
+          </div>
         </div>
         <div className="">
           {loading ? (
@@ -154,7 +162,7 @@ const ManagerMember = () => {
           ) : listMember.length ? (
             <Table headers={headers} rows={rows} />
           ) : (
-            <Typo>Không có dự án</Typo>
+            <Typo>Không có thành viên</Typo>
           )}
         </div>
       </div>
