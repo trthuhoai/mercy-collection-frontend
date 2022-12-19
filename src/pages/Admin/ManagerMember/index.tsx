@@ -24,7 +24,6 @@ const className = {
 
 const ManagerMember = () => {
   const [listMember, setListMember] = useState<IMemberDetail[]>([]);
-  const [isCreate, setIsCreate] = useState<boolean>(false);
   const [openDisableModal, setOpenDisableModal] = useState(false);
   const [openEnableModal, setOpenEnableModal] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,7 +53,7 @@ const ManagerMember = () => {
     try {
       if (id) {
         await disableUser(id);
-        const data = await await getMembers();
+        const data = await getMembers();
         setListMember(data);
         toast.success('Khóa người dùng thành công');
       }
@@ -69,13 +68,13 @@ const ManagerMember = () => {
     try {
       if (id) {
         await enableUser(id);
-        const data = await await getMembers();
+        const data = await getMembers();
         setListMember(data);
         setOpenEnableModal(false);
-        toast.success('Huỷ đăng kí tham gia thành công');
+        toast.success('Mở khóa người dùng thành công');
       }
     } catch (error) {
-      toast.error('Đăng kí tham gia thất bại vì bạn đã đăng ký');
+      toast.error('Đã có lỗi xảy ra');
     }
   };
 
@@ -146,13 +145,11 @@ const ManagerMember = () => {
       <div className="md:my-10 container">
         <div className="flex items-center justify-between mb-10">
           <Typo size="max" isBold>
-            {isCreate ? ' Tạo dự án tình nguyện' : 'Danh sách thành viên'}
+            Danh sách thành viên
           </Typo>
         </div>
         <div className="">
-          {isCreate ? (
-            <div>aa</div>
-          ) : loading ? (
+          {loading ? (
             <Loading />
           ) : listMember.length ? (
             <Table headers={headers} rows={rows} />
@@ -218,9 +215,6 @@ const ManagerMember = () => {
           >
             Xác nhận
           </Button>
-          {/* <button className='bg-red-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:bg-red-600 rounded mt-6' onClick={onCancel}>
-        Huỷ đăng ký
-      </button> */}
         </div>
       </Modal>
     </>

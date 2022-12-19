@@ -3,7 +3,7 @@ import CardProject from 'components/CardProject';
 import Sliders from 'components/Slider';
 import Typo from 'components/Typo';
 import { Link } from 'react-router-dom';
-import { getProjects } from 'apis/projects';
+import { getProjects, getProjectsByStatus } from 'apis/projects';
 import { IProject } from './types';
 import Loading from 'components/Loading';
 import { routes } from 'constant/routes';
@@ -13,7 +13,8 @@ const ProjectList = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getProjects();
+      // const data = await getProjects();
+      const data = await getProjectsByStatus('registering');
       setProjects(data);
     })();
   }, []);
