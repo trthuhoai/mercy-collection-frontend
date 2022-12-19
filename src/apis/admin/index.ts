@@ -1,10 +1,10 @@
 import request from 'apis/axios';
 import { ELocalStorageKey } from 'constant/types';
 
-const getMembers = () => {
+const getMembers = (search?: string) => {
   return request({
     method: 'GET',
-    url: `/user/all`,
+    url: `/user/all?search=${search}`,
     headers: {
       Authorization: `Bearer ${localStorage.getItem(
         ELocalStorageKey.ACCESS_TOKEN,
@@ -13,7 +13,7 @@ const getMembers = () => {
   });
 };
 
-const disableUser = (id) => {
+const disableUser = id => {
   return request({
     method: 'PATCH',
     url: `/user/disable/${id}`,
@@ -25,7 +25,7 @@ const disableUser = (id) => {
   });
 };
 
-const enableUser = (id) => {
+const enableUser = id => {
   return request({
     method: 'PATCH',
     url: `/user/enable/${id}`,
@@ -94,5 +94,5 @@ export {
   authByGoggle,
   updateUser,
   getStatistic,
-  updatePassword
+  updatePassword,
 };

@@ -2,11 +2,10 @@ import request from 'apis/axios';
 import { ELocalStorageKey } from 'constant/types';
 
 const checkLogin = () => {
-
-  if (localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN,) == null) {
-    return false
+  if (localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN) == null) {
+    return false;
   }
-  return true
+  return true;
 };
 
 const registerProject = id => {
@@ -31,8 +30,6 @@ const activeProject = id => {
     },
   });
 };
-
-
 
 const cancelRegisterProject = id => {
   return request({
@@ -82,9 +79,7 @@ const getCampaignsDetail = (id: string) => {
 };
 
 const getProjectsDetail = (id: string) => {
-  if (localStorage.getItem(
-    ELocalStorageKey.ACCESS_TOKEN,
-  )) {
+  if (localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN)) {
     return request({
       method: 'GET',
       url: `/projects/${id}`,
@@ -223,6 +218,17 @@ const createCampaign = data => {
     },
   });
 };
+
+const searchProjects = search => {
+  return request({
+    method: 'POST',
+    url: `/projects/search`,
+    data: {
+      word: search,
+    },
+  });
+};
+
 export {
   getProjects,
   getCampaigns,
@@ -243,5 +249,6 @@ export {
   updateProject,
   cancelProject,
   getPendingProjects,
-  activeProject
+  activeProject,
+  searchProjects,
 };
