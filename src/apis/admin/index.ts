@@ -13,6 +13,18 @@ const getMembers = (search?: string) => {
   });
 };
 
+const getUsers = () => {
+  return request({
+    method: 'GET',
+    url: `/user/statistic`,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        ELocalStorageKey.ACCESS_TOKEN,
+      )}`,
+    },
+  });
+};
+
 const disableUser = id => {
   return request({
     method: 'PATCH',
@@ -89,6 +101,7 @@ const getStatistic = () => {
 
 export {
   disableUser,
+  getUsers,
   enableUser,
   getMembers,
   authByGoggle,
