@@ -176,16 +176,14 @@ const UserLayout = () => {
             <NavLink to={routes.ME.INFO}>Thông tin cá nhân</NavLink>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <NavLink to={routes.ME.PROJECT}>Tình nguyện</NavLink>
+            <NavLink to={routes.ME.PROJECT}>Dự án của tôi</NavLink>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <NavLink to={routes.ME.PROJECT_REGISTER}>
-              Đăng kí tình nguyện
-            </NavLink>
+            <NavLink to={routes.ME.PROJECT_REGISTER}>Dự án đã đăng ký</NavLink>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          {/* <MenuItem onClick={handleClose}>
             <NavLink to={routes.ME.CAMPAIGN}>Dự án</NavLink>
-          </MenuItem>
+          </MenuItem> */}
         </Menu>
       </div>
       <div className="w-full lg:w-4/5">

@@ -195,18 +195,26 @@ const AdminLayout = () => {
           }}
         >
           <MenuItem onClick={handleClose}>
-            <NavLink to={routes.ME.INFO}>Thông tin cá nhân</NavLink>
+            <NavLink to={routes.ADMIN.INFO}>Thông tin cá nhân</NavLink>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <NavLink to={routes.ME.PROJECT}>Tình nguyện</NavLink>
+            <NavLink to={routes.ADMIN.PROJECT}>Dự án của tôi</NavLink>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <NavLink to={routes.ME.PROJECT_REGISTER}>
-              Đăng kí tình nguyện
+            <NavLink to={routes.ADMIN.PROJECT_REGISTER}>
+              Dự án đã đăng ký
             </NavLink>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <NavLink to={routes.ME.CAMPAIGN}>Dự án</NavLink>
+            <NavLink to={routes.ADMIN.MANAGER_MEMBER}>
+              Quản lý thành viên
+            </NavLink>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <NavLink to={routes.ADMIN.MANAGER_PROJECT}>Quản lý dự án</NavLink>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            <NavLink to={routes.ADMIN.MANAGER_STATISTIC}>Thống kê</NavLink>
           </MenuItem>
         </Menu>
       </div>
