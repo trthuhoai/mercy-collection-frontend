@@ -55,7 +55,7 @@ const ManagerMember = () => {
     try {
       if (id) {
         await disableUser(id);
-        const data = await getMembers();
+        const data = await getMembers('');
         setListMember(data);
         toast.success('Khóa người dùng thành công');
       }
@@ -70,7 +70,7 @@ const ManagerMember = () => {
     try {
       if (id) {
         await enableUser(id);
-        const data = await getMembers();
+        const data = await getMembers('');
         setListMember(data);
         setOpenEnableModal(false);
         toast.success('Mở khóa người dùng thành công');
