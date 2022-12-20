@@ -91,10 +91,23 @@ const NavMobile = ({ onLogin, onLogout }: IProps) => {
         {user && (
           <>
             <MenuItem onClick={handleClose}>
-              <NavLink to={routes.ME.INFO} className="flex items-center gap-1">
-                <Avatar src={user.picture || '/avartar.png'} />
-                {user?.name}
-              </NavLink>
+              {user.permission === 'ADMIN' ? (
+                <NavLink
+                  to={routes.ADMIN.INFO}
+                  className="flex items-center gap-1"
+                >
+                  <Avatar src={user.picture || '/avartar.png'} />
+                  {user?.name}
+                </NavLink>
+              ) : (
+                <NavLink
+                  to={routes.ME.INFO}
+                  className="flex items-center gap-1"
+                >
+                  <Avatar src={user.picture || '/avartar.png'} />
+                  {user?.name}
+                </NavLink>
+              )}
             </MenuItem>
             <Divider />
           </>
@@ -102,11 +115,11 @@ const NavMobile = ({ onLogin, onLogout }: IProps) => {
         <MenuItem onClick={handleClose}>
           <NavLink to="/">Trang chủ</NavLink>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        {/* <MenuItem onClick={handleClose}>
           <NavLink to="/campaigns">Dự án</NavLink>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem onClick={handleClose}>
-          <NavLink to="/projects">Tình nguyện</NavLink>
+          <NavLink to="/projects">Dự án</NavLink>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <NavLink to="/faqs">Faqs</NavLink>
