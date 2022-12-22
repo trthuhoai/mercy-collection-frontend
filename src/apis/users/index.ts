@@ -54,6 +54,13 @@ const updateUser = data => {
   });
 };
 
+const verifyUser = (memberId, key) => {
+  return request({
+    method: 'GET',
+    url: `/user/${memberId}/${key}`,
+  });
+};
+
 const updatePassword = data => {
   return request({
     method: 'PATCH',
@@ -87,6 +94,7 @@ const getUserById = id => {
 };
 
 export {
+  verifyUser,
   createUser,
   loginWithUser,
   getInfoUser,
