@@ -48,4 +48,29 @@ const schemaLogin = yup.object().shape({
     ),
 });
 
-export { schemaRegister, schemaLogin };
+const schemaResetPassword = yup.object().shape({
+  email: yup
+    .string()
+    .required('Bắt buộc nhập')
+    .email('Email không đúng định dạng'),
+});
+
+const schemaNewPassword = yup.object().shape({
+  password: yup
+    .string()
+    .required('Bắt buộc nhập')
+    .matches(
+      REGEX_PASSWORD,
+      'Mật khẩu bắt buộc 8 đến 20 kí tự và có chữ, số, kí tự đặc biệt',
+    ),
+  repassword: yup
+    .string()
+    .required('Bắt buộc nhập')
+    .matches(
+      REGEX_PASSWORD,
+      'Mật khẩu bắt buộc 8 đến 20 kí tự và có chữ, số, kí tự đặc biệt',
+    )
+    .oneOf([yup.ref('password'), null], 'Nhập lại mật khẩu sai!'),
+});
+
+export { schemaRegister, schemaLogin, schemaResetPassword, schemaNewPassword };
