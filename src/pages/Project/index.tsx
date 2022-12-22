@@ -25,6 +25,7 @@ const ProjectPage = () => {
         setLoading(true);
         const data = await getProjectsByStatus(tabValue);
         setProjects(data);
+        setPage(1);
       } catch (error) {
       } finally {
         setLoading(false);
