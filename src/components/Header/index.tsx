@@ -9,6 +9,7 @@ import {
   NavLink,
   useLocation,
   useNavigate,
+  useParams,
 } from 'react-router-dom';
 import { useUser } from 'store';
 import Modal from 'components/Modal';
@@ -33,6 +34,7 @@ import {
   createUser,
   getInfoUser,
   loginWithUser,
+  verifyUser,
 } from 'apis/users';
 import { toast } from 'react-toastify';
 import { ELocalStorageKey } from 'constant/types';
@@ -59,10 +61,13 @@ const Header = () => {
   const [showRePassword, setShowRePassword] = useState(false);
   const [showPasswordLogin, setShowPasswordLogin] = useState(false);
   const [hasSearch, setHasSearch] = useState(false);
+  const [verify, setVerify] = useState('');
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
   const valueSearch = useDebounce<string>(search);
   const { pathname } = useLocation();
+
+  const { memberId, key } = useParams();
 
   useEffect(() => {
     if (!matchPath(routes.SEARCH, pathname) && valueSearch) {
@@ -76,12 +81,31 @@ const Header = () => {
   };
 
   useEffect(() => {
-    gapi.load('client:auth2', () => {
-      gapi.client.init({
-        clientId:
-          '297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com',
+    (async () => {
+      console.log('AAA', memberId, key);
+      if (memberId) {
+        const data = await verifyUser(memberId, key);
+        console.log('Data', data);
+        if (data.token) {
+          localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, data.token);
+          const dataUser = await getInfoUser();
+          setUser(dataUser);
+          toast.success('Bạn đã xác minh tài khoản thành công');
+          setOpenLoginModal(false);
+        } else {
+          setOpenLoginModal(true);
+          // setVerify(
+          //   'Trước khi đăng nhập, hãy xác minh tài khoản của bạn bằng cách click vào liên kết chúng tôi đã gửi qua email mà bạn đăng ký',
+          // );
+        }
+      }
+      gapi.load('client:auth2', () => {
+        gapi.client.init({
+          clientId:
+            '297601202079-6h8hefjps9ipp7s0de5ffmophdlkfcpa.apps.googleusercontent.com',
+        });
       });
-    });
+    })();
   }, []);
 
   const responseGoogle = async response => {
@@ -135,6 +159,9 @@ const Header = () => {
       await createUser(data);
       toast.success('Đăng kí thành công');
       setOpenLoginModal(true);
+      setVerify(
+        'Trước khi đăng nhập, hãy xác minh tài khoản của bạn bằng cách click vào liên kết chúng tôi đã gửi qua email mà bạn đăng ký',
+      );
       resetLogin(data);
     } catch (error) {
       toast.error('Đăng kí thất bại');
@@ -147,14 +174,22 @@ const Header = () => {
   const onSubmitLogin = async data => {
     try {
       const dataLogin = await loginWithUser(data);
-      localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, dataLogin.token);
-      const dataUser = await getInfoUser();
-      setUser(dataUser);
-      toast.success('Đăng nhập thành công');
+      if (dataLogin.verify === false) {
+        setVerify(
+          'Trước khi đăng nhập, hãy xác minh tài khoản của bạn bằng cách click vào liên kết chúng tôi đã gửi qua email mà bạn đăng ký',
+        );
+      } else {
+        localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, dataLogin.token);
+        const dataUser = await getInfoUser();
+        setUser(dataUser);
+        toast.success('Đăng nhập thành công');
+        setOpenLoginModal(false);
+      }
     } catch (error: any) {
       toast.error('Đăng nhập thất bại');
+      setVerify('Thông tin đăng nhập không đúng');
     } finally {
-      setOpenLoginModal(false);
+      // setOpenLoginModal(false);
     }
   };
 
@@ -345,6 +380,7 @@ const Header = () => {
           noValidate
           autoComplete="off"
         >
+          {<div className="text-red-600 mb-3">{verify}</div>}
           <TextField
             required
             fullWidth

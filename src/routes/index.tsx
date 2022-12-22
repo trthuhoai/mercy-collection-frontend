@@ -39,6 +39,10 @@ const routerConfig = [
         element: <CampaignPage />,
       },
       {
+        path: routes.VERIFY,
+        element: <Home />,
+      },
+      {
         path: routes.PROJECTS_DETAIL,
         element: <ProjectDetail />,
       },
