@@ -22,7 +22,7 @@ const Sliders = ({
   slidesToScroll = 1,
   slidesToShow = 1,
   responsive = true,
-  autoplay=true,
+  autoplay = true,
   children,
 }: IProps) => {
   const settings = {
