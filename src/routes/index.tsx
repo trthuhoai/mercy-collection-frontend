@@ -43,6 +43,10 @@ const routerConfig = [
         element: <Home />,
       },
       {
+        path: routes.RESET_PASSWORD,
+        element: <Home />,
+      },
+      {
         path: routes.PROJECTS_DETAIL,
         element: <ProjectDetail />,
       },

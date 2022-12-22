@@ -17,6 +17,22 @@ const loginWithUser = body => {
   });
 };
 
+const checkMail = body => {
+  return request({
+    method: 'POST',
+    url: `/user/password`,
+    data: body,
+  });
+};
+
+const setNewPassword = body => {
+  return request({
+    method: 'PATCH',
+    url: `/user/password/update`,
+    data: body,
+  });
+};
+
 const getInfoUser = () => {
   return request({
     method: 'GET',
@@ -103,4 +119,6 @@ export {
   getStatistic,
   updatePassword,
   getUserById,
+  checkMail,
+  setNewPassword,
 };

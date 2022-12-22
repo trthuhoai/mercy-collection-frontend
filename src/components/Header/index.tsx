@@ -26,15 +26,27 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useForm } from 'react-hook-form';
 import Box from '@mui/material/Box';
-import { IFormLoginProps, IFormRegisterProps } from './types';
+import {
+  IFormLoginProps,
+  IFormRegisterProps,
+  IFormResetPasswordProps,
+  IFormNewPasswordProps,
+} from './types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaLogin, schemaRegister } from './constant';
+import {
+  schemaLogin,
+  schemaRegister,
+  schemaResetPassword,
+  schemaNewPassword,
+} from './constant';
 import {
   authByGoggle,
   createUser,
   getInfoUser,
   loginWithUser,
   verifyUser,
+  checkMail,
+  setNewPassword,
 } from 'apis/users';
 import { toast } from 'react-toastify';
 import { ELocalStorageKey } from 'constant/types';
@@ -56,6 +68,8 @@ const Header = () => {
   const { setValue } = useSearch();
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const [openResetPasswordModal, setOpenResetPasswordModal] = useState(false);
+  const [openNewPasswordModal, setOpenNewPasswordModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
@@ -67,7 +81,7 @@ const Header = () => {
   const valueSearch = useDebounce<string>(search);
   const { pathname } = useLocation();
 
-  const { memberId, key } = useParams();
+  const { memberId, key, email, code } = useParams();
 
   useEffect(() => {
     if (!matchPath(routes.SEARCH, pathname) && valueSearch) {
@@ -98,6 +112,9 @@ const Header = () => {
           //   'Trước khi đăng nhập, hãy xác minh tài khoản của bạn bằng cách click vào liên kết chúng tôi đã gửi qua email mà bạn đăng ký',
           // );
         }
+      }
+      if (email) {
+        setOpenNewPasswordModal(true);
       }
       gapi.load('client:auth2', () => {
         gapi.client.init({
@@ -130,6 +147,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.clear();
+    setVerify('');
     clearUser();
     setAnchorEl(null);
   };
@@ -152,6 +170,26 @@ const Header = () => {
   } = useForm<IFormLoginProps>({
     mode: 'onSubmit',
     resolver: yupResolver(schemaLogin),
+  });
+
+  const {
+    register: registerResetPassword,
+    handleSubmit: handleSubmitResetPassword,
+    reset: resetPassword,
+    formState: { errors: errorsResetPassword },
+  } = useForm<IFormResetPasswordProps>({
+    mode: 'onSubmit',
+    resolver: yupResolver(schemaResetPassword),
+  });
+
+  const {
+    register: registerNewPassword,
+    handleSubmit: handleSubmitNewPassword,
+    reset: newPassword,
+    formState: { errors: errorsNewPassword },
+  } = useForm<IFormNewPasswordProps>({
+    mode: 'onSubmit',
+    resolver: yupResolver(schemaNewPassword),
   });
 
   const onSubmit = async data => {
@@ -188,6 +226,41 @@ const Header = () => {
     } catch (error: any) {
       toast.error('Đăng nhập thất bại');
       setVerify('Thông tin đăng nhập không đúng');
+    } finally {
+      // setOpenLoginModal(false);
+    }
+  };
+
+  const onSubmitResetPassword = async data => {
+    try {
+      const dataCheck = await checkMail(data);
+      toast.error(dataCheck);
+      if (dataCheck.success === true) {
+        toast.success(
+          'Gửi email thành công, mở mail của bạn để có thể thêm mật khẩu mới',
+        );
+      }
+    } catch (error: any) {
+      // setNotification('Không có tài khoản với email này');
+      toast.error('Không có tài khoản với email này');
+    } finally {
+      // setOpenLoginModal(false);
+    }
+  };
+
+  const onSubmitNewPassword = async data => {
+    try {
+      data.passwordCode = code;
+      data.email = email;
+      const dataCheck = await setNewPassword(data);
+      localStorage.setItem(ELocalStorageKey.ACCESS_TOKEN, dataCheck.token);
+      const dataUser = await getInfoUser();
+      setUser(dataUser);
+      toast.success('Cập nhật mật khẩu mới thành công');
+      setOpenNewPasswordModal(false);
+    } catch (error: any) {
+      // setNotification('Không có tài khoản với email này');
+      toast.error('Bạn đã cập nhật mật khẩu mới!');
     } finally {
       // setOpenLoginModal(false);
     }
@@ -441,6 +514,15 @@ const Header = () => {
               prompt="select_account"
             />
           </div>
+          <Typo
+            className="mb-4 text-center underline cursor-pointer caret-red-900 hover:text-lime-900"
+            onClick={() => {
+              setOpenResetPasswordModal(true);
+              setOpenLoginModal(false);
+            }}
+          >
+            Quên mật khẩu?
+          </Typo>
         </Box>
       </Modal>
       <Modal
@@ -574,6 +656,123 @@ const Header = () => {
             </Button>
             <Button size="large" variant="contained" type="submit">
               Đăng kí
+            </Button>
+          </div>
+        </Box>
+      </Modal>
+
+      <Modal
+        isOpen={openResetPasswordModal}
+        title="Quên mật khẩu"
+        onClose={() => setOpenResetPasswordModal(false)}
+      >
+        <Box
+          component="form"
+          onSubmit={handleSubmitResetPassword(onSubmitResetPassword)}
+          noValidate
+          autoComplete="off"
+        >
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Email"
+              type="email"
+              {...registerResetPassword('email')}
+              error={!!errorsResetPassword.email}
+              helperText={errorsResetPassword.email?.message}
+            />
+          </div>
+          {/* {<div className="text-red-600 mb-3">{notification}</div>} */}
+          <div className="text-center">
+            <Button
+              sx={{
+                marginRight: '48px',
+              }}
+              size="large"
+              variant="outlined"
+              onClick={() => setOpenResetPasswordModal(false)}
+            >
+              Hủy
+            </Button>
+            <Button size="large" variant="contained" type="submit">
+              Gửi email
+            </Button>
+          </div>
+        </Box>
+      </Modal>
+
+      <Modal
+        isOpen={openNewPasswordModal}
+        title="Cập nhật mật mẩu mới"
+        onClose={() => setOpenNewPasswordModal(false)}
+      >
+        <Box
+          component="form"
+          onSubmit={handleSubmitNewPassword(onSubmitNewPassword)}
+          noValidate
+          autoComplete="off"
+        >
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Mật khẩu"
+              type={showPassword ? 'text' : 'password'}
+              {...registerNewPassword('password')}
+              error={!!errorsNewPassword.password}
+              helperText={errorsNewPassword.password?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          <div className="my-4">
+            <TextField
+              required
+              fullWidth
+              label="Nhập lại mật khẩu"
+              type={showRePassword ? 'text' : 'password'}
+              {...registerNewPassword('repassword')}
+              error={!!errorsNewPassword.repassword}
+              helperText={errorsNewPassword.repassword?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowRePassword(!showRePassword)}
+                      edge="end"
+                    >
+                      {showRePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          {/* {<div className="text-red-600 mb-3">{notification}</div>} */}
+          <div className="text-center">
+            <Button
+              sx={{
+                marginRight: '48px',
+              }}
+              size="large"
+              variant="outlined"
+              onClick={() => setOpenNewPasswordModal(false)}
+            >
+              Hủy
+            </Button>
+            <Button size="large" variant="contained" type="submit">
+              Xác nhận
             </Button>
           </div>
         </Box>

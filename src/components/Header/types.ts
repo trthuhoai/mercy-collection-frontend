@@ -16,4 +16,19 @@ interface IFormResionProps {
   reasion: string;
 }
 
-export type { IFormRegisterProps, IFormLoginProps, IFormResionProps };
+interface IFormResetPasswordProps {
+  email: string;
+}
+
+interface IFormNewPasswordProps {
+  password: string;
+  repassword: string;
+}
+
+export type {
+  IFormRegisterProps,
+  IFormLoginProps,
+  IFormResionProps,
+  IFormResetPasswordProps,
+  IFormNewPasswordProps,
+};

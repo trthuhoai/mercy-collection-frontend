@@ -2,6 +2,7 @@ export const routes = {
   HOME: '/',
   PROJECTS: '/projects',
   VERIFY: '/:memberId/:key',
+  RESET_PASSWORD: '/password/:email/:code',
   CAMPAIGNS: '/campaigns',
   PROJECTS_DETAIL: '/projects/:id',
   CAMPAIGNS_DETAIL: '/campaigns/:id',
