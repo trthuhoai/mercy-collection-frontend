@@ -239,6 +239,7 @@ const Header = () => {
         toast.success(
           'Gửi email thành công, mở mail của bạn để có thể thêm mật khẩu mới',
         );
+        setOpenResetPasswordModal(false);
       }
     } catch (error: any) {
       // setNotification('Không có tài khoản với email này');
