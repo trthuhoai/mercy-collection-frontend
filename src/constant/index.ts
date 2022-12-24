@@ -22,7 +22,7 @@ const CATEGORY = [
 ];
 
 const FORMAT_DATE = {
-  COMMENT: 'MMM dd, yyyy - HH:mm',
+  COMMENT: 'dd-MM-yyyy  HH:mm',
   YEAR_MONTH_DAY: 'yyyy-MM-dd',
   HOUR_MINUTE: 'HH:mm',
   FULL_DATE_HOUR: 'yyyy-MM-dd HH:mm',
