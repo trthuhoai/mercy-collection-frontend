@@ -14,7 +14,18 @@ const Home = () => {
       className="h-[238px] md:h-[438px]"
     />,
     <img
-      src="/hienmau.png"
+      src="/tn7.jpg"
+      alt="anh tu thien"
+      className="h-[238px] md:h-[438px]"
+    />,
+    // <img src="tn4.png" alt="anh tu thien" className="h-[238px] md:h-[438px]" />,
+    <img
+      src="/tn5.jpg"
+      alt="anh tu thien"
+      className="h-[238px] md:h-[438px]"
+    />,
+    <img
+      src="/tn6.jpg"
       alt="anh tu thien"
       className="h-[238px] md:h-[438px]"
     />,
@@ -27,7 +38,9 @@ const Home = () => {
 
   return (
     <div className="w-full">
-      <Sliders autoplay responsive={false}>{imagesSlider}</Sliders>
+      <Sliders autoplay responsive={false}>
+        {imagesSlider}
+      </Sliders>
       <div className="my-20">
         <div className="container">
           <ProjectList />
@@ -40,7 +53,7 @@ const Home = () => {
             <img src="/content.png" alt="logo" />
           </div>
           <div className="flex-1">
-            <Typo className="mb-4 text-primary-600" size="larger" isBold>
+            <Typo className="mb-2 mt-14 text-primary-600" size="larger" isBold>
               Mercy Collection là gì?
             </Typo>
             <Typo className="text-justify">
@@ -48,10 +61,9 @@ const Home = () => {
               nguyện, nền tảng gây quỹ cộng đồng trực tuyến tiện lợi, tin cậy và
               minh bạch. <br /> Mercy Collection được tin dùng bởi các tổ chức
               cộng đồng uy tín như: Quỹ Bảo Trợ Trẻ Em Việt Nam, Operation Smile
-              DaNang, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng Lưới Tình Nguyện xanh Việt
-              Nam, Trung tâm hợp tác phát triển Trung Bộ và nhiều tổ chức khác.{' '}
-              <br />
-        
+              DaNang, Quỹ Vì Tầm Vóc Việt, Pan Nature, Mạng Lưới Tình Nguyện
+              xanh Việt Nam, Trung tâm hợp tác phát triển Trung Bộ và nhiều tổ
+              chức khác. <br />
             </Typo>
           </div>
         </div>
