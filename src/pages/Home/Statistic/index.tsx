@@ -52,78 +52,78 @@ const Statistic = () => {
     //     </div>
     //   </div>
     // </div>
-    // <div className="my-10 container">
-    <div className="flex flex-col lg:flex-row gap-6 lg:gap-2 mb-36 mt-8 p-14">
-      <div className="flex flex-1 justify-between items-center py-8 px-6 border border-gray-300 bg-white rounded-lg">
-        <div className="text-gray-500">
-          <Typo className="mb-2" size="large" isBold>
-            Dự án thiện nguyện
-          </Typo>
-          <Typo size="max" isBold>
-            {project?.numberProject}
-          </Typo>
+    <div className="my-10 container">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-2 mb-36 mt-8 p-2">
+        <div className="flex flex-1 justify-between items-center py-8 px-6 border border-gray-300 bg-white rounded-lg">
+          <div className="text-gray-500">
+            <Typo className="mb-2" size="large" isBold>
+              Dự án thiện nguyện
+            </Typo>
+            <Typo size="max" isBold>
+              {project?.numberProject}
+            </Typo>
+          </div>
+          <Avatar
+            sx={{
+              bgcolor: purple[500],
+            }}
+          >
+            <FolderCopyIcon />
+          </Avatar>
         </div>
-        <Avatar
-          sx={{
-            bgcolor: purple[500],
-          }}
-        >
-          <FolderCopyIcon />
-        </Avatar>
-      </div>
-      <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
-        <div className="text-gray-500">
-          <Typo className="mb-2" size="large" isBold>
-            Dự án thành công
-          </Typo>
-          <Typo size="max" isBold>
-            {project?.success}
-          </Typo>
+        <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
+          <div className="text-gray-500">
+            <Typo className="mb-2" size="large" isBold>
+              Dự án thành công
+            </Typo>
+            <Typo size="max" isBold>
+              {project?.success}
+            </Typo>
+          </div>
+          <Avatar
+            sx={{
+              bgcolor: 'primary.main',
+            }}
+          >
+            <FolderIcon />
+          </Avatar>
         </div>
-        <Avatar
-          sx={{
-            bgcolor: 'primary.main',
-          }}
-        >
-          <FolderIcon />
-        </Avatar>
-      </div>
-      <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
-        <div className="text-gray-500">
-          <Typo className="mb-2" size="large" isBold>
-            Lượt đăng ký tình nguyện
-          </Typo>
-          <Typo size="max" isBold>
-            {project?.numberRegisterPeople}
-          </Typo>
+        <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
+          <div className="text-gray-500">
+            <Typo className="mb-2" size="large" isBold>
+              Lượt đăng ký tình nguyện
+            </Typo>
+            <Typo size="max" isBold>
+              {project?.numberRegisterPeople}
+            </Typo>
+          </div>
+          <Avatar
+            sx={{
+              bgcolor: lightBlue[500],
+            }}
+          >
+            <AppRegistrationIcon />
+          </Avatar>
         </div>
-        <Avatar
-          sx={{
-            bgcolor: lightBlue[500],
-          }}
-        >
-          <AppRegistrationIcon />
-        </Avatar>
-      </div>
-      <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
-        <div className="text-gray-500">
-          <Typo className="mb-2" size="large" isBold>
-            Thành viên
-          </Typo>
-          <Typo size="max" isBold>
-            {project?.numberUser}
-          </Typo>
+        <div className="flex flex-1 justify-between items-center py-2 px-6 border border-gray-300 bg-white rounded-lg">
+          <div className="text-gray-500">
+            <Typo className="mb-2" size="large" isBold>
+              Thành viên
+            </Typo>
+            <Typo size="max" isBold>
+              {project?.numberUser}
+            </Typo>
+          </div>
+          <Avatar
+            sx={{
+              bgcolor: deepOrange[500],
+            }}
+          >
+            <PeopleAltIcon />
+          </Avatar>
         </div>
-        <Avatar
-          sx={{
-            bgcolor: deepOrange[500],
-          }}
-        >
-          <PeopleAltIcon />
-        </Avatar>
       </div>
     </div>
-    // </div>
   );
 };
 
