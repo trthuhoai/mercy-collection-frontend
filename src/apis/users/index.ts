@@ -9,6 +9,14 @@ const createUser = body => {
   });
 };
 
+const createAdmin = body => {
+  return request({
+    method: 'POST',
+    url: `/user/admin`,
+    data: body,
+  });
+};
+
 const loginWithUser = body => {
   return request({
     method: 'POST',
@@ -121,4 +129,5 @@ export {
   getUserById,
   checkMail,
   setNewPassword,
+  createAdmin,
 };
