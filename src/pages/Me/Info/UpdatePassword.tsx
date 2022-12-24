@@ -13,6 +13,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
+import { useUser } from 'store';
 
 const UpdatePassword = () => {
   const [havePassword, setHavePassword] = useState<boolean>();
@@ -26,13 +27,16 @@ const UpdatePassword = () => {
   const [showRePassword, setShowRePassword] = useState(false);
   const [showPasswordOld, setShowPasswordOld] = useState(false);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     const data = await getInfoUser();
+  //     setHavePassword(data.pass);
+  //   })();
+  // }, []);
+  const { user, getUser } = useUser();
   useEffect(() => {
-    (async () => {
-      const data = await getInfoUser();
-      setHavePassword(data.pass);
-    })();
-  }, []);
-
+    setHavePassword(user?.pass || false);
+  }, [user]);
   const {
     control,
     handleSubmit,

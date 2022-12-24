@@ -12,11 +12,12 @@ interface User {
   birthday?: string;
   gender?: EGender;
   permission: ERoles;
+  pass?: boolean;
 }
 
 interface UserState {
   isAuthenticated: boolean;
-  isAdmin:boolean;
+  isAdmin: boolean;
   isLocked: boolean;
   user: User | null;
   setUser: (user: User) => void;
@@ -28,12 +29,12 @@ interface UserState {
 const useUser = create<UserState>(set => ({
   isLocked: false,
   isAuthenticated: false,
-  isAdmin:false,
+  isAdmin: false,
   user: null,
   setUser: (user: User) =>
     set(() => ({
       isAuthenticated: true,
-      isAdmin: user.permission ===  ERoles.ADMIN,
+      isAdmin: user.permission === ERoles.ADMIN,
       user,
     })),
   getUser: async () => {
@@ -45,7 +46,7 @@ const useUser = create<UserState>(set => ({
   clearUser: () =>
     set(() => ({
       isAuthenticated: false,
-      isAdmin:false,
+      isAdmin: false,
       user: null,
     })),
   setLocked: (locked: boolean) =>
