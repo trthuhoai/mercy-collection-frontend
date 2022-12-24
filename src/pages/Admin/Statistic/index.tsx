@@ -10,7 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { getProjects } from 'apis/projects';
+import { getProjects, getAllProjects } from 'apis/projects';
 import { IProjectDetail } from 'pages/Project/Detail/types';
 import Loading from 'components/Loading';
 import Box from '@mui/material/Box';
@@ -19,7 +19,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { IMemberDetail } from '../ManagerMember/types';
-import { getMembers } from 'apis/admin';
+import { getMembers, getUsers } from 'apis/admin';
 
 ChartJS.register(
   CategoryScale,
@@ -41,9 +41,9 @@ const Statistic = () => {
     (async () => {
       try {
         setLoading(true);
-        const data = await getProjects();
+        const data = await getAllProjects();
         setListProject(data);
-        const dataMember = await getMembers('');
+        const dataMember = await getUsers();
         setListMember(dataMember);
       } catch (error) {
       } finally {
