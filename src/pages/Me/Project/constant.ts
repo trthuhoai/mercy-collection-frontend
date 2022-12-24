@@ -43,6 +43,9 @@ const defaultValues = {
   pictureFile: null,
 };
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
 const schemaCreate = yup.object().shape({
   title: yup.string().required('Bắt buộc nhập'),
   content: yup.string().required('Bắt buộc nhập'),
@@ -50,17 +53,21 @@ const schemaCreate = yup.object().shape({
   deadline: yup
     .date()
     .typeError('Bắt buộc chọn ngày')
-    .max(yup.ref('startAt'), 'Phải nhỏ hơn ngày bắt đầu'),
+    .max(yup.ref('startAt'), 'Phải nhỏ hơn ngày bắt đầu')
+    .min(today, 'Phải lớn hơn hoặc bằng hôm nay'),
   deadlineTime: yup.date().typeError('Bắt buộc chọn giờ'),
   startAt: yup
     .date()
     .typeError('Bắt buộc chọn ngày')
-    .min(new Date(), 'Phải lớn hơn hoặc bằng hôm nay'),
+    .min(new Date(), 'Phải lớn hơn ngày hôm nay'),
   endAt: yup
     .date()
     .typeError('Bắt buộc chọn ngày')
     .min(yup.ref('startAt'), 'Phải lớn hơn ngày bắt đầu'),
-  pictureFile: yup.mixed().required('Bắt buộc nhập'),
+  pictureFile: yup
+    .mixed()
+    .required('Bắt buộc chọn file')
+    .typeError('Bắt buộc chọn file'),
   startTime: yup.date().typeError('Bắt buộc chọn giờ'),
   endTime: yup.date().typeError('Bắt buộc chọn giờ'),
   category: yup.string().required('Bắt buộc nhập'),
