@@ -57,6 +57,13 @@ const getProjects = () => {
   });
 };
 
+const getAllProjects = () => {
+  return request({
+    method: 'GET',
+    url: `/projects/all`,
+  });
+};
+
 const getProjectsByStatus = status => {
   return request({
     method: 'GET',
@@ -252,4 +259,5 @@ export {
   getPendingProjects,
   activeProject,
   searchProjects,
+  getAllProjects,
 };
