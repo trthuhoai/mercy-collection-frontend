@@ -1,3 +1,4 @@
+import * as yup from 'yup';
 const headers = [
   {
     name: 'Tên',
@@ -13,4 +14,9 @@ const headers = [
   },
 ];
 
-export { headers };
+const schemaSendMail = yup.object().shape({
+  title: yup.string(),
+  message: yup.string(),
+});
+
+export { headers, schemaSendMail };

@@ -144,10 +144,11 @@ const getPendingProjects = () => {
   });
 };
 
-const sendMailProject = id => {
+const sendMailProject = (id, data) => {
   return request({
     method: 'POST',
     url: `/projects/sendmail/${id}`,
+    data,
     headers: {
       Authorization: `Bearer ${localStorage.getItem(
         ELocalStorageKey.ACCESS_TOKEN,
