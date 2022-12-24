@@ -5,3 +5,8 @@ export interface IProjectPeople {
   tel: string;
   createdAt: string;
 }
+
+export interface IFormMailProps {
+  title: string;
+  message: string;
+}
