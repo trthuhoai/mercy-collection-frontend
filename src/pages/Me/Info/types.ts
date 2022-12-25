@@ -4,10 +4,15 @@ interface IFormEditProps {
   gender: string;
   address: string;
   birthday: Date | null;
+  telShow: boolean;
+  genderShow: boolean;
+  nameShow: boolean;
+  addressShow: boolean;
+  birthdayShow: boolean;
 }
 
 interface IFormEditPasswordProps {
-  oldPassword: string|null;
+  oldPassword: string | null;
   password: string;
   reNewPassword: string;
 }

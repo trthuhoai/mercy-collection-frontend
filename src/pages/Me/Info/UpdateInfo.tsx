@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUser } from 'store';
 import Button from '@mui/material/Button';
 import { convertDate } from 'untils';
@@ -18,9 +18,11 @@ import { EGender } from 'constant/types';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { FORMAT_DATE } from 'constant';
 import { toast } from 'react-toastify';
+import Checkbox from '@mui/material/Checkbox';
 
 const UpdateInfo = () => {
   const { user, getUser } = useUser();
+  const [number, setNumber] = useState(true);
 
   const defaultValues = {
     name: user?.name || '',
@@ -28,6 +30,11 @@ const UpdateInfo = () => {
     gender: user?.gender || '',
     address: user?.address || '',
     birthday: user?.birthday ? new Date(user?.birthday) : null,
+    telShow: user?.telShow || false,
+    genderShow: user?.genderShow || false,
+    nameShow: user?.nameShow || false,
+    birthdayShow: user?.birthdayShow || false,
+    addressShow: user?.addressShow || false,
   };
 
   const {
@@ -47,6 +54,7 @@ const UpdateInfo = () => {
   }, [user]);
 
   const onSubmit = async data => {
+    console.log(data);
     try {
       const payload = {
         ...data,
@@ -67,21 +75,34 @@ const UpdateInfo = () => {
         noValidate
         autoComplete="off"
       >
-        <Controller
-          control={control}
-          name="name"
-          render={({ field }) => (
-            <TextField
-              required
-              fullWidth
-              label="Họ và tên"
-              {...field}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-            />
-          )}
-        />
-        <div className="my-4">
+        <div className="flex items-center gap-4 my-4">
+          <Controller
+            control={control}
+            name="name"
+            render={({ field }) => (
+              <TextField
+                required
+                fullWidth
+                label="Họ và tên"
+                {...field}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="nameShow"
+            render={({ field }) => (
+              <Checkbox
+                color="secondary"
+                defaultChecked={user?.nameShow || false}
+                {...field}
+              />
+            )}
+          />
+        </div>
+        <div className="flex items-center gap-4 my-4">
           <Controller
             control={control}
             name="tel"
@@ -96,8 +117,19 @@ const UpdateInfo = () => {
               />
             )}
           />
+          <Controller
+            control={control}
+            name="telShow"
+            render={({ field }) => (
+              <Checkbox
+                color="secondary"
+                defaultChecked={user?.telShow || false}
+                {...field}
+              />
+            )}
+          />
         </div>
-        <div className="my-4">
+        <div className="flex items-center gap-4 my-4">
           <Controller
             control={control}
             name="address"
@@ -111,8 +143,19 @@ const UpdateInfo = () => {
               />
             )}
           />
+          <Controller
+            control={control}
+            name="addressShow"
+            render={({ field }) => (
+              <Checkbox
+                color="secondary"
+                defaultChecked={user?.addressShow || false}
+                {...field}
+              />
+            )}
+          />
         </div>
-        <div className="my-4">
+        <div className="flex items-center gap-4 my-4">
           <Controller
             control={control}
             name="birthday"
@@ -131,8 +174,19 @@ const UpdateInfo = () => {
               />
             )}
           />
+          <Controller
+            control={control}
+            name="birthdayShow"
+            render={({ field }) => (
+              <Checkbox
+                color="secondary"
+                defaultChecked={user?.birthdayShow || false}
+                {...field}
+              />
+            )}
+          />
         </div>
-        <div className="my-4">
+        <div className="flex items-center gap-4 my-4">
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Giới tính</FormLabel>
             <Controller
@@ -166,6 +220,17 @@ const UpdateInfo = () => {
               )}
             />
           </FormControl>
+          <Controller
+            control={control}
+            name="genderShow"
+            render={({ field }) => (
+              <Checkbox
+                color="secondary"
+                defaultChecked={user?.genderShow || false}
+                {...field}
+              />
+            )}
+          />
         </div>
         <div className="text-center mt-10">
           <Button

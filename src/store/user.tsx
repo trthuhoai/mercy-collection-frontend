@@ -13,6 +13,11 @@ interface User {
   gender?: EGender;
   permission: ERoles;
   pass?: boolean;
+  telShow?: boolean;
+  genderShow: boolean;
+  nameShow: boolean;
+  addressShow: boolean;
+  birthdayShow: boolean;
 }
 
 interface UserState {
