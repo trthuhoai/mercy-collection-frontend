@@ -19,6 +19,7 @@ const Search = () => {
   useEffect(() => {
     (async () => {
       try {
+        setPage(1);
         setLoading(true);
         const data = await searchProjects(value);
         setProjects(data);
