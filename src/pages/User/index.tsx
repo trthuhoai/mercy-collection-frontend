@@ -10,6 +10,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Statistic from './Statistic';
 import { useParams } from 'react-router-dom';
 import Loading from 'components/Loading';
+import Info from './Info';
 
 const User = () => {
   const [user, setUser] = useState<IUser>();
@@ -66,10 +67,14 @@ const User = () => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <TabList onChange={handleChange} variant="fullWidth">
                   <Tab label="Thống kê" value={ETabsUser.STATISTIC} />
+                  <Tab label="Thông tin cá nhân" value={ETabsUser.INFO} />
                 </TabList>
               </Box>
               <TabPanel value={ETabsUser.STATISTIC}>
                 <Statistic statistic={statistic} />
+              </TabPanel>
+              <TabPanel value={ETabsUser.INFO}>
+                <Info info={info} />
               </TabPanel>
             </TabContext>
           </Box>
