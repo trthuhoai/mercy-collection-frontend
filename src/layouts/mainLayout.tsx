@@ -44,7 +44,7 @@ const MainLayout = () => {
         routesPrivate.some(route => !!matchPath(route, pathname)) &&
         !localStorage.getItem(ELocalStorageKey.ACCESS_TOKEN)
       ) {
-        toast.error('Bạn cần đăng nhập trước');
+        toast.error('Bạn chưa đăng nhập');
         return navigate(routes.HOME);
       }
 
@@ -76,8 +76,9 @@ const MainLayout = () => {
       >
         <div className="text-center">
           <Typo className="mb-10">
-            Tài khoản của bạn đã bị khóa vì vi phạm quy định ban đầu của chúng tôi, vui lòng gửi thư đến địa chỉ email tr.thuhoai@gmail.com
-            để được hổ trợ.
+            Tài khoản của bạn đã bị khóa vì vi phạm quy định ban đầu của chúng
+            tôi, vui lòng gửi thư đến địa chỉ email tr.thuhoai@gmail.com để được
+            hổ trợ.
           </Typo>
           <Button
             size="large"

@@ -19,7 +19,7 @@ const schemaEdit = yup.object().shape(
     }),
     gender: yup.string(),
     address: yup.string(),
-    birthday: yup.date(),
+    birthday: yup.date().nullable(),
   },
   [['tel', 'tel']],
 );
