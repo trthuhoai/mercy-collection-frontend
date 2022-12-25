@@ -40,6 +40,7 @@ const UpdateInfo = () => {
     defaultValues,
     resolver: yupResolver(schemaEdit),
   });
+  console.log(errors);
 
   useEffect(() => {
     reset(defaultValues);
@@ -49,7 +50,7 @@ const UpdateInfo = () => {
     try {
       const payload = {
         ...data,
-        birthday: convertDate(data.birthday),
+        birthday: data.birthday && convertDate(data.birthday),
       };
 
       await updateUser(payload);
