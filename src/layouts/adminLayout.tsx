@@ -35,7 +35,7 @@ const AdminLayout = () => {
   return (
     <div className="md:flex w-full">
       <aside className="hidden md:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
-        <nav className="mt-10 mx-6">
+        <nav className="lg:sticky lg:top-16 mt-10 mx-6">
           <div className="mb-4 text-center text-3xl font-serif subpixel-antialiased font-semibold text-emerald-700 list-disc">
             ADMIN
           </div>

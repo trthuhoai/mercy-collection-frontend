@@ -32,7 +32,7 @@ const UserLayout = () => {
   return (
     <div className="lg:flex w-full">
       <aside className="hidden lg:block md:w-2/6 lg:w-1/5 bg-white border-r border-gray-300">
-        <nav className="mt-10 mx-6">
+        <nav className="lg:sticky lg:top-16 mt-10 mx-6">
           <ul>
             <li className="mb-4">
               <NavLink to={routes.ME.INFO}>
