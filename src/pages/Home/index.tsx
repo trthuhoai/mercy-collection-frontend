@@ -29,11 +29,11 @@ const Home = () => {
       alt="anh tu thien"
       className="h-[238px] md:h-[438px]"
     />,
-    <img
-      src="/lantoayeuthuong.png"
-      alt="anh tu thien"
-      className="h-[238px] md:h-[438px]"
-    />,
+    // <img
+    //   src="/lantoayeuthuong.png"
+    //   alt="anh tu thien"
+    //   className="h-[238px] md:h-[438px]"
+    // />,
   ];
 
   return (
