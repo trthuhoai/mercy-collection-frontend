@@ -140,13 +140,16 @@ const ProjectDetail = () => {
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Người tổ chức:</Typo>
                   <Typo
-                  className="text-black cursor-pointer"
-                  isBold
-                  onClick={() =>
-                    navigate(
-                      generatePath(routes.USER, { id: projects.memberId }),
-                    )
-                  }>{projects.email}</Typo>
+                    className="text-black cursor-pointer"
+                    isBold
+                    onClick={() =>
+                      navigate(
+                        generatePath(routes.USER, { id: projects.memberId }),
+                      )
+                    }
+                  >
+                    {projects.email}
+                  </Typo>
                 </div>
                 <div className="flex flex-wrap items-center justify-between mb-4 last:mb-0">
                   <Typo>Thời gian bắt đầu:</Typo>
@@ -171,7 +174,7 @@ const ProjectDetail = () => {
                   <Typo>{projects.location}</Typo>
                 </div>
 
-                {projects.reasion && (
+                {projects.reasion && projects.status === 'CANCELLED' && (
                   <div className="flex justify-between mb-4 last:mb-0">
                     <Typo>Lý do huỷ:</Typo>
                     <Typo className="whitespace-pre-line">
