@@ -195,14 +195,14 @@ const Header = () => {
   const onSubmit = async data => {
     try {
       await createUser(data);
-      toast.success('Đăng kí thành công');
+      toast.success('Đăng ký thành công');
       setOpenLoginModal(true);
       setVerify(
         'Trước khi đăng nhập, hãy xác minh tài khoản của bạn bằng cách click vào liên kết chúng tôi đã gửi qua email mà bạn đăng ký',
       );
       resetLogin(data);
     } catch (error) {
-      toast.error('Đăng kí thất bại');
+      toast.error('Đăng ký thất bại');
     } finally {
       setOpenRegisterModal(false);
       reset();
@@ -431,7 +431,7 @@ const Header = () => {
                   setOpenRegisterModal(true);
                 }}
               >
-                Đăng kí
+                Đăng ký
               </Button>
               <Button
                 variant="contained"
@@ -499,7 +499,7 @@ const Header = () => {
                 setOpenRegisterModal(true);
               }}
             >
-              Đăng kí
+              Đăng ký
             </Button>
             <Button size="large" variant="contained" type="submit">
               Đăng nhập
@@ -528,7 +528,7 @@ const Header = () => {
       </Modal>
       <Modal
         isOpen={openRegisterModal}
-        title="Đăng kí"
+        title="Đăng ký"
         onClose={() => setOpenRegisterModal(false)}
       >
         <Box
@@ -656,7 +656,7 @@ const Header = () => {
               Hủy
             </Button>
             <Button size="large" variant="contained" type="submit">
-              Đăng kí
+              Đăng ký
             </Button>
           </div>
         </Box>
