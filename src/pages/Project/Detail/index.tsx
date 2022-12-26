@@ -35,10 +35,10 @@ const ProjectDetail = () => {
         await registerProject(id);
         const data = await getProjectsDetail(id);
         setProjects(data);
-        toast.success('Đăng kí tham gia thành công');
+        toast.success('Đăng ký tham gia thành công');
       }
     } catch (error) {
-      toast.error('Huỷ đăng kí tham gia thất bại vì bạn chưa đăng ký');
+      toast.error('Huỷ Đăng ký tham gia thất bại vì bạn chưa đăng ký');
     }
   };
   const onCancel = async () => {
@@ -48,10 +48,10 @@ const ProjectDetail = () => {
         const data = await getProjectsDetail(id);
         setProjects(data);
         setOpenCancelModal(false);
-        toast.success('Huỷ đăng kí tham gia thành công');
+        toast.success('Huỷ Đăng ký tham gia thành công');
       }
     } catch (error) {
-      toast.error('Đăng kí tham gia thất bại vì bạn đã đăng ký');
+      toast.error('Đăng ký tham gia thất bại vì bạn đã đăng ký');
     }
   };
 
