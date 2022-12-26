@@ -61,15 +61,14 @@ const ProjectRegister = () => {
           {EStatusProject[status]}
         </div>
       ),
-      onClick: () =>
-        navigate(generatePath(routes.PROJECTS_DETAIL, { id })),
+      onClick: () => navigate(generatePath(routes.PROJECTS_DETAIL, { id })),
     }),
   );
 
   return (
     <div className="lg:my-10 container">
       <Typo size="max" isBold className="mb-10">
-        Danh sách dự án tình nguyện đã đăng kí
+        Danh sách dự án tình nguyện đã Đăng ký
       </Typo>
       {loading ? (
         <Loading />
