@@ -446,7 +446,7 @@ const UpdateProject = () => {
       </div>
       <Modal
         isOpen={openCancelModal}
-        title="Xác nhận huỷ đăng ký"
+        title="Xác nhận huỷ dự án"
         onClose={() => setOpenCancelModal(false)}
       >
         Bạn có chắc chắn muốn huỷ hoạt động này không?
@@ -476,12 +476,12 @@ const UpdateProject = () => {
           />
           <div className="my-4">
             <Checkbox color="secondary" value="1" onClick={e => getValue(e)} />{' '}
-            Đồng ý gửi mail thông báo huỷ đến những thành viên đã đăng ký tham
+            Đồng ý gửi email thông báo huỷ đến những thành viên đã đăng ký tham
             gia hoạt động này.
           </div>
           {!reasion && (
             <div className="my-4 text-red-600 text-sm">
-              Bạn cần đồng ý gửi mail thông báo trước khi xác nhận huỷ
+              Bạn cần đồng ý gửi email thông báo trước khi xác nhận huỷ
             </div>
           )}
 
