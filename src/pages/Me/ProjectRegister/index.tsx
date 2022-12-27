@@ -36,7 +36,7 @@ const ProjectRegister = () => {
 
   const rows = listProject.map(
     ({
-      id,
+      projectId,
       title,
       category,
       deadlineTime,
@@ -61,7 +61,8 @@ const ProjectRegister = () => {
           {EStatusProject[status]}
         </div>
       ),
-      onClick: () => navigate(generatePath(routes.PROJECTS_DETAIL, { id })),
+      onClick: () =>
+        navigate(generatePath(routes.PROJECTS_DETAIL, { id: projectId })),
     }),
   );
 
